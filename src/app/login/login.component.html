@@ -1,0 +1,31 @@
+<div style="display: flex;">
+    <div class="main-screen">
+        <h1 class="title">ride or die</h1>
+        <h2 class="tagline">your second chance at finding love</h2>
+    </div>
+    <div class="side-panel">
+        <h2 class="login">log in</h2>
+        <form nzForm [formGroup]="form">
+            <div>
+                <input class="login-input" 
+                        nz-input 
+                        placeholder="enter email"
+                        formControlName="email"/>
+            </div>
+            <div>
+                <input class="login-input" 
+                        nz-input 
+                        type="password"
+                        placeholder="enter password"
+                        formControlName="password"/>
+            </div>
+            <div>
+                <button nz-button class="sign-in" (click)="submit()">sign in</button>
+            </div>
+        </form>
+        <div>
+            <p class="sign-up" (click)="createSignUpComponent()">Don't have an account? Click here to sign up</p>
+        </div>
+    </div>
+</div>
+

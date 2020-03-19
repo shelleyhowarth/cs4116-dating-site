@@ -1,0 +1,53 @@
+.title {
+    color: #D22D2D;
+    font-weight: bold;
+    font-size: 120px;
+    margin: 0;
+}
+
+.tagline {
+    color: #D22D2D;
+    font-weight: bold;
+    font-size: 45px;
+    margin: 0;
+    
+}
+
+.side-panel {
+    background-color: white;
+    height: 100vh;
+    width: 30%;
+}
+
+.main-screen {
+    width: 70%;
+}
+
+.login {
+    color: #D22D2D;
+    font-weight: bold;
+    font-size: 60px;
+    margin: 0;
+    display: flex;
+    margin-left: 5rem;
+}
+
+.login-input {
+    margin-left: 5rem;
+    width: 11rem;
+    margin-bottom: 1rem;
+}
+
+.sign-in {
+    margin-left: 5rem;
+    background-color:#D22D2D;
+    color: white;
+    width: 11rem;
+    margin-bottom: 1rem;
+}
+
+.sign-up {
+    margin-left: 5rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
