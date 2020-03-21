@@ -1,0 +1,36 @@
+.sign-up {
+    color: #D22D2D;
+    font-weight: bold;
+    font-size: 60px;
+    margin: 0;
+    display: flex;
+}
+
+.form-field {
+    width: 11rem;
+    margin-right: 3rem;
+}
+
+.form-label {
+    display: flex;
+    color: black;
+    font-weight: bold;
+}
+
+.text-area {
+    width: 11rem;
+    height: 4rem;
+    margin-right: 3rem;
+}
+
+.sign-up-btn {
+    background-color: #D22D2D;
+    color: white;
+    width: 50%;
+    font-size: 20px;
+}
+
+.btn {
+    display: flex;
+    place-content: center;
+}

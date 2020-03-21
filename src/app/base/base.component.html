@@ -1,0 +1,32 @@
+<nz-layout>
+    <nz-sider *ngIf="authService.isAuthenticated()">
+        <ul
+            nz-menu
+            nzMode="inline"
+            class="nav-container"
+        >
+            <li
+                nz-menu-item
+                *ngFor="let navItem of navItems"
+                [routerLink]="navItem.routing"
+                class="nav-button"
+            >
+                <div style="display: flex">
+                    <i nz-icon>
+                        <img src="{{ navItem.imgPath }}"  class="icon" />
+                    </i>
+                </div>
+                <div style="display: flex">
+                    <span class="sidenav-label">{{ navItem.name }}</span>
+                </div>
+            </li>
+        </ul>
+    </nz-sider>
+    <nz-layout>
+        <nz-content>
+            <div class="component-container">
+                <router-outlet> </router-outlet>
+            </div>
+        </nz-content>
+    </nz-layout>
+</nz-layout>
