@@ -1,12 +1,12 @@
 .title {
-    color: #D22D2D;
+    color: $red;
     font-weight: bold;
     font-size: 120px;
     margin: 0;
 }
 
 .tagline {
-    color: #D22D2D;
+    color: $red;
     font-weight: bold;
     font-size: 45px;
     margin: 0;
@@ -24,7 +24,7 @@
 }
 
 .login {
-    color: #D22D2D;
+    color: $red;
     font-weight: bold;
     font-size: 60px;
     margin: 0;
@@ -40,7 +40,7 @@
 
 .sign-in {
     margin-left: 5rem;
-    background-color:#D22D2D;
+    background-color:$red;
     color: white;
     width: 11rem;
     margin-bottom: 1rem;

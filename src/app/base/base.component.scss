@@ -3,7 +3,7 @@
 }
 
 .nav-container {
-    background-color: #FFF1F1;
+    background-color: $lightPink;
     height: 100vh;
 }
 
@@ -18,7 +18,7 @@
 }
 
 .sidenav-label {
-    color: #D22D2D;
+    color: $red;
     font-size: 16px;
-    font-weight: bold; 
+    font-weight: 600; 
 }
