@@ -29,13 +29,12 @@ import { Routes, RouterModule, CanActivate } from '@angular/router';
 import { BaseComponent } from './base/base.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
-
+import { NzGridModule } from 'ng-zorro-antd/grid';
 
 registerLocaleData(en);
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
-/*   { path: 'base', component: BaseComponent, canActivate: [AuthGuard]}, */
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]}
 ];
@@ -68,7 +67,8 @@ const appRoutes: Routes = [
     AngularFireModule.initializeApp(environment.firebase),
     NzRadioModule,
     NzDatePickerModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    NzGridModule
   ],
 
   exports: [RouterModule],

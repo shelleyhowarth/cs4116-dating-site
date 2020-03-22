@@ -1,5 +1,9 @@
 @import "../../styles/variables";
 
+html{
+    background-color: blue !important;
+}
+
 .title {
     color: $red;
     font-weight: bold;
