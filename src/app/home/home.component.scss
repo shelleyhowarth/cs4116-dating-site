@@ -1,1 +1,10 @@
-@import "../../styles/utilities"
+@import "../../styles/utilities";
+
+.first-row {
+    display: flex;
+}
+
+.notifcations-card {
+    @extend .card;
+    width: 10rem;
+}
