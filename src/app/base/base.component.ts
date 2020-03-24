@@ -27,7 +27,7 @@ export class BaseComponent implements OnInit {
     },
     {
       name: 'My Profile',
-      routing: 'profile',
+      routing: 'my-profile',
       imgPath: '../assets/user.svg'
     },
     {

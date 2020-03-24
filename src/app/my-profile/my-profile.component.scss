@@ -1,0 +1,30 @@
+@import "../../styles/utilities";
+
+.profile-picture {
+    width: 100%;
+    height: 100%;
+}
+
+.name {
+    @extend .card-title;
+    font-size: 400%;
+}
+
+.age {
+    @extend .card-title;
+    font-size: 200%;
+}
+
+p {
+    margin: 0;
+}
+
+.edit {
+    color: $red;
+    font-weight: 500;
+}
+
+.bio {
+    color: black;
+    font-weight: 500;
+}
