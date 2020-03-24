@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { differenceInCalendarDays } from 'date-fns';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NzModalService } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService, UploadFile } from 'ng-zorro-antd';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../../services/auth.service';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
+import * as firebase from 'firebase';
+
 
 export interface User { FirstName: string; LastName: string; Age: number;
                         Gender: string; Description: string; county: string;
@@ -17,6 +19,11 @@ export interface User { FirstName: string; LastName: string; Age: number;
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
+
+  loading = false;
+  avatarUrl:string;
+  selectedFile = null;
+  fileObj = null;
 
   counties = [
     "Antrim",
@@ -63,6 +70,7 @@ export class SignUpComponent implements OnInit {
     private modalService: NzModalService,
     public authService: AuthService,
     private fs: AngularFirestore,
+    private msg: NzMessageService
     ) { 
       this.users = fs.collection('User').valueChanges();
       this._db = fs;
@@ -123,10 +131,12 @@ export class SignUpComponent implements OnInit {
       smoker: this.form.value.smoker,
       drinker: this.form.value.drinker,
       favSong: this.form.value.favSong,
-      favMovie: this.form.value.favMovie
+      favMovie: this.form.value.favMovie,
     }
     this.authService.SignUp(user.email, user.password);
     console.log(user);
+    this.upload(user.email);
+
     this.form.reset;
     this.modalService.closeAll();
 
@@ -149,6 +159,8 @@ export class SignUpComponent implements OnInit {
                   user.favMovie);
                   
     return user;
+
+
   }
 
   public CalculateAge(birthdate: number) {
@@ -157,6 +169,57 @@ export class SignUpComponent implements OnInit {
 
   disabledDate = (current: Date): boolean => {
     return differenceInCalendarDays(current, this.today) > 0;
+}
+
+beforeUpload = (file: File) => {
+  return new Observable((observer: Observer<boolean>) => {
+    const isJPG = file.type === 'image/jpeg';
+    if (!isJPG) {
+      this.msg.error('You can only upload JPG file!');
+      observer.complete();
+      return;
+    }
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      this.msg.error('Image must smaller than 2MB!');
+      observer.complete();
+      return;
+    }
+    // check height
+    this.checkImageDimension(file).then(dimensionRes => {
+      if (!dimensionRes) {
+        this.msg.error('Image only 300x300 above');
+        observer.complete();
+        return;
+      }
+
+      observer.next(isJPG && isLt2M && dimensionRes);
+      observer.complete();
+    });
+  });
+};
+
+private checkImageDimension(file: File): Promise<boolean> {
+  return new Promise(resolve => {
+    const img = new Image(); // create image
+    img.src = window.URL.createObjectURL(file);
+    img.onload = () => {
+      const width = img.naturalWidth;
+      const height = img.naturalHeight;
+      window.URL.revokeObjectURL(img.src!);
+      resolve(width === height && width >= 300);
+    };
+  });
+}
+
+handleChange(event){
+  this.fileObj = event.fileList[0].originFileObj;
+  console.log(event);
+}
+
+upload(email: string){
+  var storageRef = firebase.storage().ref("profilePics");
+  var uploadTask = storageRef.child(email).put(this.fileObj);
 }
 
 }
