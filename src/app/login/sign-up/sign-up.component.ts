@@ -106,7 +106,6 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-  //if(this.form.value.smoker == "smoker") 
 
   submit() {
     const user = {

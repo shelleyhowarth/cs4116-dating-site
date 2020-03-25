@@ -1,6 +1,6 @@
 <h2 class="sign-up">sign up</h2>
 <form nzForm [formGroup]="form">
-    <div id="row 2" style="display: flex">
+    <div id="row 2" nz-row style="display: flex">
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">email*</nz-form-label>
@@ -8,6 +8,7 @@
                     nz-input
                     formControlName="email">
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">password*</nz-form-label>
@@ -25,6 +26,7 @@
                     nz-input
                     formControlName="firstName">
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">gender*</nz-form-label>
@@ -42,6 +44,7 @@
                     nz-input
                     formControlName="lastName">
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">bio*</nz-form-label>
@@ -60,6 +63,7 @@
                 <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option> 
             </nz-select>
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">date of birth*</nz-form-label>
@@ -78,6 +82,7 @@
                     nz-input
                     formControlName="occupation">
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">martial status*</nz-form-label>
@@ -98,6 +103,7 @@
                 <label nz-radio nzValue="nonSmoker">No</label>
             </nz-radio-group>
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">drinker*</nz-form-label>
@@ -115,6 +121,7 @@
                     nz-input
                     formControlName="favSong">
         </div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
             [nzNoColon]="true">favourite movie*</nz-form-label>
