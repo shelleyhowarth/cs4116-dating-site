@@ -17,6 +17,12 @@
 
 .nav-button {
     height: auto;
+    outline: none;
+    border-right: none;
+    height: 10%;
+    &:hover {
+        background-color: $darkPink;
+    }
 }
 
 .sidenav-label {
@@ -24,3 +30,16 @@
     font-size: 16px;
     font-weight: 600; 
 }
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: $darkPink;
+    border-right: none;
+}
+
+.ant-menu-inline .ant-menu-item::after,
+.ant-menu-vertical .ant-menu-item::after,
+.ant-menu-vertical-left .ant-menu-item::after,
+.ant-menu-vertical-right .ant-menu-item::after {
+  border-right: none;
+}
+
