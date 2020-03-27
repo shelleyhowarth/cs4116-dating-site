@@ -18,7 +18,7 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         window.alert("You have been successfully registered!");
-        console.log(result.user)
+        this.router.navigate(['home']);
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -28,7 +28,6 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log('Successfully signed up!', result);
         this.router.navigate(['home']);
       }).catch((error) => {
         window.alert(error.message)

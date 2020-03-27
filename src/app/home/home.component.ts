@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  users;
+  constructor(private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    this.getUsers();
+  }
+
+  getUsers() {
+/*     this.firestore.collection('Users').snapshotChanges().subscribe(res => {
+      this.users = res;
+      console.log(this.users);
+    }); */
+    this.users = this.firestore.collection('interests').valueChanges().subscribe(res => {
+      this.users = res;
+      console.log(this.users);
+    });
   }
 
 }

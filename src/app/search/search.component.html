@@ -7,25 +7,25 @@
             </div>
             <div nz-row id="second row" style="display: flex">
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="gender">
+                    <nz-select class="dropdown" nzPlaceHolder="gender" [(ngModel)]="filter.gender">
                         <nz-option *ngFor="let gender of genders" [nzValue]="gender" [nzLabel]="gender"></nz-option> 
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="age range" nzMode="multiple">
+                    <nz-select class="dropdown" nzPlaceHolder="age range" nzMode="multiple" [(ngModel)]="filter.ageRange">
                         <nz-option *ngFor="let range of ranges" [nzValue]="range" [nzLabel]="range"></nz-option> 
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="interests" nzMode="multiple">
+                    <nz-select class="dropdown" nzPlaceHolder="interests" nzMode="multiple" [(ngModel)]="filter.interests">
                         <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest"></nz-option> 
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="location" nzMode="multiple">
+                    <nz-select class="dropdown" nzPlaceHolder="location" nzMode="multiple" [(ngModel)]="filter.location">
                         <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option> 
                     </nz-select>
                 </div>
@@ -33,6 +33,12 @@
                 <div>
                     <button nz-button class="search" (click)="search()">search</button>
                 </div>
+            </div>
+        </nz-card>
+        <div style="margin-top: 5%"></div>
+        <nz-card class="card">
+            <div id="first row">
+                <p class="card-title">users</p>
             </div>
         </nz-card>
     </div>

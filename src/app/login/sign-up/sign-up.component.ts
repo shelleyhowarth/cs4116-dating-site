@@ -57,7 +57,7 @@ export class SignUpComponent implements OnInit {
   isSmoker: boolean;
   isDrinker: boolean;
   ActualAge: number;
-
+ 
   constructor(
     private fb: FormBuilder,
     private modalService: NzModalService,
