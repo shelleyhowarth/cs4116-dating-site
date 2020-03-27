@@ -8,22 +8,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 })
 export class HomeComponent implements OnInit {
 
-  users;
-  constructor(private firestore: AngularFirestore) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getUsers();
   }
-
-  getUsers() {
-/*     this.firestore.collection('Users').snapshotChanges().subscribe(res => {
-      this.users = res;
-      console.log(this.users);
-    }); */
-    this.users = this.firestore.collection('interests').valueChanges().subscribe(res => {
-      this.users = res;
-      console.log(this.users);
-    });
-  }
-
 }

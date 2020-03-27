@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { UsersService } from '../services/users.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-search',
@@ -48,9 +51,31 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   searchPress = false;    
   filter = { gender: '', ageRange: [], location: [], interests: [] };
-  constructor(private fb: FormBuilder) { }
+  users: Array<User> = [];
+  constructor(private fb: FormBuilder, private usersService: UsersService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+    let object = new User();
+    const snapshot = this.firestore.collection('Users').get();
+    snapshot.subscribe(snap => {
+       snap.forEach(doc => {
+          object.firstName = doc.data().FirstName;
+          object.lastName = doc.data().LastName;
+          object.age = doc.data().Age;
+          object.description = doc.data().Description;
+          object.gender = doc.data().Gender;
+          object.email = doc.data().Email;
+          object.favoriteSong = doc.data().FavoriteSong;
+          object.favoriteMovie = doc.data().FavoriteMovie;
+          object.county =  doc.data().county;
+          object.drinker = doc.data().drinker;
+          object.martialStatus = doc.data().martialStatus;
+          object.occupation = doc.data().occupation;
+          object.smoker = doc.data().smoker;
+          this.users.push(object);
+        });
+        console.log(this.users);
+       });
   }
 
   search() {
