@@ -9,7 +9,7 @@ import { Observable, Observer } from 'rxjs';
 import * as firebase from 'firebase';
 
 
-export interface User { FirstName: string; LastName: string; Age: number;
+export interface User { email: string; FirstName: string; LastName: string; Age: number;
                         Gender: string; Description: string; county: string;
                         occupation: string; martialStatus: string; smoker: boolean;
                         drinker: boolean; FavoriteSong: string; FavoriteMovie: string }
@@ -84,13 +84,13 @@ export class SignUpComponent implements OnInit {
     this.setUpForm();
   }
 
-  addUser(FName: string, lName: string, fAge: number, 
+  addUser(femail: string, FName: string, lName: string, fAge: number, 
           fGender: string, fDescription: string, fcounty: string,
           foccupation: string, fMartialStatus: string, fSmoker: boolean,
           fDrinker: boolean, fFavSong: string, fFavMovie: string){
 
     let userCollection = this._db.collection<User>('Users');
-    userCollection.add({ FirstName: FName, LastName: lName, Age: fAge,
+    userCollection.doc(femail).set({ email: femail, FirstName: FName, LastName: lName, Age: fAge,
       Gender: fGender, Description: fDescription, county: fcounty,
       occupation: foccupation, martialStatus: fMartialStatus, smoker: fSmoker,
       drinker: fDrinker, FavoriteSong: fFavSong, FavoriteMovie: fFavMovie});
@@ -154,7 +154,7 @@ export class SignUpComponent implements OnInit {
     var timeDiff = Math.abs(Date.now() - new Date(user.dateOfBirth).getTime());
     this.ActualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25);
 
-    this.addUser(user.firstName, user.lastName,this.ActualAge, user.gender,
+    this.addUser(user.email, user.firstName, user.lastName,this.ActualAge, user.gender,
                   user.description, user.county,user.occupation, 
                   user.martialStatus, this.isSmoker, this.isDrinker, user.favSong,
                   user.favMovie);
