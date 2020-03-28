@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { differenceInCalendarDays } from 'date-fns';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { NzModalService, NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { NzModalService, NzMessageService} from 'ng-zorro-antd';
+import { UploadFile } from 'ng-zorro-antd/upload';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AuthService } from '../../services/auth.service';
 import { Observable, Observer } from 'rxjs';
@@ -213,13 +214,26 @@ private checkImageDimension(file: File): Promise<boolean> {
 }
 
 handleChange(event){
-  this.fileObj = event.fileList[0].originFileObj;
+  var size = event.fileList.length;
+  console.log(size);
+  this.fileObj = event.fileList[size - 1].originFileObj;
   console.log(event);
+  
+  this.getBase64(event.file!.originFileObj!, (img: string) => {
+    this.loading = false;
+    this.avatarUrl = img;
+  });
 }
 
 upload(email: string){
   var storageRef = firebase.storage().ref("profilePics");
   var uploadTask = storageRef.child(email).put(this.fileObj);
+}
+
+private getBase64(img: File, callback: (img: string) => void): void {
+  const reader = new FileReader();
+  reader.addEventListener('load', () => callback(reader.result!.toString()));
+  reader.readAsDataURL(img);
 }
 
 }
