@@ -14,7 +14,7 @@ export class MyProfileComponent implements OnInit {
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(public afAuth: AngularFireAuth){
+  constructor(){
 
   }
 
