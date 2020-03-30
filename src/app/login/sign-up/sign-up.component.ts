@@ -79,6 +79,7 @@ export class SignUpComponent implements OnInit {
 
     _db:AngularFirestore;
     users:  Observable<any[]>;
+    userUid : string;
 
   ngOnInit(): void {
     this.setUpForm();
@@ -90,7 +91,7 @@ export class SignUpComponent implements OnInit {
           fDrinker: boolean, fFavSong: string, fFavMovie: string){
 
     let userCollection = this._db.collection<User>('Users');
-    userCollection.doc(fEmail).set({ email: fEmail, FirstName: FName, LastName: lName, Age: fAge,
+    userCollection.doc(this.authService.getUid()).set({ email: fEmail, FirstName: FName, LastName: lName, Age: fAge,
       Gender: fGender, Description: fDescription, county: fcounty,
       occupation: foccupation, martialStatus: fMartialStatus, smoker: fSmoker,
       drinker: fDrinker, FavoriteSong: fFavSong, FavoriteMovie: fFavMovie});
@@ -135,6 +136,8 @@ export class SignUpComponent implements OnInit {
       favMovie: this.form.value.favMovie,
     }
     this.authService.SignUp(user.email, user.password);
+    this.userUid = this.authService.getUid();
+    console.log(this.userUid);
     console.log(user);
     this.upload(user.email);
 
