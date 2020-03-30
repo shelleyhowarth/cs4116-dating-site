@@ -33,6 +33,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { InterestsComponent } from './login/sign-up/interests/interests.component';
 
 registerLocaleData(en);
 
@@ -52,7 +53,8 @@ const appRoutes: Routes = [
     BaseComponent,
     HomeComponent,
     MyProfileComponent,
-    SearchComponent
+    SearchComponent,
+    InterestsComponent
   ],
   imports: [
     BrowserModule,

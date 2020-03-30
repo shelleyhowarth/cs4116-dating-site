@@ -29,3 +29,19 @@
     margin-bottom: 1rem;
 }
 
+.sign-up-btn {
+    background-color: $red;
+    color: white;
+    width: 50%;
+    font-size: 20px;
+}
+
+.dropdown {
+    width: 7rem;
+}
+
+.btn {
+    display: flex;
+    place-content: center;
+}
+
