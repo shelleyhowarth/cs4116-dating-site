@@ -49,16 +49,15 @@ export class SearchComponent implements OnInit {
     "Wicklow"
   ];
   form: FormGroup;
-  searchPress = false;    
   filter = { gender: '', ageRange: [], location: [], interests: [] };
   users: Array<User> = [];
   constructor(private fb: FormBuilder, private usersService: UsersService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-    let object = new User();
     const snapshot = this.firestore.collection('Users').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
+          let object = new User();
           object.firstName = doc.data().FirstName;
           object.lastName = doc.data().LastName;
           object.age = doc.data().Age;
@@ -78,9 +77,16 @@ export class SearchComponent implements OnInit {
        });
   }
 
+  getName(user) {
+    return user.firstName;
+  }
+
+  getAgeAndLocation(user) {
+    return " " + user.age + ", " + user.county + " ";
+  }
+
   search() {
-    this.searchPress = true;
-    console.log(this.filter);
+   
   }
 
 }

@@ -39,8 +39,15 @@
         <nz-card class="card">
             <div id="first row">
                 <p class="card-title">users</p>
-<!--                 <p *ngFor="let user of users"> {{ user.firstName }}</p>
- -->            </div>
+                <div style="display: flex" nz-row>
+                    <div *ngFor="let user of users">
+                        <div nz-col nzSpan="1">
+                            <p class="details">{{ getName(user) }}</p>
+                            <p class="details"> {{ getAgeAndLocation(user) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </nz-card>
     </div>
 </div>
