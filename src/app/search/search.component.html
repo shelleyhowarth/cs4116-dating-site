@@ -41,10 +41,9 @@
                 <p class="card-title">users</p>
                 <div style="display: flex" nz-row>
                     <div *ngFor="let user of users">
-                        <div nz-col nzSpan="1" [routerLink]="['/user', { id: user.firstName }]" style="cursor: pointer">
+                        <div nz-col nzSpan="1" [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
                             <p class="details">{{ getName(user) }}</p>
                             <p class="details"> {{ getAgeAndLocation(user) }}</p>
-                            <p>{{ getId(user) }} yo</p>
                         </div>
                     </div>
                 </div>

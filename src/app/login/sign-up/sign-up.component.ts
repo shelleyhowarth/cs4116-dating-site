@@ -121,26 +121,7 @@ export class SignUpComponent implements OnInit {
     this.upload(user.email);
 
     this.form.reset;
-    this.modalService.closeAll();
-/* 
-    if(user.smoker == "smoker")
-      this.isSmoker = true;
-    else
-      this.isSmoker = false;
-
-    if(user.drinker == "drinker")
-      this.isDrinker = true;
-    else
-     this.isDrinker = false;
-
-    var timeDiff = Math.abs(Date.now() - new Date(user.dateOfBirth).getTime());
-    this.ActualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25); */
-
-/*     this.addUser(user.firstName, user.lastName,this.ActualAge, user.gender,
-                  user.description, user.county,user.occupation, 
-                  user.maritalStatus, this.isSmoker, this.isDrinker, user.favSong,
-                  user.favMovie); */
-    
+    this.modalService.closeAll();   
     this.createInterestsComponent(user);
   }
 

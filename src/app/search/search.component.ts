@@ -71,6 +71,8 @@ export class SearchComponent implements OnInit {
           object.maritalStatus = doc.data().maritalStatus;
           object.occupation = doc.data().occupation;
           object.smoker = doc.data().smoker;
+          object.interests = doc.data().interests;
+          object.uid = doc.data().uid;
           this.users.push(object);
         });
         console.log(this.users);
@@ -86,12 +88,6 @@ export class SearchComponent implements OnInit {
     return " " + user.age + ", " + user.county + " ";
   }
 
-  getId(user) {
-    return user.uid;
-  }
-
-  search() {
-   
-  }
+  search() { }
 
 }

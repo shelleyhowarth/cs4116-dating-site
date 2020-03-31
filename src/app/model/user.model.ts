@@ -13,4 +13,5 @@ export class User {
     favoriteSong: string; 
     favoriteMovie: string;
     interests: [];
+    uid: string;
 }
