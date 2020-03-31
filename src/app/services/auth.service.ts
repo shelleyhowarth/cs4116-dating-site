@@ -9,7 +9,6 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
   loggedIn;
   _db: AngularFirestore;
   
@@ -57,12 +56,14 @@ export class AuthService {
   addUser(fName: string, lName: string, fAge: number, fEmail: string,
           fGender: string, fDescription: string, fcounty: string,
           foccupation: string, fmaritalStatus: string, fSmoker: boolean,
-          fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: []) {
+          fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: [], fUid: string) {
       let userCollection = this._db.collection<User>('Users');
+
       userCollection.doc(fEmail).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
-      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests});
+      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid});
+      
   }
 
 }
