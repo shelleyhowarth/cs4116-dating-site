@@ -90,7 +90,7 @@ export class SignUpComponent implements OnInit {
       description: ['', Validators.compose([Validators.required, Validators.maxLength(250)])],
       gender: ['', Validators.required],
       occupation: ['', Validators.required],
-      martialStatus: ['', Validators.required],
+      maritalStatus: ['', Validators.required],
       smoker: ['', Validators.required],
       drinker: ['', Validators.required],
       favoriteSong: ['', Validators.required],
@@ -110,7 +110,7 @@ export class SignUpComponent implements OnInit {
       description: this.form.value.description,
       gender: this.form.value.gender,
       occupation: this.form.value.occupation,
-      martialStatus: this.form.value.martialStatus,
+      maritalStatus: this.form.value.maritalStatus,
       smoker: this.form.value.smoker,
       drinker: this.form.value.drinker,
       favoriteSong: this.form.value.favoriteSong,
@@ -138,7 +138,7 @@ export class SignUpComponent implements OnInit {
 
 /*     this.addUser(user.firstName, user.lastName,this.ActualAge, user.gender,
                   user.description, user.county,user.occupation, 
-                  user.martialStatus, this.isSmoker, this.isDrinker, user.favSong,
+                  user.maritalStatus, this.isSmoker, this.isDrinker, user.favSong,
                   user.favMovie); */
     
     this.createInterestsComponent(user);

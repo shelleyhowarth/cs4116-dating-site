@@ -7,7 +7,7 @@ export class User {
     description: string; 
     county: string;
     occupation: string; 
-    martialStatus: string; 
+    maritalStatus: string; 
     smoker: boolean;
     drinker: boolean; 
     favoriteSong: string; 

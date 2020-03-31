@@ -58,23 +58,24 @@ export class SearchComponent implements OnInit {
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
           let object = new User();
-          object.firstName = doc.data().FirstName;
-          object.lastName = doc.data().LastName;
-          object.age = doc.data().Age;
-          object.description = doc.data().Description;
-          object.gender = doc.data().Gender;
-          object.email = doc.data().Email;
-          object.favoriteSong = doc.data().FavoriteSong;
-          object.favoriteMovie = doc.data().FavoriteMovie;
+          object.firstName = doc.data().firstName;
+          object.lastName = doc.data().lastName;
+          object.age = doc.data().age;
+          object.description = doc.data().description;
+          object.gender = doc.data().gender;
+          object.email = doc.data().email;
+          object.favoriteSong = doc.data().favoriteSong;
+          object.favoriteMovie = doc.data().favoriteMovie;
           object.county =  doc.data().county;
           object.drinker = doc.data().drinker;
-          object.martialStatus = doc.data().martialStatus;
+          object.maritalStatus = doc.data().maritalStatus;
           object.occupation = doc.data().occupation;
           object.smoker = doc.data().smoker;
           this.users.push(object);
         });
         console.log(this.users);
        });
+
   }
 
   getName(user) {
@@ -83,6 +84,10 @@ export class SearchComponent implements OnInit {
 
   getAgeAndLocation(user) {
     return " " + user.age + ", " + user.county + " ";
+  }
+
+  getId(user) {
+    return user.uid;
   }
 
   search() {

@@ -30,10 +30,11 @@ import { BaseComponent } from './base/base.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { MyProfileComponent } from './my-profile/my-profile.component';
+import { MyProfileComponent } from './users/my-profile/my-profile.component';
 import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { InterestsComponent } from './login/sign-up/interests/interests.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 registerLocaleData(en);
 
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
-  { path: 'search', component: SearchComponent, canActivate: [AuthGuard]}
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
+  { path: 'user',component: UserProfileComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -54,7 +56,8 @@ const appRoutes: Routes = [
     HomeComponent,
     MyProfileComponent,
     SearchComponent,
-    InterestsComponent
+    InterestsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
