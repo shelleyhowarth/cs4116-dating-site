@@ -11,5 +11,6 @@ export class User {
     smoker: boolean;
     drinker: boolean; 
     favoriteSong: string; 
-    favoriteMovie: string
+    favoriteMovie: string;
+    interests: [];
 }

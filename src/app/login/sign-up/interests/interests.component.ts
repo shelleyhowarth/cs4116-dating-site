@@ -16,7 +16,7 @@ export class InterestsComponent implements OnInit {
   isDrinker;
   actualAge;
   interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
-  chosenInterests = [];
+  chosenInterests;
   constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, ) { }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class InterestsComponent implements OnInit {
     this.actualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25); 
     this.authService.addUser(this.user.firstName, this.user.lastName, this.actualAge, this.user.email, this.user.gender, this.user.description,
                               this.user.county, this.user.occupation, this.user.martialStatus, this.user.smoker, this.user.drinker,
-                              this.user.favoriteSong, this.user.favoriteMovie);
+                              this.user.favoriteSong, this.user.favoriteMovie, this.chosenInterests);
     this.router.navigate(['home']);
     this.modalService.closeAll();
   }

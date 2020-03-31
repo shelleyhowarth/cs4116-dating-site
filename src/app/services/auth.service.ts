@@ -57,12 +57,12 @@ export class AuthService {
   addUser(fName: string, lName: string, fAge: number, fEmail: string,
           fGender: string, fDescription: string, fcounty: string,
           foccupation: string, fMartialStatus: string, fSmoker: boolean,
-          fDrinker: boolean, fFavSong: string, fFavMovie: string) {
+          fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: []) {
       let userCollection = this._db.collection<User>('Users');
       userCollection.doc(fEmail).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, martialStatus: fMartialStatus, smoker: fSmoker,
-      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie});
+      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests});
   }
 
 }
