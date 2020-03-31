@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
             if(user.county === this.filter.county || this.filter.county === '')
             {
               if(user.interests.find(interest => interest == this.filter.interests) || this.filter.interests === '') {
-                if(this.getAgeRange(user.age) || this.filter.ageRange === '') {
+                if(this.getAgeRange(user.age) || this.filter.ageRange === '' || this.over85(user.age)) {
                   
                   this.searchArray.push(user);
                   if(this.searchArray.length > 0) {
@@ -107,7 +107,7 @@ export class SearchComponent implements OnInit {
                   }
                   else if(this.searchArray.length == 0) {
                     this.noResults = true;
-                } 
+                }
               }
             }
           }
@@ -116,11 +116,21 @@ export class SearchComponent implements OnInit {
     console.log(this.searchArray);
    }
 
-   getAgeRange(userAge) {
-    let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
-    let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
-    return (userAge >= firstNumber && userAge <= secondNumber);
-    }
+  getAgeRange(userAge) {
+  let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
+  let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
+  return (userAge >= firstNumber && userAge <= secondNumber);
+  }
+
+  over85(userAge) {
+    let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
+    return userAge >= firstNumber;
+  }
+
+  reset() {
+    this.filter = { gender: '', ageRange: '', county: '', interests: '' };
+    this.search();
+  }
 
 
 }

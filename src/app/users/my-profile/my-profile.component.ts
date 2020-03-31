@@ -7,9 +7,9 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
-  user =null;
+  user = null;
   email = null;
-  avatarUrl:string;
+  avatarUrl: string;
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
