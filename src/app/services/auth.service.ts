@@ -9,7 +9,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-
+  uid;
   loggedIn;
   _db: AngularFirestore;
   
@@ -24,6 +24,7 @@ export class AuthService {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         window.alert("You have been successfully registered!");
+        this.uid = result.user.uid;
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -33,6 +34,7 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
+        this.uid = result.user.uid;
         this.router.navigate(['home']);
       }).catch((error) => {
         window.alert(error.message)
@@ -59,10 +61,16 @@ export class AuthService {
           foccupation: string, fmaritalStatus: string, fSmoker: boolean,
           fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: []) {
       let userCollection = this._db.collection<User>('Users');
+
       userCollection.doc(fEmail).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
-      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests});
+      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: this.uid});
+      console.log(this.uid);
+  }
+
+  getUid() {
+    return this.uid;
   }
 
 }
