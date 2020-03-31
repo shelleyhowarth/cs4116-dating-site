@@ -9,8 +9,9 @@ export class UsersService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getUsers(array) {
+  getUsers() {
     const snapshot = this.firestore.collection('Users').get();
+    let array;
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
           let object = new User();
@@ -32,5 +33,6 @@ export class UsersService {
           array.push(object);
         });
        });
+       return array;
   }
 }
