@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { Router } from '@angular/router';
 import * as firebase from "firebase";
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../model/user.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,16 +11,19 @@ import * as firebase from "firebase";
 export class AuthService {
 
   loggedIn;
-
+  _db: AngularFirestore;
+  
   constructor(public afAuth: AngularFireAuth,
-              public router: Router) { 
+              public router: Router,
+              private fs: AngularFirestore,
+              ) { 
+                this._db = fs;
     }
 
   SignUp(email, password) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         window.alert("You have been successfully registered!");
-        console.log(result.user)
       }).catch((error) => {
         window.alert(error.message)
       })
@@ -28,7 +33,6 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
-        console.log('Successfully signed up!', result);
         this.router.navigate(['home']);
       }).catch((error) => {
         window.alert(error.message)
@@ -48,6 +52,17 @@ export class AuthService {
       this.loggedIn = false;
     }
     return this.loggedIn;
+  }
+
+  addUser(fName: string, lName: string, fAge: number, fEmail: string,
+          fGender: string, fDescription: string, fcounty: string,
+          foccupation: string, fmaritalStatus: string, fSmoker: boolean,
+          fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: []) {
+      let userCollection = this._db.collection<User>('Users');
+      userCollection.doc(fEmail).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
+      gender: fGender, description: fDescription, county: fcounty,
+      occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
+      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests});
   }
 
 }
