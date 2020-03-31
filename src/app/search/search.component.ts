@@ -11,7 +11,7 @@ import { User } from '../model/user.model';
 })
 export class SearchComponent implements OnInit {
 
-  genders = ["male", "female", "both"];
+  genders = ["male", "female"];
   ranges = ["55-60", "61-65", "66-70", "71-75", "76-80", "81-85", "85+"];
   interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
   counties = [
@@ -51,32 +51,10 @@ export class SearchComponent implements OnInit {
   form: FormGroup;
   filter = { gender: '', ageRange: [], location: [], interests: [] };
   users: Array<User> = [];
-  constructor(private fb: FormBuilder, private usersService: UsersService, private firestore: AngularFirestore) { }
+  searchArray: Array<User> = [];
+  constructor(private fb: FormBuilder, private firestore: AngularFirestore, private usersService: UsersService) { }
 
   ngOnInit(): void {
-    const snapshot = this.firestore.collection('Users').get();
-    snapshot.subscribe(snap => {
-       snap.forEach(doc => {
-          let object = new User();
-          object.firstName = doc.data().firstName;
-          object.lastName = doc.data().lastName;
-          object.age = doc.data().age;
-          object.description = doc.data().description;
-          object.gender = doc.data().gender;
-          object.email = doc.data().email;
-          object.favoriteSong = doc.data().favoriteSong;
-          object.favoriteMovie = doc.data().favoriteMovie;
-          object.county =  doc.data().county;
-          object.drinker = doc.data().drinker;
-          object.maritalStatus = doc.data().maritalStatus;
-          object.occupation = doc.data().occupation;
-          object.smoker = doc.data().smoker;
-          object.interests = doc.data().interests;
-          object.uid = doc.data().uid;
-          this.users.push(object);
-        });
-        console.log(this.users);
-       });
 
   }
 
@@ -88,6 +66,13 @@ export class SearchComponent implements OnInit {
     return " " + user.age + ", " + user.county + " ";
   }
 
-  search() { }
+  search() {
+    this.usersService.getUsers(this.users);
+    console.log(this.filter);
+    this.users = this.users.filter(user => {
+      user.gender === this.filter.gender;
+      })
+    console.log(this.users);
+   }
 
 }
