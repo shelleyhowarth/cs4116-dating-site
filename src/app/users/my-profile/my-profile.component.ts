@@ -29,7 +29,6 @@ export class MyProfileComponent implements OnInit {
   setProfilePicture(){
     this.getUserEmail();
     var picLocation = "profilePics/"  + this.email;
-    console.log(picLocation);
     var picRef = firebase.storage().ref(picLocation);
     
     picRef.getDownloadURL().then(picUrl => {
