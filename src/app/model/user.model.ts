@@ -1,37 +1,41 @@
 export class User {
-    FirstName: string; 
-    LastName: string; 
+    firstName: string; 
+    lastName: string; 
     email: string;
-    Age: number;
-    Gender: string; 
-    Description: string; 
+    age: number;
+    gender: string; 
+    description: string; 
     county: string;
     occupation: string; 
-    martialStatus: string; 
+    maritalStatus: string; 
     smoker: boolean;
     drinker: boolean; 
-    FavoriteSong: string; 
-    FavoriteMovie: string
+    favoriteSong: string; 
+    favoriteMovie: string;
+    interests: [];
+    uid: string;
 
     constructor(firstName, lastName, email, age, gender,
-        description,county,occupation,martialStatus,smoker,drinker,favouriteSong,favouriteMovie){
+        description,county,occupation,martialStatus,smoker,drinker,favouriteSong,favouriteMovie,interests,uid){
 
-            this.FirstName = firstName;
-            this.LastName = lastName;
+            this.firstName = firstName;
+            this.lastName = lastName;
             this.email = email;
-            this.Age = age;
-            this.Gender = gender;
-            this.Description = description;
+            this.age = age;
+            this.gender = gender;
+            this.description = description;
             this.county= county;
             this.occupation = occupation;
-            this.martialStatus =martialStatus;
+            this.maritalStatus = martialStatus;
             this.smoker = smoker;
             this.drinker = drinker;
-            this.FavoriteSong = favouriteSong;
-            this.FavoriteMovie = favouriteMovie;
+            this.favoriteSong = favouriteSong;
+            this.favoriteMovie = favouriteMovie;
+            this.interests = interests;
+            this.uid = uid;
         }
         toString() {
-            return this.FirstName + ', ' + this.LastName + ', ' + this.email;
+            return this.firstName + ', ' + this.lastName + ', ' + this.email;
         }
 }
 

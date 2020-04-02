@@ -1,0 +1,13 @@
+@import "../../styles/utilities";
+@import "../../styles/variables";
+
+.search {
+    @extend .sign-in;
+    margin-left: 0;
+    font-size: 150%;
+    width: 7rem;
+}
+
+.details {
+    color: $red;
+}

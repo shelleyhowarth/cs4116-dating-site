@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
-import { User } from "../model/user.model";
+import { User } from "..";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
   @Component({

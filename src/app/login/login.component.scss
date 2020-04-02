@@ -1,4 +1,5 @@
 @import "../../styles/variables";
+@import "../../styles/utilities";
 
 html{
     background-color: blue !important;
@@ -44,13 +45,7 @@ html{
     margin-bottom: 1rem;
 }
 
-.sign-in {
-    margin-left: 5rem;
-    background-color:$red;
-    color: white;
-    width: 11rem;
-    margin-bottom: 1rem;
-}
+
 
 .sign-up {
     margin-left: 5rem;
