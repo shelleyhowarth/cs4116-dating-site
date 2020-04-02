@@ -15,27 +15,33 @@ export class User {
     interests: [];
     uid: string;
 
-    constructor(firstName, lastName, email, age, gender,
-        description,county,occupation,martialStatus,smoker,drinker,favouriteSong,favouriteMovie,interests,uid){
+    constructor(){};
 
-            this.firstName = firstName;
-            this.lastName = lastName;
-            this.email = email;
-            this.age = age;
-            this.gender = gender;
-            this.description = description;
-            this.county= county;
-            this.occupation = occupation;
-            this.maritalStatus = martialStatus;
-            this.smoker = smoker;
-            this.drinker = drinker;
-            this.favoriteSong = favouriteSong;
-            this.favoriteMovie = favouriteMovie;
-            this.interests = interests;
-            this.uid = uid;
-        }
+    // constructor(firstName, lastName, email, age, gender,
+    //     description,county,occupation,martialStatus,smoker,drinker,favouriteSong,favouriteMovie,interests,uid){
+
+    //         this.firstName = firstName;
+    //         this.lastName = lastName;
+    //         this.email = email;
+    //         this.age = age;
+    //         this.gender = gender;
+    //         this.description = description;
+    //         this.county= county;
+    //         this.occupation = occupation;
+    //         this.maritalStatus = martialStatus;
+    //         this.smoker = smoker;
+    //         this.drinker = drinker;
+    //         this.favoriteSong = favouriteSong;
+    //         this.favoriteMovie = favouriteMovie;
+    //         this.interests = interests;
+    //         this.uid = uid;
+    //     }
         toString() {
             return this.firstName + ', ' + this.lastName + ', ' + this.email;
+        }
+
+        getFirstName(){
+            return this.firstName;
         }
 }
 

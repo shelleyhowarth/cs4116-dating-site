@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
-import { User } from "..";
+import { User } from "../../model/user.model";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
+import { UsersService } from '../../services/users.service';
 
   @Component({
     selector: 'app-my-profile',
@@ -11,26 +12,29 @@ import { Variable } from '@angular/compiler/src/render3/r3_ast';
 
 export class MyProfileComponent implements OnInit {
   user =null;
-  email = null;
+  users: Array<User> = [];
+  uid = null;
+  email= null;
   avatarUrl:string;
-  firstName :string;
-  age: string;
-  county:string;
-  bio:string;
-  userDetails = null;
+  firstName = null;
+  age = {};
+  county = {};
+  bio = {};
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(){
+  constructor(private usersService: UsersService){
     
   }
 
   getUserEmail(){
     this.user = firebase.auth().currentUser;
 
+
     if(this.user != null){
       this.email = this.user.email;
-      console.log(this.email);
+      this.uid = this.user.uid;
+      console.log(this.uid);
     }
   }
   
@@ -47,6 +51,8 @@ export class MyProfileComponent implements OnInit {
 
   getUserInfo(){
     const db = firebase.firestore()
+    var fName;
+    
     this.getUserEmail();
     var docRef = db.collection("Users").doc(this.email);
     console.log(docRef);
@@ -54,17 +60,26 @@ export class MyProfileComponent implements OnInit {
     docRef.get().then(function(doc) {
       if (doc.exists) {
           console.log("Document data:", doc.data());
-          
-          var data = doc.data();
 
-          const details = new User(data.FirstName, data.LastName, data.email,data.age,
-            data.Gender,data.Description,data.county,data.occupation,data.martialStatus,
-            data.smoker,data.drinker,data.FavouriteSong,data.FavouriteMovie)
+          var object = new User();
+          object.firstName = doc.data().firstName;
+          object.lastName = doc.data().lastName;
+          object.age = doc.data().age;
+          object.description = doc.data().description;
+          object.gender = doc.data().gender;
+          object.email = doc.data().email;
+          object.favoriteSong = doc.data().favoriteSong;
+          object.favoriteMovie = doc.data().favoriteMovie;
+          object.county =  doc.data().county;
+          object.drinker = doc.data().drinker;
+          object.maritalStatus = doc.data().maritalStatus;
+          object.occupation = doc.data().occupation;
+          object.smoker = doc.data().smoker;
+          object.interests = doc.data().interests;
+          object.uid = doc.data().uid;
 
-          this.userDetails = details;
-
-          console.log(this.userDetails);
-
+          console.log(object);
+          this.users.push(object);
 
       } else {
           // doc.data() will be undefined in this case
@@ -73,11 +88,15 @@ export class MyProfileComponent implements OnInit {
   }).catch(function(error) {
       console.log("Error getting document:", error);
   });
+
   
   }
 
   setProfileDetails(){
     this.getUserInfo();
+
+    console.log
+    
   }
 
   
