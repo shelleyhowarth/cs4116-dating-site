@@ -91,7 +91,7 @@ export class SignUpComponent implements OnInit {
           fDrinker: boolean, fFavSong: string, fFavMovie: string){
 
     let userCollection = this._db.collection<User>('Users');
-    userCollection.doc(this.authService.getUid()).set({ email: fEmail, FirstName: FName, LastName: lName, Age: fAge,
+    userCollection.doc(fEmail).set({ email: fEmail, FirstName: FName, LastName: lName, Age: fAge,
       Gender: fGender, Description: fDescription, county: fcounty,
       occupation: foccupation, martialStatus: fMartialStatus, smoker: fSmoker,
       drinker: fDrinker, FavoriteSong: fFavSong, FavoriteMovie: fFavMovie});
