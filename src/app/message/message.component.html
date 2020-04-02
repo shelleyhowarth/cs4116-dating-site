@@ -1,7 +1,11 @@
 <div class = "messageContainer">
-    <p>{{ userName }}</p>
-    <p>{{ timeStamp }}</p>
-    <p>{{ messageContent }}</p>
+   <div #scroller class = "feedWrapper">
+       <app-chat-feed></app-chat-feed>
+   </div>
+
+   <div class = "chatFormWrapper">
+       <app-chat-form></app-chat-form>
+   </div>
 
 
 </div>
