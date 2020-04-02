@@ -33,6 +33,8 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MessageComponent } from './message/message.component';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { ChatFeedComponent } from './chat-feed/chat-feed.component';
+import { ChatFormComponent } from './chat-form/chat-form.component';
 
 registerLocaleData(en);
 
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
     HomeComponent,
     MessageComponent,
     MyProfileComponent,
-    MessageComponent
+    MessageComponent,
+    ChatFeedComponent,
+    ChatFormComponent
   ],
   imports: [
     BrowserModule,
