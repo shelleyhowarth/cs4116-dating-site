@@ -3,6 +3,7 @@ import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { UsersService } from '../../services/users.service';
+import { AngularFirestore } from '@angular/fire/firestore';
 
   @Component({
     selector: 'app-my-profile',
@@ -16,20 +17,20 @@ export class MyProfileComponent implements OnInit {
   uid = null;
   email= null;
   avatarUrl:string;
-  firstName = null;
+  firstName;
   age = {};
   county = {};
   bio = {};
+  newUser: User = null;
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(private usersService: UsersService){
+  constructor(private usersService: UsersService, private firestore: AngularFirestore){
     
   }
 
   getUserEmail(){
     this.user = firebase.auth().currentUser;
-
 
     if(this.user != null){
       this.email = this.user.email;
@@ -50,15 +51,11 @@ export class MyProfileComponent implements OnInit {
   }
 
   getUserInfo(){
-    const db = firebase.firestore()
-    var fName;
-    
     this.getUserEmail();
-    var docRef = db.collection("Users").doc(this.email);
+    var docRef = this.firestore.collection("Users").doc(this.uid).get();
     console.log(docRef);
 
-    docRef.get().then(function(doc) {
-      if (doc.exists) {
+    docRef.subscribe(doc => {
           console.log("Document data:", doc.data());
 
           var object = new User();
@@ -78,18 +75,10 @@ export class MyProfileComponent implements OnInit {
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
 
-          console.log(object);
-          this.users.push(object);
+          this.newUser = object;
+          console.log(this.newUser);
+    });
 
-      } else {
-          // doc.data() will be undefined in this case
-          console.log("No such document!");
-      }
-  }).catch(function(error) {
-      console.log("Error getting document:", error);
-  });
-
-  
   }
 
   setProfileDetails(){
@@ -100,7 +89,25 @@ export class MyProfileComponent implements OnInit {
   }
 
   
+  getName() {
+    return this.newUser.firstName;
+  }
 
+  getAge() {
+    return this.newUser.age;
+  }
+
+  getCounty() {
+    return this.newUser.county;
+  }
+
+  getBio() {
+    return this.newUser.description;
+  }
+
+  getInterests() {
+    return this.newUser.interests;
+  }
 
   ngOnInit(): void {
     this.setProfilePicture();
