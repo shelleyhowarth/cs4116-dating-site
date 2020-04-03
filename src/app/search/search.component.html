@@ -7,6 +7,23 @@
             </div>
             <div nz-row id="second row" style="display: flex">
                 <div>
+                    <p class="search-title">gender</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div>
+                    <p class="search-title">age range</p>
+                </div>
+                <div nz-col nzSpan="2"></div>
+                <div>
+                    <p class="search-title">interests</p>
+                </div>
+                <div nz-col nzSpan="2"></div>
+                <div>
+                    <p class="search-title">county</p>
+                </div>
+            </div>
+            <div nz-row id="third row" style="display: flex">
+                <div>
                     <nz-select class="dropdown" nzPlaceHolder="gender" [(ngModel)]="filter.gender">
                         <nz-option *ngFor="let gender of genders" [nzValue]="gender" [nzLabel]="gender"></nz-option> 
                     </nz-select>

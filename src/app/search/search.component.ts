@@ -99,7 +99,7 @@ export class SearchComponent implements OnInit {
             if(user.county === this.filter.county || this.filter.county === '')
             {
               if(user.interests.find(interest => interest == this.filter.interests) || this.filter.interests === '') {
-                if(this.getAgeRange(user.age) || this.filter.ageRange === '' || this.over85(user.age)) {
+                if(this.getAgeRange(user.age) || this.filter.ageRange === '') {
                   
                   this.searchArray.push(user);
                   if(this.searchArray.length > 0) {
@@ -119,12 +119,14 @@ export class SearchComponent implements OnInit {
   getAgeRange(userAge) {
   let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
   let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
-  return (userAge >= firstNumber && userAge <= secondNumber);
-  }
+  let eightyFive = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
 
-  over85(userAge) {
-    let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
-    return userAge >= firstNumber;
+  if(firstNumber !== 85 && userAge >= firstNumber && userAge <= secondNumber) {
+    return true;
+  }
+  else if(eightyFive == 85 && userAge >= eightyFive) {
+    return true;
+    }
   }
 
   reset() {
