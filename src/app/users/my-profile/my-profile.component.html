@@ -7,8 +7,8 @@
             </div>
             <div id="empty space" nz-col nzSpan="3"></div>
             <div id="name age location">
-                <p class="name">Simon</p>
-                <p class="age">22, Limerick</p>
+                <p class="name">{{ newUser.firstName }}</p>
+                <p class="age">{{ newUser.age }}, {{ newUser.county }}</p>
             </div>
         </div>
         <div id="second row" nz-row>
@@ -37,12 +37,12 @@
         <div id="fourth row" nz-row>
             <div id="empty space" nz-col nzSpan="1"></div>
             <div nz-col nzSpan="5">
-                <p class="bio">I haven’t dated much in recent years because I’ve been so focused on my career. Now I’m ready to meet the person who will pull my head out of the books and bring me a bit of happiness.</p>
+                <p class="bio">{{ newUser.description }}</p>
             </div>
             <div id="empty space" nz-col nzSpan="6"></div>
             <div nz-col nzSpan="3">
                 <ul>
-                    <li *ngFor="let interest of interests" class="bio"> {{interest}} </li>
+                    <li *ngFor="let interest of newUser.interests" class="bio"> {{ interest }} </li>
                 </ul>
             </div>
         </div>
