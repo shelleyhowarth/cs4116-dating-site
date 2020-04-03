@@ -107,7 +107,7 @@ export class SearchComponent implements OnInit {
                   }
                   else if(this.searchArray.length == 0) {
                     this.noResults = true;
-                } 
+                }
               }
             }
           }
@@ -116,11 +116,23 @@ export class SearchComponent implements OnInit {
     console.log(this.searchArray);
    }
 
-   getAgeRange(userAge) {
+  getAgeRange(userAge) {
     let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
     let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
-    return (userAge >= firstNumber && userAge <= secondNumber);
+    let eightyFive = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
+
+    if(firstNumber !== 85 && userAge >= firstNumber && userAge <= secondNumber) {
+      return true;
     }
+    else if(eightyFive == 85 && userAge >= eightyFive) {
+      return true;
+      }
+  }
+
+  reset() {
+    this.filter = { gender: '', ageRange: '', county: '', interests: '' };
+    this.search();
+  }
 
 
 }

@@ -128,6 +128,8 @@ export class SignUpComponent implements OnInit {
   createInterestsComponent(user) {
     this.modalService.create({
         nzContent: InterestsComponent,
+        nzClosable: false,
+        nzMaskClosable: false,
         nzComponentParams: {
           entry: user
         },

@@ -15,3 +15,4 @@ export class User {
     interests: [];
     uid: string;
 }
+
