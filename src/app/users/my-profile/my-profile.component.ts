@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { UsersService } from '../../services/users.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 
@@ -12,21 +11,20 @@ import { AngularFirestore } from '@angular/fire/firestore';
   })
 
 export class MyProfileComponent implements OnInit {
-  user =null;
   users: Array<User> = [];
   uid = null;
-  email= null;
-  avatarUrl:string;
-  firstName;
-  age = {};
-  county = {};
-  bio = {};
+  email = null;
+  avatarUrl: string;
   newUser: User = null;
+  user = null;
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(private usersService: UsersService, private firestore: AngularFirestore){
-    
+  constructor(private usersService: UsersService, private firestore: AngularFirestore){ }
+
+  ngOnInit(): void {
+    this.setProfilePicture();
+    this.getUserInfo();
   }
 
   getUserEmail(){
@@ -35,14 +33,12 @@ export class MyProfileComponent implements OnInit {
     if(this.user != null){
       this.email = this.user.email;
       this.uid = this.user.uid;
-      console.log(this.uid);
     }
   }
-  
+   
   setProfilePicture(){
     this.getUserEmail();
     var picLocation = "profilePics/"  + this.email;
-    console.log(picLocation);
     var picRef = firebase.storage().ref(picLocation);
     
     picRef.getDownloadURL().then(picUrl => {
@@ -56,8 +52,6 @@ export class MyProfileComponent implements OnInit {
     console.log(docRef);
 
     docRef.subscribe(doc => {
-          console.log("Document data:", doc.data());
-
           var object = new User();
           object.firstName = doc.data().firstName;
           object.lastName = doc.data().lastName;
@@ -78,40 +72,5 @@ export class MyProfileComponent implements OnInit {
           this.newUser = object;
           console.log(this.newUser);
     });
-
   }
-
-  setProfileDetails(){
-    this.getUserInfo();
-
-    console.log
-    
-  }
-
-  
-  getName() {
-    return this.newUser.firstName;
-  }
-
-  getAge() {
-    return this.newUser.age;
-  }
-
-  getCounty() {
-    return this.newUser.county;
-  }
-
-  getBio() {
-    return this.newUser.description;
-  }
-
-  getInterests() {
-    return this.newUser.interests;
-  }
-
-  ngOnInit(): void {
-    this.setProfilePicture();
-    this.setProfileDetails();
-  }
-
 }
