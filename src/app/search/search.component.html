@@ -1,0 +1,54 @@
+<div nz-row style="display: flex">
+    <div nz-col nzSpan="3"></div>
+    <div id="first card">
+        <nz-card class="card" nz-col nzSpan="28"> 
+            <div id="first row">
+                <p class="card-title">what are you looking for?</p>
+            </div>
+            <div nz-row id="second row" style="display: flex">
+                <div>
+                    <nz-select class="dropdown" nzPlaceHolder="gender" [(ngModel)]="filter.gender">
+                        <nz-option *ngFor="let gender of genders" [nzValue]="gender" [nzLabel]="gender"></nz-option> 
+                    </nz-select>
+                </div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <nz-select class="dropdown" nzPlaceHolder="age range" [(ngModel)]="filter.ageRange">
+                        <nz-option *ngFor="let range of ranges" [nzValue]="range" [nzLabel]="range"></nz-option> 
+                    </nz-select>
+                </div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <nz-select class="dropdown" nzPlaceHolder="interests" [(ngModel)]="filter.interests">
+                        <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest"></nz-option> 
+                    </nz-select>
+                </div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <nz-select class="dropdown" nzPlaceHolder="location" [(ngModel)]="filter.county">
+                        <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option> 
+                    </nz-select>
+                </div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <button nz-button class="search" (click)="search()">search</button>
+                </div>
+            </div>
+        </nz-card>
+        <div style="margin-top: 5%"></div>
+        <nz-card class="card">
+            <div id="first row">
+                <p class="card-title">users</p>
+                <div style="display: flex" nz-row>
+                    <div *ngFor="let user of searchArray">
+                        <div nz-col nzSpan="1" [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
+                            <p class="details">{{ getName(user) }}</p>
+                            <p class="details"> {{ getAgeAndLocation(user) }}</p>
+                        </div>
+                    </div>
+                    <p *ngIf=noResults>No users to display</p>
+                </div>
+            </div>
+        </nz-card>
+    </div>
+</div>

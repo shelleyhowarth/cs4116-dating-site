@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 
 @Component({
@@ -37,9 +36,6 @@ export class MyProfileComponent implements OnInit {
       this.avatarUrl = picUrl;
     });
   }
-
-  
-  
 
   ngOnInit(): void {
     this.setProfilePicture();

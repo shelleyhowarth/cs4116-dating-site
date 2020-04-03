@@ -1,0 +1,51 @@
+<div id="outside card" nz-row style="display: flex">
+    <div nz-col nzSpan="3"></div>
+    <nz-card class="card">
+        <div id="first row" nz-row style="display: flex">
+            <div nz-col nzSpan="5">
+                <img *ngIf="avatarUrl" [src]="avatarUrl" class="profile-picture">
+            </div>
+            <div id="empty space" nz-col nzSpan="3"></div>
+            <div id="name age location">
+                <p class="name">Simon</p>
+                <p class="age">22, Limerick</p>
+            </div>
+        </div>
+        <div id="second row" nz-row>
+            <div nz-col nzSpan="4"></div>
+            <p class="edit">edit</p>
+        </div>
+        <div style="margin-top: 3%"></div>
+        <div id="third row" nz-row style="display: flex">
+            <div id="empty space" nz-col nzSpan="1"></div>
+            <div>
+                <p class="age">Bio</p>
+            </div>
+            <div id="empty space" nz-col nzSpan="4"></div>
+            <div>
+                <p class="edit">edit</p>
+            </div>
+            <div id="empty space" nz-col nzSpan="6"></div>
+            <div>
+                <p class="age">Interests</p>
+            </div>
+            <div id="empty space" nz-col nzSpan="1"></div>
+            <div>
+                <p class="edit">edit</p>
+            </div>
+        </div>
+        <div id="fourth row" nz-row>
+            <div id="empty space" nz-col nzSpan="1"></div>
+            <div nz-col nzSpan="5">
+                <p class="bio">I haven’t dated much in recent years because I’ve been so focused on my career. Now I’m ready to meet the person who will pull my head out of the books and bring me a bit of happiness.</p>
+            </div>
+            <div id="empty space" nz-col nzSpan="6"></div>
+            <div nz-col nzSpan="3">
+                <ul>
+                    <li *ngFor="let interest of interests" class="bio"> {{interest}} </li>
+                </ul>
+            </div>
+        </div>
+    </nz-card>
+    <div nz-col nzSpan="3"></div>
+</div>

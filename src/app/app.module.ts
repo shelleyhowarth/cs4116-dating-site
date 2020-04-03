@@ -30,11 +30,15 @@ import { BaseComponent } from './base/base.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
-import { MyProfileComponent } from './my-profile/my-profile.component';
 import { MessageComponent } from './message/message.component';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 import { ChatFeedComponent } from './chat-feed/chat-feed.component';
 import { ChatFormComponent } from './chat-form/chat-form.component';
+import { MyProfileComponent } from './users/my-profile/my-profile.component';
+import { SearchComponent } from './search/search.component';
+import { NzSliderModule } from 'ng-zorro-antd/slider';
+import { InterestsComponent } from './login/sign-up/interests/interests.component';
+import { UserProfileComponent } from './users/user-profile/user-profile.component';
 
 registerLocaleData(en);
 
@@ -43,7 +47,9 @@ const appRoutes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'message', component: MessageComponent, canActivate: [AuthGuard]},
-  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]}
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
+  { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
+  { path: 'user',component: UserProfileComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -57,7 +63,10 @@ const appRoutes: Routes = [
     MyProfileComponent,
     MessageComponent,
     ChatFeedComponent,
-    ChatFormComponent
+    ChatFormComponent,
+    SearchComponent,
+    InterestsComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -80,7 +89,8 @@ const appRoutes: Routes = [
     NzRadioModule,
     NzDatePickerModule,
     RouterModule.forRoot(appRoutes),
-    NzGridModule
+    NzGridModule,
+    NzSliderModule
   ],
 
   exports: [RouterModule],
