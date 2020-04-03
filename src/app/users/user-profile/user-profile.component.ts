@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { User } from 'firebase';
+import { User } from 'src/app/model/user.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-user-profile',
@@ -11,12 +12,12 @@ import { User } from 'firebase';
 export class UserProfileComponent implements OnInit {
   id;
   user: User;
+  avatarUrl;
   constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore) { }
 
   ngOnInit(): void {
     this.id = this.router.url.substring(this.router.url.indexOf("=") + 1, this.router.url.length);
-    this.db.collection('Users').doc(this.id).ref.get().then(function (doc) {
-      if (doc.exists) {
+    this.db.collection('Users').doc(this.id).get().subscribe( doc => {
         this.user = {  
           firstName: doc.data().firstName,
           lastName: doc.data().lastName,
@@ -29,19 +30,23 @@ export class UserProfileComponent implements OnInit {
           county: doc.data().county,
           drinker: doc.data().drinker,
           maritalStatus: doc.data().maritalStatus,
-          occupatio: doc.data().occupation,
+          occupation: doc.data().occupation,
           smoker: doc.data().smoker,
           interests: doc.data().interests,
-          uid: doc.data().uid
+          uid: doc.data().uid 
         };
-        console.log(this.doc.data().firstName);
-        console.log(this.user);
-      } else {
-        console.log("There is no document!");
-      }
-    }).catch(function (error) {
-      console.log("There was an error getting your document:", error);
+        console.log(this.user.email);
+        this.setProfilePicture();
+      })
+  }
+
+  setProfilePicture(){
+    var picLocation = "profilePics/"  + this.user.email;
+    var picRef = firebase.storage().ref(picLocation);
+    
+    picRef.getDownloadURL().then(picUrl => {
+      this.avatarUrl = picUrl;
     });
   }
 
-  }
+}
