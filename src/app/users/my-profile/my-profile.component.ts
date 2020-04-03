@@ -7,9 +7,9 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
-  user =null;
+  user = null;
   email = null;
-  avatarUrl:string;
+  avatarUrl: string;
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
@@ -29,7 +29,6 @@ export class MyProfileComponent implements OnInit {
   setProfilePicture(){
     this.getUserEmail();
     var picLocation = "profilePics/"  + this.email;
-    console.log(picLocation);
     var picRef = firebase.storage().ref(picLocation);
     
     picRef.getDownloadURL().then(picUrl => {

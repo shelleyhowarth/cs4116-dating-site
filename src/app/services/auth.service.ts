@@ -59,7 +59,7 @@ export class AuthService {
           fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: [], fUid: string) {
       let userCollection = this._db.collection<User>('Users');
 
-      userCollection.doc(fEmail).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
+      userCollection.doc(fUid).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
       drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid});
