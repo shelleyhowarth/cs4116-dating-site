@@ -117,16 +117,16 @@ export class SearchComponent implements OnInit {
    }
 
   getAgeRange(userAge) {
-  let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
-  let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
-  let eightyFive = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
+    let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
+    let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
+    let eightyFive = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
 
-  if(firstNumber !== 85 && userAge >= firstNumber && userAge <= secondNumber) {
-    return true;
-  }
-  else if(eightyFive == 85 && userAge >= eightyFive) {
-    return true;
+    if(firstNumber !== 85 && userAge >= firstNumber && userAge <= secondNumber) {
+      return true;
     }
+    else if(eightyFive == 85 && userAge >= eightyFive) {
+      return true;
+      }
   }
 
   reset() {
