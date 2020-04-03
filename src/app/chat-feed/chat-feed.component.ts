@@ -19,11 +19,11 @@ export class ChatFeedComponent implements OnInit, OnChanges {
   constructor(private chat: ChatService, private db: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.feed = this.chat.getMessages();
+    //this.feed = this.chat.getMessages();
   }
 
   ngOnChanges(): void{
-    this.feed = this.chat.getMessages();
+    //this.feed = this.chat.getMessages();
   }
 
 }

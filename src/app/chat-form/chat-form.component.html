@@ -1,6 +1,30 @@
-<input
-    class = "chatInput"
-    [(ngModel)] = "message"
-    (keydown) = "handleSubmit ($event)"/>
-
-<button class = "chatButton" (click) = send()>Send</button>
+<nz-card class="card">
+    <div id="first row">
+        <p class="card-title">Select user to message</p>
+        <div style="display: flex" nz-row>
+            <div *ngFor="let user of users" (click)="onClick(user)">
+                <div nz-col nzSpan="1" style="cursor: pointer">
+                    <p class="details">{{ getName(user) }}</p>
+                    <p class="details"> {{ getAgeAndLocation(user) }}</p>
+                </div>
+            </div>
+            <p *ngIf=userSelected>Messaging</p>
+        </div>
+    </div>
+</nz-card>
+<nz-card class="card">
+    <div id="first row">
+        <p class="card-title">Message</p>
+        <div style="display: flex" nz-row>
+            <div *ngFor="let message of messages">
+                <div nz-col nzSpan="1" style="cursor: pointer">
+                    <p class="details">{{ message }}</p>
+                </div>
+            </div>
+            <div nz-col nzSpan="1" style="cursor: pointer">
+                <input class = "chatInput" [(ngModel)] = "message"(keydown) = "handleSubmit ($event)"/>
+                 <button class = "chatButton" (click) = send()>Send</button>
+            </div>
+        </div>
+    </div>
+</nz-card>
