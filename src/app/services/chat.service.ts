@@ -125,6 +125,7 @@ export class ChatService {
 
   setMessage(msg:string) {
     this.message = msg;
+  
   }
 
   getMessages(){
