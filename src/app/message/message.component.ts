@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ChatMessage } from '../models/chat-message.model';
+import { ChatMessage } from '../model/chat-message.model';
 import * as firebase from "firebase";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestoreModule, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
@@ -26,10 +26,9 @@ export class MessageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(chatMessage = this.chatMessage): void {
-    this.messageContent = chatMessage.message;
-    this.timeStamp = chatMessage.timeSent;
-    this.userName = chatMessage.userName;
-
+    //this.messageContent = chatMessage.message;
+    //this.timeStamp = chatMessage.timeSent;
+    //this.userName = chatMessage.userName;
   }
   
 
