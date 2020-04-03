@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../services/chat.service';
-import { User } from '../model/user.model';
+import { ChatService } from '../../services/chat.service';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: 'app-chat-form',
@@ -40,11 +40,12 @@ export class ChatFormComponent implements OnInit {
   }
 
   onClick(user) {
+    this.chat.checkForUser(user);
     this.userSelected = true;
     this.users = [];
     console.log(user.uid);
     this.reciever = user;
-    this.chat.checkForUser(user);
-    this.messages = this.chat.getMessages();
+    
+    this.messages = this.chat.getMessageArray();
   }
 }

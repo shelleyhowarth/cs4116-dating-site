@@ -64,6 +64,7 @@ export class ChatService {
   }
 
   displayUsers() {
+    this.users = [];
     const snapshot = this.db.collection('Users').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
@@ -99,12 +100,13 @@ export class ChatService {
     const snapshot = this.db.collection('chats').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
-         console.log(doc.id);
          if(doc.id === this.chatId1) {
            this.chatId = this.chatId1;
+           this.getMessages();
          }
          else if(doc.id === this.chatId2) {
            this.chatId = this.chatId2;
+           this.getMessages();
          }
          else {
            this.chatId = this.chatId1;
@@ -113,7 +115,6 @@ export class ChatService {
        });
        console.log("chatId " + this.chatId);
       });
-      this.getMessages();
   }
 
   createUser() {
@@ -127,6 +128,7 @@ export class ChatService {
   }
 
   getMessages(){
+    this.messages = [];
     const snapshot = this.db.collection('chats').doc(this.chatId).collection('messages').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
@@ -135,7 +137,11 @@ export class ChatService {
           this.messages.push(data.message)
        });
       });
-      return this.messages
+  }
+
+  getMessageArray(){
+    console.log(this.messages);
+    return this.messages;
   }
 
   getTimeStamp(){

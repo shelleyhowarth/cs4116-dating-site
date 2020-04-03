@@ -1,11 +1,11 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { ChatMessage } from '../models/chat-message.model';
+import { ChatMessage } from '../../models/chat-message.model';
 import * as firebase from "firebase";
 import { Observable, of } from 'rxjs';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestoreModule, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ChatService } from '../services/chat.service';
+import { ChatService } from '../../services/chat.service';
 
 @Component({
   selector: 'app-chat-feed',
@@ -14,16 +14,16 @@ import { ChatService } from '../services/chat.service';
 })
 export class ChatFeedComponent implements OnInit, OnChanges {
 
-  feed: AngularFirestoreCollection<any> = this.db.collection('chats');
+  feed;
 
   constructor(private chat: ChatService, private db: AngularFirestore) { }
 
   ngOnInit(): void {
-    //this.feed = this.chat.getMessages();
+    this.feed = this.chat.getMessageArray();
   }
 
   ngOnChanges(): void{
-    //this.feed = this.chat.getMessages();
+    this.feed = this.chat.getMessageArray();
   }
 
 }
