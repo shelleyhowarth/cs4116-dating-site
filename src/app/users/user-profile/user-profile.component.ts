@@ -123,7 +123,3 @@ export class UserProfileComponent implements OnInit {
     });
   }
 }
-
-  Message() {
-    this.rou
-  }
