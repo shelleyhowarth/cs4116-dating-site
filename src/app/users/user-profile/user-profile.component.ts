@@ -15,7 +15,7 @@ export class UserProfileComponent implements OnInit {
   currentUser;
   user: User;
   avatarUrl;
-  connectionExists = false;
+  noConnection = false;
   constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore) { }
 
   ngOnInit(): void {
@@ -27,11 +27,11 @@ export class UserProfileComponent implements OnInit {
     ref.subscribe(doc => {
       if (doc.exists) {
         console.log("Connection Exists")
-        this.connectionExists = false;
+        this.noConnection = false;
       }
       else {
         console.log("no connection")
-        this.connectionExists = true;
+        this.noConnection = true;
       }
     });
 

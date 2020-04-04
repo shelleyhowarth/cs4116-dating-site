@@ -1,9 +1,6 @@
 <div id="outside card" nz-row style="display: flex">
     <div nz-col nzSpan="3"></div>
     <nz-card class="card">
-        <div class="connect" *ngIf="connectionExists">
-            <button nz-button  (click)="submit()" class="connect-btn">connect</button>
-        </div>
         <div id="first row" nz-row style="display: flex">
             <div nz-col nzSpan="5">
                 <img *ngIf="avatarUrl" [src]="avatarUrl" class="profile-picture">
@@ -15,7 +12,10 @@
             </div>
         </div>
         <div id="second row" nz-row>
-            <div nz-col nzSpan="4"></div>
+            <div id="empty space" nz-col nzSpan="7"></div>
+            <div *ngIf="noConnection">
+                <button nz-button class="connect-btn" (click)="submit()">connect</button>
+            </div>
         </div>
         <div style="margin-top: 3%"></div>
         <div id="third row" nz-row style="display: flex">
