@@ -105,22 +105,28 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  submit() {
+  accept() {
     var docRef = this.db.collection("notifications").doc(this.userId).get();
     docRef.subscribe(doc => {
       this.connectedId = doc.data().connectionId;
       this.receiverId = doc.data().receiver;
-      this.updateDb();
+      this.updateDb(true);
     });
-
   }
 
-  updateDb() {
-    const time = new Date().toLocaleString();
+  reject() {
+    var docRef = this.db.collection("notifications").doc(this.userId).get();
+    docRef.subscribe(doc => {
+      this.connectedId = doc.data().connectionId;
+      this.receiverId = doc.data().receiver;
+      this.updateDb(false);
+    });
+  }
 
+  updateDb(acceptStatus) {
     var ref = this.db.collection("Connections").doc(this.connectedId);
     ref.update({
-      accepted: true
+      accepted: acceptStatus
     });
 
     var ref2 = this.db.collection("notifications").doc(this.userId);

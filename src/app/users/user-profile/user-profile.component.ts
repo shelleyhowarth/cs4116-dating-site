@@ -121,5 +121,8 @@ export class UserProfileComponent implements OnInit {
       sender: this.currentId,
       receiver: this.otherUserId
     });
+
+    this.noConnection = false;
+    this.connectionPending = true;
   }
 }
