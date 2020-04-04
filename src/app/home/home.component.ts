@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from "firebase";
 import { Connection } from 'src/app/model/connections.model';
 import { User } from '../model/user.model';
+import { Notification} from '../model/notifications.model';
 
 @Component({
   selector: 'app-home',
@@ -13,14 +14,17 @@ export class HomeComponent implements OnInit {
 
   userId = firebase.auth().currentUser.uid
   connections: Array<Connection> = [];
+  notifications: Array<Notification> = [];
   users: Array<User> = [];
   connectedUserIds: Array<String> = [];
   searchId: Array<String> = [];
+  connectedId;
 
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getConnections();
+    this.getNotifications();
   }
 
   getConnections() {
@@ -30,10 +34,11 @@ export class HomeComponent implements OnInit {
         let object = new Connection;
         var data = doc.data();
         console.log("user id = " + this.userId + "doc id" + doc.id);
-        if (doc.id.includes(this.userId)) {
+        if (doc.id.includes(this.userId) && data.accepted) {
           object.date = data.date;
           object.userId1 = data.userId1;
           object.userId2 = data.userId2;
+          object.accepted = data.accepted
           this.connections.push(object);
         }
         else {
@@ -85,4 +90,51 @@ export class HomeComponent implements OnInit {
     })
     console.log(this.users);
   }
+
+  getNotifications() {
+    var ref = this.db.collection("notifications").get();
+    ref.subscribe(snap => {
+      snap.forEach(doc => {
+        let object = new Notification;
+        var data = doc.data();
+        console.log("user id = " + this.userId + "doc id" + doc.id);
+        if (doc.id.includes(this.userId) && !(doc.data().seen)) {
+          object.date = data.date;
+          object.notification = data.notification;
+          object.seen = data.seen;
+          this.notifications.push(object);
+        }
+        else {
+          console.log("no Notifications");
+        }
+      });
+      console.log(this.notifications);
+    });
+  }
+
+  submit() {
+    console.log(this.userId);
+    var docRef = this.db.collection("notifications").doc(this.userId).get();
+    console.log("docRef " + docRef);
+    docRef.subscribe(doc => {
+      console.log(doc.data().connectionId);
+      this.connectedId = doc.data().connectionId;
+      this.updateDb();
+    });
+    console.log("connected " + this.connectedId);
+
+  }
+
+  updateDb() {
+    var ref = this.db.collection("Connections").doc(this.connectedId);
+    ref.update({
+      accepted: true
+    });
+
+    var ref2 = this.db.collection("notifications").doc(this.userId);
+    ref2.update({
+      seen: true
+    });
+  }
+
 }

@@ -12,6 +12,7 @@ import * as firebase from 'firebase';
 export class UserProfileComponent implements OnInit {
   id;
   currentId = firebase.auth().currentUser.uid;
+  currentUser;
   user: User;
   avatarUrl;
   constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore) { }
@@ -38,7 +39,28 @@ export class UserProfileComponent implements OnInit {
         };
         console.log(this.user.email);
         this.setProfilePicture();
-      })
+    })
+    this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
+      this.currentUser = {
+        firstName: doc.data().firstName,
+        lastName: doc.data().lastName,
+        age: doc.data().age,
+        description: doc.data().description,
+        gender: doc.data().gender,
+        email: doc.data().email,
+        favoriteSong: doc.data().favoriteSong,
+        favoriteMovie: doc.data().favoriteMovie,
+        county: doc.data().county,
+        drinker: doc.data().drinker,
+        maritalStatus: doc.data().maritalStatus,
+        occupation: doc.data().occupation,
+        smoker: doc.data().smoker,
+        interests: doc.data().interests,
+        uid: doc.data().uid
+      };
+      console.log(this.user.email);
+      this.setProfilePicture();
+    })
   }
 
   setProfilePicture(){
@@ -53,13 +75,24 @@ export class UserProfileComponent implements OnInit {
   submit() {
     const time = new Date().toLocaleString();
     var docId = this.currentId + this.id;
+    
     var ref = this.db.collection("Connections").doc(docId);
     ref.set({
       userId1: this.currentId,
       userId2: this.id,
-      date: time
+      date: time,
+      accepted: false
     });
     console.log(ref);
     window.alert("You have connected with " + this.user.firstName);
+
+    var ref2 = this.db.collection("notifications").doc(this.id);
+    ref2.set({
+      date: time,
+      notification: (this.currentUser.firstName + " wants to connect with you."),
+      seen: false,
+      connectionId: docId
+    });
+
   }
 }

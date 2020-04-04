@@ -12,6 +12,10 @@
     <div nz-col nzSpan="6">
         <nz-card class="card">
             <p class="card-title">notifications</p>
+            <div class="notifications" *ngFor="let notification of notifications">
+                <p class="details">{{ notification.notification }}</p>
+                <button nz-button (click)="submit()" class="accept-btn">accept</button>
+            </div>
         </nz-card>
     </div>
 </div>
