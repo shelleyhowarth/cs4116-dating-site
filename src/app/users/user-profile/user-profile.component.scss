@@ -5,3 +5,9 @@
     font-size: 21px;
     width: 55%;
 }
+
+.connect-pend-btn {
+    @extend .connect-btn;
+    opacity: 0.3;
+    cursor: not-allowed;
+}
