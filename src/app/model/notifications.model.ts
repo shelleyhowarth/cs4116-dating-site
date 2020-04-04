@@ -3,5 +3,7 @@ export class Notification {
     notification: string;
     seen: boolean;
     connectionId: string;
+    sender: string;
+    receiver: string;
 }
 

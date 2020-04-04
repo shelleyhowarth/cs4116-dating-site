@@ -15,10 +15,26 @@ export class UserProfileComponent implements OnInit {
   currentUser;
   user: User;
   avatarUrl;
+  connectionExists = false;
   constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore) { }
 
   ngOnInit(): void {
     this.id = this.router.url.substring(this.router.url.indexOf("=") + 1, this.router.url.length);
+
+    var docId = this.currentId + this.id;
+    var ref = this.db.collection("Connections").doc(docId).get();
+    console.log(ref);
+    ref.subscribe(doc => {
+      if (doc.exists) {
+        console.log("Connection Exists")
+        this.connectionExists = false;
+      }
+      else {
+        console.log("no connection")
+        this.connectionExists = true;
+      }
+    });
+
     this.db.collection('Users').doc(this.id).get().subscribe( doc => {
         this.user = {  
           firstName: doc.data().firstName,
@@ -61,6 +77,7 @@ export class UserProfileComponent implements OnInit {
       console.log(this.user.email);
       this.setProfilePicture();
     })
+
   }
 
   setProfilePicture(){
@@ -75,7 +92,7 @@ export class UserProfileComponent implements OnInit {
   submit() {
     const time = new Date().toLocaleString();
     var docId = this.currentId + this.id;
-    
+
     var ref = this.db.collection("Connections").doc(docId);
     ref.set({
       userId1: this.currentId,
@@ -84,15 +101,16 @@ export class UserProfileComponent implements OnInit {
       accepted: false
     });
     console.log(ref);
-    window.alert("You have connected with " + this.user.firstName);
+    window.alert("Your connection request has been sent to " + this.user.firstName);
 
     var ref2 = this.db.collection("notifications").doc(this.id);
     ref2.set({
       date: time,
       notification: (this.currentUser.firstName + " wants to connect with you."),
       seen: false,
-      connectionId: docId
+      connectionId: docId,
+      sender: this.currentId,
+      receiver: this.id
     });
-
   }
 }

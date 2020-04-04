@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
   connectedUserIds: Array<String> = [];
   searchId: Array<String> = [];
   connectedId;
+  receiverId;
 
   constructor(private db: AngularFirestore) { }
 
@@ -33,7 +34,6 @@ export class HomeComponent implements OnInit {
       snap.forEach(doc => {
         let object = new Connection;
         var data = doc.data();
-        console.log("user id = " + this.userId + "doc id" + doc.id);
         if (doc.id.includes(this.userId) && data.accepted) {
           object.date = data.date;
           object.userId1 = data.userId1;
@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
           console.log("no connections");
         }
       });
-      console.log(this.connections);
       this.getConnectedUsers();
     });
   }
@@ -61,7 +60,6 @@ export class HomeComponent implements OnInit {
         this.searchId.push(object.userId1);
       }
     });
-    console.log(this.searchId)
 
     this.searchId.forEach(id => {
       ref.subscribe(snap => {
@@ -88,7 +86,6 @@ export class HomeComponent implements OnInit {
         });
       });
     })
-    console.log(this.users);
   }
 
   getNotifications() {
@@ -104,28 +101,23 @@ export class HomeComponent implements OnInit {
           object.seen = data.seen;
           this.notifications.push(object);
         }
-        else {
-          console.log("no Notifications");
-        }
       });
-      console.log(this.notifications);
     });
   }
 
   submit() {
-    console.log(this.userId);
     var docRef = this.db.collection("notifications").doc(this.userId).get();
-    console.log("docRef " + docRef);
     docRef.subscribe(doc => {
-      console.log(doc.data().connectionId);
       this.connectedId = doc.data().connectionId;
+      this.receiverId = doc.data().receiver;
       this.updateDb();
     });
-    console.log("connected " + this.connectedId);
 
   }
 
   updateDb() {
+    const time = new Date().toLocaleString();
+
     var ref = this.db.collection("Connections").doc(this.connectedId);
     ref.update({
       accepted: true
@@ -136,5 +128,4 @@ export class HomeComponent implements OnInit {
       seen: true
     });
   }
-
 }
