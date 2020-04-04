@@ -9,6 +9,17 @@
     <div nz-col nzSpan="6">
         <nz-card class="card">
             <p class="card-title">notifications</p>
+           
+                <!-- <div *ngFor="let message of messages"> -->
+                 <div *ngFor="let user of users" (click)="onClick(user)">
+                    <div nz-row nzSpan="3" style="cursor: pointer">
+                        <nz-card class="message">
+                            <p class="details">{{ getName(user) }} wants to connect with you </p>
+                        </nz-card>
+                    </div>
+                </div>
+                <!-- </div> -->
+       
         </nz-card>
     </div>
 </div>

@@ -12,6 +12,7 @@ import { User } from '../model/user.model';
 @Injectable({
   providedIn: 'root'
 })
+
 export class ChatService {
 
   user: any;
@@ -67,9 +68,10 @@ export class ChatService {
           this.users.push(object);
         });
        });
+
        return this.users
+       }
   }
-}
 
 
 
