@@ -3,7 +3,11 @@ import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
 import { Variable } from '@angular/compiler/src/render3/r3_ast';
 import { UsersService } from '../../services/users.service';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, QueryDocumentSnapshot } from '@angular/fire/firestore';
+import { NzModalService, NzMessageService} from 'ng-zorro-antd';
+import { InterestsComponent } from '../../login/sign-up/interests/interests.component';
+import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
   @Component({
     selector: 'app-my-profile',
@@ -12,6 +16,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
   })
 
 export class MyProfileComponent implements OnInit {
+
   user =null;
   users: Array<User> = [];
   uid = null;
@@ -21,16 +26,25 @@ export class MyProfileComponent implements OnInit {
   age = {};
   county = {};
   bio = {};
-  newUser: User = null;
+  newUser;
+  projects: QueryDocumentSnapshot<User>;
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(private usersService: UsersService, private firestore: AngularFirestore){
+  constructor(
+    private usersService: UsersService,
+     private firestore: AngularFirestore,
+    private modalService: NzModalService,
+    private msg: NzMessageService,
+  ){}
     
+
+  getCurrentUser(){
+    return this.user = firebase.auth().currentUser;
   }
 
   getUserEmail(){
-    this.user = firebase.auth().currentUser;
+   this.getCurrentUser();
 
     if(this.user != null){
       this.email = this.user.email;
@@ -52,28 +66,30 @@ export class MyProfileComponent implements OnInit {
 
   getUserInfo(){
     this.getUserEmail();
-    var docRef = this.firestore.collection("Users").doc(this.uid).get();
+    var docRef = this.firestore.collection("Users").doc(this.uid).valueChanges();
+    
     console.log(docRef);
+docRef.subscribe(doc => {
+          console.log("Document data:", doc);
 
-    docRef.subscribe(doc => {
-          console.log("Document data:", doc.data());
+          this.newUser = doc
 
           var object = new User();
-          object.firstName = doc.data().firstName;
-          object.lastName = doc.data().lastName;
-          object.age = doc.data().age;
-          object.description = doc.data().description;
-          object.gender = doc.data().gender;
-          object.email = doc.data().email;
-          object.favoriteSong = doc.data().favoriteSong;
-          object.favoriteMovie = doc.data().favoriteMovie;
-          object.county =  doc.data().county;
-          object.drinker = doc.data().drinker;
-          object.maritalStatus = doc.data().maritalStatus;
-          object.occupation = doc.data().occupation;
-          object.smoker = doc.data().smoker;
-          object.interests = doc.data().interests;
-          object.uid = doc.data().uid;
+          object.firstName = this.newUser.firstName;
+          object.lastName = this.newUser.lastName;
+          object.age =this.newUser.age;
+          object.description = this.newUser.description;
+          object.gender = this.newUser.gender;
+          object.email = this.newUser.email;
+          object.favoriteSong = this.newUser.favoriteSong;
+          object.favoriteMovie = this.newUser.favoriteMovie;
+          object.county =  this.newUser.county;
+          object.drinker = this.newUser.drinker;
+          object.maritalStatus = this.newUser.maritalStatus;
+          object.occupation = this.newUser.occupation;
+          object.smoker = this.newUser.smoker;
+          object.interests = this.newUser.interests;
+          object.uid = this.newUser.uid;
 
           this.newUser = object;
           console.log(this.newUser);
@@ -83,10 +99,20 @@ export class MyProfileComponent implements OnInit {
 
   setProfileDetails(){
     this.getUserInfo();
-
-    console.log
     
   }
+
+  createInterestsComponent() {
+    this.modalService.create({
+        nzContent: EditInterestComponent,
+        nzComponentParams: {
+          entry: this.getCurrentUser(),
+          current: this.getInterests()
+        },
+    }
+    );
+
+}
 
   
   getName() {
@@ -113,5 +139,6 @@ export class MyProfileComponent implements OnInit {
     this.setProfilePicture();
     this.setProfileDetails();
   }
+  
 
 }
