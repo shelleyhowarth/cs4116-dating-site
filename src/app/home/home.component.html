@@ -3,6 +3,9 @@
     <div nz-col nzSpan="6">
         <nz-card class="card">
             <p class="card-title">connections</p>
+            <nz-card class="connections" *ngFor="let connect of users">
+                <p class="details">{{ connect.firstName }}</p>
+            </nz-card>
         </nz-card>
     </div>
     <div id="empty space" nz-col nzSpan="5"></div>
