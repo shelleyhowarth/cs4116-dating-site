@@ -21,7 +21,8 @@ export class ChatFormComponent implements OnInit {
   senderUid = this.currentUser.uid;
   userSelected: boolean = false;
   reciever;
-  messages: Array<ChatMessage>
+  messages: Array<ChatMessage>;
+  avatarUrl;
 
   constructor(private db: AngularFirestore,private chat: ChatService) { }
 
@@ -114,11 +115,35 @@ export class ChatFormComponent implements OnInit {
          let object = new ChatMessage;
          object.userUid = data.sender;
          object.message = data.message;
-         object.timeSent = data.timeSent;
-         console.log(object);
+         object.timeSent = new Date(data.timeSent);
+         //console.log(object);
          this.messages.push(object);
        });
-      });
-      return this.messages;
+    });
+    this.sortByDate();
+    return this.messages;
+  }
+
+  private getTime(date?: Date) {
+    return date != null ? date.getTime() : 0;
+  }
+
+
+  public sortByDate(): void {
+    this.messages.sort((a: ChatMessage, b: ChatMessage) => {
+         //console.log(this.getTime(a.timeSent) - this.getTime(b.timeSent));
+         return this.getTime(a.timeSent) - this.getTime(b.timeSent);
+    });
+    console.log("ordered" + this.messages)
+  }
+
+  setProfilePicture(user){
+    var picLocation = "profilePics/"  + user.email;
+    var picRef = firebase.storage().ref(picLocation);
+    
+    picRef.getDownloadURL().then(picUrl => {
+      this.avatarUrl = picUrl;
+    });
+    return this.avatarUrl;
   }
 }

@@ -1,5 +1,5 @@
 export class ChatMessage {
     userUid: string;
     message: string;
-    timeSent: Date = new Date();
+    timeSent: Date;
 }
