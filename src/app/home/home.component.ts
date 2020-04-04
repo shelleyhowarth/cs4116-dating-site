@@ -35,24 +35,9 @@ export class HomeComponent implements OnInit {
     this.reciever = secondUser.uid;
   }
 
-  sendNotification(notification){
-    console.log(this.senderUid);
-    const timestamp = new Date().toLocaleString()
-    //const email = this.currentUser.email;
-    //this.chatMessages = this.getMessages();
-    this.db.collection('test').add({
-      notification: notification,
-      timeSent: timestamp,
-      sender: this.senderUid,
-      reciever: this.reciever,
-      seen: false,
-    });
-    console.log('Called sendNotification()');
-  }
-
   getNotifications() {
   
-    var ref = this.db.collection("test").get();
+    var ref = this.db.collection("notifications").get();
     ref.subscribe(snap => {
       snap.forEach(doc => {
         let object = new notification;
@@ -60,8 +45,7 @@ export class HomeComponent implements OnInit {
         console.log("user id = " + this.userId + "doc id" + doc.id);
         if (doc.id.includes(this.userId) && !(doc.data().seen)) {
           object.timeSent = data.date;
-          object.senderName = this.senderUid;
-          object.receiver = this.receiverId;
+          object.senderName = 
           object.notification = data.notification;
           object.seen = data.seen;
           this.notifications.push(object);
@@ -70,7 +54,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  /*submit() {
+  submit() {
     var docRef = this.db.collection("notification").doc(this.userId).get();
     docRef.subscribe(doc => {
       this.chatId = doc.data().receiver;
@@ -79,7 +63,6 @@ export class HomeComponent implements OnInit {
     });
 
   }
-  */
 
   getName(user) {
     return user.firstName;
