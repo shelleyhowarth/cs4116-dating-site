@@ -18,7 +18,7 @@ export class EditProfilePictureComponent implements OnInit {
     @Input() current;
     user;
     email;
-    avatarUrl;
+    url;
     selectedFile = null;
     fileObj = null;
     loading = false;
@@ -32,7 +32,7 @@ export class EditProfilePictureComponent implements OnInit {
       this.getProfilePicture();
   
       console.log("User "+ this.user);
-      console.log("Bio "+ this.email);
+      console.log("email "+ this.email);
     }
 
     getProfilePicture(){
@@ -41,7 +41,7 @@ export class EditProfilePictureComponent implements OnInit {
       var picRef = firebase.storage().ref(picLocation);
       
       picRef.getDownloadURL().then(picUrl => {
-        this.avatarUrl = picUrl;
+        this.url = picUrl;
       });
     }
   
@@ -99,10 +99,6 @@ export class EditProfilePictureComponent implements OnInit {
       this.fileObj = event.fileList[size - 1].originFileObj;
       console.log(event);
       
-      this.getBase64(event.file!.originFileObj!, (img: string) => {
-        this.loading = false;
-        this.avatarUrl = img;
-      });
     }
     
     private getBase64(img: File, callback: (img: string) => void): void {
