@@ -1,1 +1,8 @@
-<p>edit-bio works!</p>
+<div class="btn">
+    <textarea rows="4" nz-input [(ngModel)]="defaultOption"></textarea>
+</div>
+<div *nzModalFooter class="btn">
+    <button nz-button 
+            (click)="update()"
+            class="sign-up-btn">Update Bio</button>
+</div>

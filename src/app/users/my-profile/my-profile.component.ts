@@ -8,6 +8,8 @@ import { NzModalService, NzMessageService} from 'ng-zorro-antd';
 import { InterestsComponent } from '../../login/sign-up/interests/interests.component';
 import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
+import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
 
   @Component({
     selector: 'app-my-profile',
@@ -58,6 +60,8 @@ export class MyProfileComponent implements OnInit {
     var picLocation = "profilePics/"  + this.email;
     console.log(picLocation);
     var picRef = firebase.storage().ref(picLocation);
+
+    
     
     picRef.getDownloadURL().then(picUrl => {
       this.avatarUrl = picUrl;
@@ -111,8 +115,29 @@ docRef.subscribe(doc => {
         },
     }
     );
-
 }
+
+  editBioComponent(){
+    this.modalService.create({
+      nzContent: EditBioComponent,
+      nzComponentParams: {
+        entry: this.getCurrentUser(),
+        current: this.getBio()
+      },
+  }
+  );
+  }
+
+    editPictureComponent(){
+    this.modalService.create({
+      nzContent: EditProfilePictureComponent,
+      nzComponentParams: {
+        entry: this.getCurrentUser(),
+        current: this.email
+      },
+  }
+  );
+  }
 
   
   getName() {
