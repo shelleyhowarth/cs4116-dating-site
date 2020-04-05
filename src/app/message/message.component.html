@@ -1,47 +1,11 @@
-<div nz-row>
-    <div nz-col nzSpan="3"></div>
-    <div>
-        <nz-card class="card">
-            <div id="first row">
-                <p class="card-title">Select user to message</p>
-                <div style="display: flex" nz-row>
-                    <div *ngFor="let user of users" (click)="onClick(user)">
-                        <div nz-col nzSpan="1" style="cursor: pointer">
-                            <p class="details"> {{ getName(user) }} </p>
-                        </div>
-                    </div>
-                    <p *ngIf=userSelected>Messaging</p>
-                </div>
-            </div>
-        </nz-card>
-    </div>
-    <div nz-col nzSpan="1"></div>
-    <div>
-        <nz-card class="card" *ngIf=userSelected>
-            <div id="second row">
-                <p class="card-title">Messages</p>
-                <div style="display: flex" nz-row>
-                    <div *ngFor="let message of messages">
-                        <div nz-col nzSpan="1" style="cursor: pointer">
-                            <nz-card class="message">
-                                <p class="details"> {{(message.message)}} </p>
-                                <p class="details">{{ message.timeSent}}</p>
-                            </nz-card>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </nz-card>
-    </div>
+<div class = "messageContainer">
+   <div #scroller class = "feedWrapper">
+       <app-chat-feed></app-chat-feed>
+   </div>
+
+   <div class = "chatFormWrapper">
+       <app-chat-form></app-chat-form>
+   </div>
+
+
 </div>
-<nz-card class="card">
-    <div id="third row">
-        <p class="card-title">Message</p>
-        <div style="display: flex" nz-row>
-            <div nz-col nzSpan="1" style="cursor: pointer">
-                <input class = "chatInput" [(ngModel)] = "message"(keydown) = "handleSubmit ($event)"/>
-                <button class = "chatButton" (click) = send()>Send</button>
-            </div>
-        </div>
-    </div>
-</nz-card>

@@ -31,6 +31,9 @@ import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { MessageComponent } from './message/message.component';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import { ChatFeedComponent } from './message/chat-feed/chat-feed.component';
+import { ChatFormComponent } from './message/chat-form/chat-form.component';
 import { MyProfileComponent } from './users/my-profile/my-profile.component';
 import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
@@ -59,6 +62,8 @@ const appRoutes: Routes = [
     MessageComponent,
     MyProfileComponent,
     MessageComponent,
+    ChatFeedComponent,
+    ChatFormComponent,
     SearchComponent,
     InterestsComponent,
     UserProfileComponent
