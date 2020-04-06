@@ -33,20 +33,10 @@ export class UserProfileComponent implements OnInit {
           occupation: doc.data().occupation,
           smoker: doc.data().smoker,
           interests: doc.data().interests,
-          uid: doc.data().uid 
+          uid: doc.data().uid,
+          profilePic: doc.data().profilePic 
         };
         console.log(this.user.email);
-        this.setProfilePicture();
       })
   }
-
-  setProfilePicture(){
-    var picLocation = "profilePics/"  + this.user.email;
-    var picRef = firebase.storage().ref(picLocation);
-    
-    picRef.getDownloadURL().then(picUrl => {
-      this.avatarUrl = picUrl;
-    });
-  }
-
 }
