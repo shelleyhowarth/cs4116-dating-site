@@ -14,5 +14,6 @@ export class User {
     favoriteMovie: string;
     interests: [];
     uid: string;
+    profilePic: string;
 }
 

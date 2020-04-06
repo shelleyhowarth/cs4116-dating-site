@@ -4,6 +4,7 @@
         <nz-card class="card">
             <p class="card-title">connections</p>
             <div *ngFor="let connect of users">
+                <img class="connect-pic" src= "{{ connect.profilePic }}">
                 <p class="notif-text">{{ connect.firstName }}</p>
             </div>
         </nz-card>
@@ -16,7 +17,6 @@
                 <p class="notif-text">{{ notification.notification }}</p>
                 <button nz-button (click)="accept()" class="sign-up-btn">accept</button>
                 <button nz-button (click)="reject()" class="sign-up-btn">reject</button>
-
             </div>
         </nz-card>
     </div>

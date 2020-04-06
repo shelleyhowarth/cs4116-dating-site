@@ -81,6 +81,7 @@ export class HomeComponent implements OnInit {
             object.smoker = doc.data().smoker;
             object.interests = doc.data().interests;
             object.uid = doc.data().uid;
+            object.profilePic = doc.data().profilePic;
             this.users.push(object);
           }
         });

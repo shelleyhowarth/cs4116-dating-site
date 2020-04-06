@@ -3,7 +3,7 @@
     <nz-card class="card">
         <div id="first row" nz-row style="display: flex">
             <div nz-col nzSpan="5">
-                <img *ngIf="avatarUrl" [src]="avatarUrl" class="profile-picture">
+                <img src="{{ user.profilePic }}" class="profile-picture">
             </div>
             <div id="empty space" nz-col nzSpan="3"></div>
             <div id="name age location">

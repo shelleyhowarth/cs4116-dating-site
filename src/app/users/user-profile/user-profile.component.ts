@@ -25,24 +25,34 @@ export class UserProfileComponent implements OnInit {
     this.otherUserId = this.router.url.substring(this.router.url.indexOf("=") + 1, this.router.url.length);
 
     var docId = this.currentId + this.otherUserId;
-    var ref = this.db.collection("Connections").doc(docId).get();
-    console.log(ref);
-    ref.subscribe(doc => {
-      if (doc.exists) {
-        console.log("Connection Exists")
-        this.noConnection = false;
-        if(doc.data().accepted === true) {
-          this.connectionAccepted = true;
+    var docId2 = this.otherUserId + this.currentId;
+    var collectionRef = this.db.collection("Connections").get();
+
+    collectionRef.subscribe(res => {
+      res.forEach(doc => {
+        console.log("doc.id " + doc.id);
+        if(doc.id === docId || doc.id === docId2) {
+          console.log("docId " + docId);
+          console.log("docId2 " + docId2);
+          if(doc.data().accepted == true) {
+            this.connectionAccepted = true;
+            this.connectionPending = false;
+            this.noConnection = false;
+          }
+          else {
+            this.connectionPending = true;
+            this.connectionAccepted = false;
+            this.noConnection = false;
+          }
         }
-        else {
-          this.connectionPending = true;
+        else if(this.connectionAccepted === false && this.connectionPending === false) {
+          this.noConnection = true;
         }
-      }
-      else {
-        console.log("no connection")
-        this.noConnection = true;
-      }
-    });
+      })
+      
+    })
+
+
 
     this.db.collection('Users').doc(this.otherUserId).get().subscribe( doc => {
         this.user = {  
@@ -60,10 +70,10 @@ export class UserProfileComponent implements OnInit {
           occupation: doc.data().occupation,
           smoker: doc.data().smoker,
           interests: doc.data().interests,
-          uid: doc.data().uid 
+          uid: doc.data().uid,
+          profilePic: doc.data().profilePic 
         };
         console.log(this.user.email);
-        this.setProfilePicture();
     })
     this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
       this.currentUser = {
@@ -81,21 +91,12 @@ export class UserProfileComponent implements OnInit {
         occupation: doc.data().occupation,
         smoker: doc.data().smoker,
         interests: doc.data().interests,
-        uid: doc.data().uid
+        uid: doc.data().uid,
+        profilePic: doc.data().profilePic
       };
       console.log(this.user.email);
-      this.setProfilePicture();
     })
 
-  }
-
-  setProfilePicture(){
-    var picLocation = "profilePics/"  + this.user.email;
-    var picRef = firebase.storage().ref(picLocation);
-    
-    picRef.getDownloadURL().then(picUrl => {
-      this.avatarUrl = picUrl;
-    });
   }
 
   sendConnectRequest() {
