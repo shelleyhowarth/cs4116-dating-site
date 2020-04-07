@@ -20,7 +20,7 @@ export class ChatService {
   chatMessage: ChatMessage;
   userName: Observable<String>;
   currentUser;
-  recieverUid;
+  receiverUid;
   senderUid
   users: Array<User> = [];
   chatId1;
@@ -29,10 +29,7 @@ export class ChatService {
   message;
   messages: Array<String> =[];
 
-  constructor(
-    private db: AngularFirestore,
-    private afAuth: AngularFireAuth
-  ){
+  constructor( private db: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(auth => {
 
       if(auth !== undefined && auth !== null){
@@ -65,10 +62,10 @@ export class ChatService {
           object.smoker = doc.data().smoker;
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
           this.users.push(object);
         });
        });
-
        return this.users
        }
   }
