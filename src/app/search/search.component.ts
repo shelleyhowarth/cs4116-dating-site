@@ -76,6 +76,7 @@ export class SearchComponent implements OnInit {
           object.smoker = doc.data().smoker;
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
           this.users.push(object);
         });
        });
@@ -92,7 +93,6 @@ export class SearchComponent implements OnInit {
   search() {
     this.noResults = true;
     this.searchArray = [];
-    console.log(this.filter);
       this.users.forEach(user => {
           if(user.gender === this.filter.gender || this.filter.gender === '')
           {
@@ -113,7 +113,6 @@ export class SearchComponent implements OnInit {
           }
         }
       });
-    console.log(this.searchArray);
    }
 
   getAgeRange(userAge) {

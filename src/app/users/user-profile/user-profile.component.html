@@ -12,7 +12,17 @@
             </div>
         </div>
         <div id="second row" nz-row>
-            <div nz-col nzSpan="4"></div>
+            <div id="empty space" nz-col nzSpan="7"></div>
+            <div *ngIf="noConnection">
+                <button nz-button class="connect-btn" (click)="sendConnectRequest()">connect</button>
+            </div>
+            <div *ngIf="connectionPending">
+                <button nz-button class="connect-pend-btn">connection pending</button>
+            </div>
+            <div *ngIf="connectionAccepted">
+<!--                 Add this after this branch is merged with message branch => [routerLink]="['/message']" -->
+                <button nz-button class="connect-btn">message</button>
+            </div>
         </div>
         <div style="margin-top: 3%"></div>
         <div id="third row" nz-row style="display: flex">

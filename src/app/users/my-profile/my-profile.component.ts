@@ -38,7 +38,6 @@ export class MyProfileComponent implements OnInit {
   getUserInfo(){
     this.getUserEmail();
     var docRef = this.firestore.collection("Users").doc(this.uid).get();
-    console.log(docRef);
 
     docRef.subscribe(doc => {
           var object = new User();
@@ -60,7 +59,6 @@ export class MyProfileComponent implements OnInit {
           object.profilePic = doc.data().profilePic;
 
           this.newUser = object;
-          console.log(this.newUser);
     });
   }
 }

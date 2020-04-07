@@ -117,7 +117,6 @@ export class SignUpComponent implements OnInit {
       favoriteMovie: this.form.value.favoriteMovie,
     }
     this.authService.SignUp(user.email, user.password);
-    console.log(user);
     this.upload(user.email);
 
     this.form.reset;
@@ -185,9 +184,7 @@ export class SignUpComponent implements OnInit {
 
   handleChange(event){
     var size = event.fileList.length;
-    console.log(size);
     this.fileObj = event.fileList[size - 1].originFileObj;
-    console.log(event);
     
     this.getBase64(event.file!.originFileObj!, (img: string) => {
       this.loading = false;
