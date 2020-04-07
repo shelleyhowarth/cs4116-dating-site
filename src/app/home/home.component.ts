@@ -41,9 +41,6 @@ export class HomeComponent implements OnInit {
           object.accepted = data.accepted
           this.connections.push(object);
         }
-        else {
-          console.log("no connections");
-        }
       });
       this.getConnectedUsers();
     });
@@ -95,7 +92,6 @@ export class HomeComponent implements OnInit {
       snap.forEach(doc => {
         let object = new Notification;
         var data = doc.data();
-        console.log("user id = " + this.userId + "doc id" + doc.id);
         if (doc.id.includes(this.userId) && !(doc.data().seen)) {
           object.date = data.date;
           object.notification = data.notification;

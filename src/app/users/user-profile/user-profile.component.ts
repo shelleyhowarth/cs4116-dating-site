@@ -30,10 +30,7 @@ export class UserProfileComponent implements OnInit {
 
     collectionRef.subscribe(res => {
       res.forEach(doc => {
-        console.log("doc.id " + doc.id);
         if(doc.id === docId || doc.id === docId2) {
-          console.log("docId " + docId);
-          console.log("docId2 " + docId2);
           if(doc.data().accepted == true) {
             this.connectionAccepted = true;
             this.connectionPending = false;
@@ -73,7 +70,6 @@ export class UserProfileComponent implements OnInit {
           uid: doc.data().uid,
           profilePic: doc.data().profilePic 
         };
-        console.log(this.user.email);
     })
     this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
       this.currentUser = {
@@ -94,7 +90,6 @@ export class UserProfileComponent implements OnInit {
         uid: doc.data().uid,
         profilePic: doc.data().profilePic
       };
-      console.log(this.user.email);
     })
 
   }
@@ -110,7 +105,6 @@ export class UserProfileComponent implements OnInit {
       date: time,
       accepted: false
     });
-    console.log(ref);
     window.alert("Your connection request has been sent to " + this.user.firstName);
 
     var ref2 = this.db.collection("notifications").doc(this.otherUserId);

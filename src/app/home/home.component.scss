@@ -1,12 +1,8 @@
 @import "../../styles/utilities";
 
-.first-row {
-    display: flex;
-}
-
-.notifcations-card {
+.home-card {
     @extend .card;
-    width: 10rem;
+    min-width: 10rem;
 }
 
 .details {
@@ -19,7 +15,6 @@
     font-size: larger;
 }
 
-.connect-pic {
-    width: 24px;
-    height: 24px;
+.connect-flex {
+    display: inline-flex;
 }
