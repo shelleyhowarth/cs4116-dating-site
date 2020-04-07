@@ -1,12 +1,12 @@
 @import "../../styles/utilities";
 
-.first-row {
-    display: flex;
+.home-card {
+    @extend .card;
+    min-width: 10rem;
 }
 
-.notifcations-card {
-    @extend .card;
-    width: 10rem;
+.details {
+    color: black;
 }
 
 .messages {
@@ -22,4 +22,13 @@
 
 .details {
     color: black;
+}
+.notif-text {
+    color: $red;
+    font-weight: 500;
+    font-size: larger;
+}
+
+.connect-flex {
+    display: inline-flex;
 }

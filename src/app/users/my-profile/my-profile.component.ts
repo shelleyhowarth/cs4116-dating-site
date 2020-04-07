@@ -23,7 +23,6 @@ export class MyProfileComponent implements OnInit {
   constructor(private usersService: UsersService, private firestore: AngularFirestore){ }
 
   ngOnInit(): void {
-    this.setProfilePicture();
     this.getUserInfo();
   }
 
@@ -36,20 +35,9 @@ export class MyProfileComponent implements OnInit {
     }
   }
    
-  setProfilePicture(){
-    this.getUserEmail();
-    var picLocation = "profilePics/"  + this.email;
-    var picRef = firebase.storage().ref(picLocation);
-    
-    picRef.getDownloadURL().then(picUrl => {
-      this.avatarUrl = picUrl;
-    });
-  }
-
   getUserInfo(){
     this.getUserEmail();
     var docRef = this.firestore.collection("Users").doc(this.uid).get();
-    console.log(docRef);
 
     docRef.subscribe(doc => {
           var object = new User();
@@ -68,9 +56,9 @@ export class MyProfileComponent implements OnInit {
           object.smoker = doc.data().smoker;
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
 
           this.newUser = object;
-          console.log(this.newUser);
     });
   }
 }
