@@ -21,7 +21,6 @@
                     <button nz-button class="connect-pend-btn">connection pending</button>
                 </div>
                 <div *ngIf="connectionAccepted">
-    <!--                 Add this after this branch is merged with message branch => [routerLink]="['/message']" -->
                     <button nz-button [routerLink]="['/message']" class="connect-btn">message</button>
                 </div>
             </div>
