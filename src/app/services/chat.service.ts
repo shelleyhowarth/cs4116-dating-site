@@ -7,6 +7,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from "firebase";
 import { Observable, of } from 'rxjs';
 import { User } from '../model/user.model';
+import { Connection } from '../model/connections.model';
 
 
 @Injectable({
@@ -28,6 +29,9 @@ export class ChatService {
   chatId;
   message;
   messages: Array<String> =[];
+  connections;
+  searchId;
+  userId = firebase.auth().currentUser.uid
 
   constructor( private db: AngularFirestore, private afAuth: AngularFireAuth) {
     this.afAuth.authState.subscribe(auth => {
@@ -41,35 +45,4 @@ export class ChatService {
     this.senderUid = this.currentUser.uid;
   }
 
-  displayUsers() {
-    this.users = [];
-    const snapshot = this.db.collection('Users').get();
-    snapshot.subscribe(snap => {
-       snap.forEach(doc => {
-          let object = new User();
-          object.firstName = doc.data().firstName;
-          object.lastName = doc.data().lastName;
-          object.age = doc.data().age;
-          object.description = doc.data().description;
-          object.gender = doc.data().gender;
-          object.email = doc.data().email;
-          object.favoriteSong = doc.data().favoriteSong;
-          object.favoriteMovie = doc.data().favoriteMovie;
-          object.county =  doc.data().county;
-          object.drinker = doc.data().drinker;
-          object.maritalStatus = doc.data().maritalStatus;
-          object.occupation = doc.data().occupation;
-          object.smoker = doc.data().smoker;
-          object.interests = doc.data().interests;
-          object.uid = doc.data().uid;
-          object.profilePic = doc.data().profilePic;
-          this.users.push(object);
-        });
-       });
-       return this.users
-       }
-  }
-
-
-
-
+}

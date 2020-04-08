@@ -4,17 +4,17 @@
     <nz-card class="card">
         <div id="first row">
             <p class="card-title">Select a connection to message</p>
-            <div nz-row>
-                <div *ngFor="let user of users" (click)="onClick(user)" style="display: inline-flex">
-                    <div>
-                        <img class="search-pic" src= "{{ user.profilePic }}">
-                        <p class="details">{{ user.firstName | titlecase }}</p>
-                    </div>
+            <div *ngFor="let user of users" (click)="onClick(user)" style="display: inline-flex">
+                <div>
+                    <img class="search-pic" src= "{{ user.profilePic }}">
+                    <p class="details">{{ user.firstName | titlecase }}</p>
                 </div>
-                <div *ngIf=userSelected>
-                    <img class="search-pic" src= "{{ receiver.profilePic }}">
-                    <p class="details">{{ receiver.firstName }}</p>
-                </div>
+                &nbsp;
+                &nbsp;
+            </div>
+            <div *ngIf=userSelected>
+                <img class="search-pic" src= "{{ receiver.profilePic }}">
+                <p class="details">{{ receiver.firstName }}</p>
             </div>
         </div>
     </nz-card>
@@ -30,23 +30,19 @@
         <nz-card class="card" *ngIf=userSelected>
             <div id="second row">
                 <p class="card-title">Conversation</p>
-                <div style="display: flex" nz-row>
-                    <div *ngFor="let message of messages">
-                        <div nz-col nzSpan="1" style="cursor: pointer">
-                            <nz-card class="message">
-                                <p class="details"> {{ message.message }} </p>
-                                <p class="details">{{ message.timeSent}}</p>
-                            </nz-card>
-                        </div>
-                    </div>
+                <div *ngFor="let message of messages">
+                    <nz-card class="message">
+                        <p class="details"> {{ message.message }} </p>
+                        <p class="black-text">{{ message.timeSent | date:'short'}}</p>
+                    </nz-card>
                 </div>
                 <hr>
                 <div id="third row">
                     <p class="card-title">Message</p>
                     <div style="display: flex" nz-row>
-                        <div nz-col nzSpan="1" style="display: flex">
-                            <input [(ngModel)]="message" (keydown)="handleSubmit($event)"/>
-                            &nbsp;
+                        <textarea class="message-box" [(ngModel)]="message" (keydown)="handleSubmit($event)"></textarea>
+                        &nbsp;
+                        <div class="center">
                             <button nz-button class="send" (click)="send()">Send</button>
                         </div>
                     </div>

@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ChatService } from '../services/chat.service';
 import { User } from '../model/user.model';
+import { Connection } from '../model/connections.model';
 
 
 @Component({
@@ -25,11 +26,73 @@ export class MessageComponent implements OnInit {
   receiver;
   messages: Array<ChatMessage>;
   avatarUrl;
+  connections: Array<Connection> = [];
+  searchId: Array<String> = [];
 
-  constructor(private db: AngularFirestore,private chatService: ChatService) { }
+  constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
-    this.users = this.chatService.displayUsers();
+   this.getConnections();
+   console.log(this.users);
+  }
+
+  getConnections() {
+    var ref = this.db.collection("Connections").get();
+    ref.subscribe(snap => {
+      snap.forEach(doc => {
+        let object = new Connection;
+        var data = doc.data();
+        if (doc.id.includes(this.currentUser.uid) && data.accepted) {
+          object.date = data.date;
+          object.userId1 = data.userId1;
+          object.userId2 = data.userId2;
+          object.accepted = data.accepted
+          this.connections.push(object);
+        }
+      });
+      this.getConnectedUsers();
+    });
+  }
+
+  getConnectedUsers() {
+    var ref = this.db.collection("Users").get();
+
+    this.connections.forEach(object => {
+      if (object.userId1 === this.currentUser.uid) {
+        this.searchId.push(object.userId2);
+      }
+      else {
+        this.searchId.push(object.userId1);
+      }
+    });
+
+    this.searchId.forEach(id => {
+      ref.subscribe(snap => {
+        snap.forEach(doc => {
+          if (doc.id === id) {
+            let object = new User();
+            object.firstName = doc.data().firstName;
+            object.lastName = doc.data().lastName;
+            object.age = doc.data().age;
+            object.description = doc.data().description;
+            object.gender = doc.data().gender;
+            object.email = doc.data().email;
+            object.favoriteSong = doc.data().favoriteSong;
+            object.favoriteMovie = doc.data().favoriteMovie;
+            object.county = doc.data().county;
+            object.drinker = doc.data().drinker;
+            object.maritalStatus = doc.data().maritalStatus;
+            object.occupation = doc.data().occupation;
+            object.smoker = doc.data().smoker;
+            object.interests = doc.data().interests;
+            object.uid = doc.data().uid;
+            object.profilePic = doc.data().profilePic;
+            this.users.push(object);
+          }
+        });
+      });
+    })
+    return this.users;
   }
 
   send(){

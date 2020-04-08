@@ -69,21 +69,27 @@
         <nz-card class="card">
             <div id="first row">
                 <p class="card-title">users</p>
-                <div  nz-row>
-                    <div *ngFor="let user of searchArray" style="display: inline-flex;">
-                        <div nz-col nzSpan="6" [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
-                            <div>
-                                <img src="{{ user.profilePic }}" class="search-pic">
-                            </div>
-                            <div>
-                                <p class="details">{{ user.firstName | titlecase}}</p>
-                                <p class="details"> {{ user.age }}, {{ user.county }}</p>
-                            </div>
+                <div *ngFor="let user of searchArray" style="display: inline-flex;">
+                    <div [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
+                        <div>
+                            <img src="{{ user.profilePic }}" class="search-pic">
                         </div>
-                        <div nz-col nzSpan="1"></div>
+                        <div>
+                            <p class="details">{{ user.firstName | titlecase}}</p>
+                            <p class="details"> {{ user.age }}, {{ user.county }}</p>
+                        </div>
                     </div>
-                    <p *ngIf=noResults>No users to display</p>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
                 </div>
+                <p *ngIf=noResults>No users to display</p>
             </div>
         </nz-card>
     </div>
