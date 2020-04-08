@@ -82,14 +82,6 @@ export class SearchComponent implements OnInit {
        });
   }
 
-  getName(user) {
-    return user.firstName;
-  }
-
-  getAgeAndLocation(user) {
-    return " " + user.age + ", " + user.county + " ";
-  }
-
   search() {
     this.noResults = true;
     this.searchArray = [];

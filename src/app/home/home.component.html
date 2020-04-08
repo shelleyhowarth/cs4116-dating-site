@@ -3,11 +3,13 @@
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
             <p class="card-title">connections</p>
-            <div *ngFor="let connect of users" class="connect-flex">
+            <div *ngFor="let connect of users" style="display: inline-flex">
                 <div>
                     <img class="search-pic" src= "{{ connect.profilePic }}">
-                    <p class="notif-text">{{ connect.firstName }}</p>
+                    <p class="notif-text">{{ connect.firstName | titlecase }}</p>
                 </div>
+                &nbsp;
+                &nbsp;
             </div>
         </nz-card>
     </div>

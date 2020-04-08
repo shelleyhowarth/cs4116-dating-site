@@ -7,7 +7,7 @@
             </div>
             <div id="empty space" nz-col nzSpan="3"></div>
             <div id="name age location">
-                <p class="name">{{ newUser.firstName }}</p>
+                <p class="name">{{ newUser.firstName | titlecase }}</p>
                 <p class="age">{{ newUser.age }}, {{ newUser.county }}</p>
             </div>
         </div>
