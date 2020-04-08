@@ -34,6 +34,24 @@ export class MyProfileComponent implements OnInit {
       this.uid = this.user.uid;
     }
   }
+
+  isSmoker() {
+    if(this.user.smoker === "smoker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
+
+  isDrinker() {
+    if(this.user.drinker === "drinker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
    
   getUserInfo(){
     this.getUserEmail();
