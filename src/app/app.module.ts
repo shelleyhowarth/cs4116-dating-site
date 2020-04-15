@@ -35,6 +35,7 @@ import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { InterestsComponent } from './login/sign-up/interests/interests.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { AdminComponent } from './admin/admin.component';
 
 registerLocaleData(en);
 
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
-  { path: 'user',component: UserProfileComponent, canActivate: [AuthGuard]},
+  { path: 'user', component: UserProfileComponent, canActivate: [AuthGuard] },
+  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -57,7 +59,8 @@ const appRoutes: Routes = [
     MyProfileComponent,
     SearchComponent,
     InterestsComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

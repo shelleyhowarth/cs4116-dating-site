@@ -11,6 +11,7 @@ import { User } from '../model/user.model';
 export class AuthService {
   loggedIn;
   _db: AngularFirestore;
+  admin = false;
   
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -53,6 +54,7 @@ export class AuthService {
     return this.loggedIn;
   }
 
+
   addUser(fName: string, lName: string, fAge: number, fEmail: string,
           fGender: string, fDescription: string, fcounty: string,
           foccupation: string, fmaritalStatus: string, fSmoker: boolean,
@@ -62,7 +64,8 @@ export class AuthService {
       userCollection.doc(fUid).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
-      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid, profilePic: fProfilePic});
+      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid,
+      profilePic: fProfilePic, admin: this.admin});
       
   }
 

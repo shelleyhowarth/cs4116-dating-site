@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import * as firebase from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from '../model/user.model';
 
 @Component({
   selector: 'app-base',
@@ -10,6 +11,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./base.component.scss']
 })
 export class BaseComponent implements OnInit {
+
+  newUser: User;
+  user;
+  uid;
+  isAdmin;
 
   navItems = [
     {
@@ -37,6 +43,12 @@ export class BaseComponent implements OnInit {
       imgSrc: 'https://firebasestorage.googleapis.com/v0/b/cs4116-group4-dating.appspot.com/o/icons%2Fuser.svg?alt=media&token=060e1187-1f0d-4dc7-9712-63e6d6525f2b'
     },
     {
+      name: 'Admin',
+      routing: 'admin',
+      imgName: 'pic',
+      imgSrc: ''
+    },
+    {
       name: 'Log Out',
       routing: 'login',
       imgName: 'switch',
@@ -44,9 +56,47 @@ export class BaseComponent implements OnInit {
     }
   ]
 
-  constructor(public routing: Router, public authService: AuthService) { }
+  constructor(public routing: Router, public authService: AuthService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
+
+    this.user = firebase.auth().currentUser;
+    if (this.user != null) {
+      this.uid = this.user.uid;
+    }
+
+    this.getUserInfo();
+
+    this.isAdmin = this.newUser.admin;
+    console.log("admin " + this.isAdmin);
+  }
+
+  getUserInfo() {
+    var docRef = this.firestore.collection("Users").doc(this.uid).get();
+
+    docRef.subscribe(doc => {
+      var object = new User();
+      object.firstName = doc.data().firstName;
+      object.lastName = doc.data().lastName;
+      object.age = doc.data().age;
+      object.description = doc.data().description;
+      object.gender = doc.data().gender;
+      object.email = doc.data().email;
+      object.favoriteSong = doc.data().favoriteSong;
+      object.favoriteMovie = doc.data().favoriteMovie;
+      object.county = doc.data().county;
+      object.drinker = doc.data().drinker;
+      object.maritalStatus = doc.data().maritalStatus;
+      object.occupation = doc.data().occupation;
+      object.smoker = doc.data().smoker;
+      object.interests = doc.data().interests;
+      object.uid = doc.data().uid;
+      object.profilePic = doc.data().profilePic;
+      object.admin = doc.data().admin;
+      console.log(object.admin);
+      this.newUser = object;
+    });
+    console.log(this.newUser.admin);
   }
 
 }

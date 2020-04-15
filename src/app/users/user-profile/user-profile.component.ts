@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
+import * as admin from 'firebase-admin';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
@@ -19,7 +21,10 @@ export class UserProfileComponent implements OnInit {
   noConnection = false;
   connectionPending = false;
   connectionAccepted = false;
-  constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore) { }
+  isAdmin = false;
+  admin = require('firebase-admin');
+
+  constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore, public afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.otherUserId = this.router.url.substring(this.router.url.indexOf("=") + 1, this.router.url.length);
@@ -68,7 +73,8 @@ export class UserProfileComponent implements OnInit {
           smoker: doc.data().smoker,
           interests: doc.data().interests,
           uid: doc.data().uid,
-          profilePic: doc.data().profilePic 
+          profilePic: doc.data().profilePic,
+          admin: doc.data().admin
         };
     })
     this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
@@ -88,8 +94,11 @@ export class UserProfileComponent implements OnInit {
         smoker: doc.data().smoker,
         interests: doc.data().interests,
         uid: doc.data().uid,
-        profilePic: doc.data().profilePic
+        profilePic: doc.data().profilePic,
+        admin: doc.data().admin
       };
+      this.isAdmin = this.currentUser.admin
+      console.log(this.isAdmin);
     })
 
   }
@@ -119,5 +128,19 @@ export class UserProfileComponent implements OnInit {
 
     this.noConnection = false;
     this.connectionPending = true;
+  }
+
+  disableAccount() {
+    
+  }
+
+  deleteAccount() {
+  //  admin.auth().deleteUser(this.otherUserId).then(function () {
+   //   console.log('Successfully deleted user');
+   //   this.db.collection("Users").doc(this.otherUserId).delete()
+    //})
+    //.catch(function (error) {
+    //    console.log('Error deleting user:', error);
+   // });;
   }
 }

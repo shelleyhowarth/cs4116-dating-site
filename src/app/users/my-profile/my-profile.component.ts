@@ -57,7 +57,7 @@ export class MyProfileComponent implements OnInit {
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
           object.profilePic = doc.data().profilePic;
-
+          object.admin = doc.data().admin;
           this.newUser = object;
     });
   }

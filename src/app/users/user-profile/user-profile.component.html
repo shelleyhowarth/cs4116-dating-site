@@ -2,6 +2,12 @@
     <div nz-col nzSpan="3"></div>
     <nz-card class="card">
         <div id="first row" nz-row style="display: flex">
+            <div *ngIf="isAdmin">
+                <button nz-button class="disable-acc-btn" (click)="disableAccount()">Disable account</button>
+            </div>
+            <div *ngIf="isAdmin">
+                <button nz-button class="delete-acc-btn" (click)="deleteAccount()">Delete account</button>
+            </div>
             <div nz-col nzSpan="5">
                 <img src="{{ user.profilePic }}" class="profile-picture">
             </div>
