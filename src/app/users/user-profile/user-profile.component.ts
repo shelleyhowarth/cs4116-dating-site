@@ -120,4 +120,30 @@ export class UserProfileComponent implements OnInit {
     this.noConnection = false;
     this.connectionPending = true;
   }
+
+  deleteConnection(){
+
+    const time = new Date().toLocaleString();
+
+    var docId = this.currentId + this.otherUserId;
+    var ref = this.db.collection("Connections").doc(docId);
+    ref.set({
+      userId1: this.currentId,
+      userId2: this.otherUserId,
+      date: time,
+      accepted: false
+    });
+
+    var docId = this.otherUserId + this.currentId;
+    var ref = this.db.collection("Connections").doc(docId);
+    ref.set({
+      userId1: this.otherUserId,
+      userId2: this.currentId,
+      date: time,
+      accepted: false
+    });
+
+    window.alert("You have deleted the User:  " + this.user.firstName);
+    
+  }
 }

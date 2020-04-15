@@ -23,6 +23,9 @@
 <!--                 Add this after this branch is merged with message branch => [routerLink]="['/message']" -->
                 <button nz-button class="connect-btn">message</button>
             </div>
+            <div *ngIf="connectionAccepted">
+                <button nz-button class="connect-btn"(click)="deleteConnection()" >delete</button>
+            </div>
         </div>
         <div style="margin-top: 3%"></div>
         <div id="third row" nz-row style="display: flex">
