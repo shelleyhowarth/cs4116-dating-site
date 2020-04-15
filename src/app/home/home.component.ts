@@ -139,53 +139,52 @@ export class HomeComponent implements OnInit {
           this.allUsers.push(object);
        });
       this.createSuggestion();
-       });
-
+    });
   }
-    getUserEmail(){
-      this.currentUser = firebase.auth().currentUser;
-  
-      if(this.currentUser != null){
-        this.email = this.currentUser.email;
-        this.uid = this.currentUser.uid;
-      }
-    }
 
-    getUserInfo(){
-      this.getUserEmail();
-      var docRef = this.db.collection("Users").doc(this.uid).get();
+  getUserEmail(){
+    this.currentUser = firebase.auth().currentUser;
   
-      docRef.subscribe(doc => {
-            var object = new User();
-            object.firstName = doc.data().firstName;
-            object.lastName = doc.data().lastName;
-            object.age = doc.data().age;
-            object.description = doc.data().description;
-            object.gender = doc.data().gender;
-            object.email = doc.data().email;
-            object.favoriteSong = doc.data().favoriteSong;
-            object.favoriteMovie = doc.data().favoriteMovie;
-            object.county =  doc.data().county;
-            object.drinker = doc.data().drinker;
-            object.maritalStatus = doc.data().maritalStatus;
-            object.occupation = doc.data().occupation;
-            object.smoker = doc.data().smoker;
-            object.interests = doc.data().interests;
-            object.uid = doc.data().uid;
-            object.profilePic = doc.data().profilePic;
-  
-            this.currentUser = object;
-            console.log(this.currentUser.interests);
-  
-      });
+    if(this.currentUser != null){
+      this.email = this.currentUser.email;
+      this.uid = this.currentUser.uid;
     }
+  }
 
-    createSuggestion(){
-      //console.log(this.allUsers);
-      this.allUsers.forEach(user => {
-          console.log(user);
-      })
-    }
+  getUserInfo(){
+    this.getUserEmail();
+    var docRef = this.db.collection("Users").doc(this.uid).get();
+  
+    docRef.subscribe(doc => {
+      var object = new User();
+      object.firstName = doc.data().firstName;
+      object.lastName = doc.data().lastName;
+      object.age = doc.data().age;
+      object.description = doc.data().description;
+      object.gender = doc.data().gender;
+      object.email = doc.data().email;
+      object.favoriteSong = doc.data().favoriteSong;
+      object.favoriteMovie = doc.data().favoriteMovie;
+      object.county =  doc.data().county;
+      object.drinker = doc.data().drinker;
+      object.maritalStatus = doc.data().maritalStatus;
+      object.occupation = doc.data().occupation;
+      object.smoker = doc.data().smoker;
+      object.interests = doc.data().interests;
+      object.uid = doc.data().uid;
+      object.profilePic = doc.data().profilePic;
+  
+      this.currentUser = object;
+      console.log(this.currentUser.interests)
+    });
+  }
+
+  createSuggestion(){
+    //console.log(this.allUsers);
+    this.allUsers.forEach(user => {
+      console.log(user);
+    })
+  }
     
 
   accept() {
