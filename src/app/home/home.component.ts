@@ -39,8 +39,6 @@ export class HomeComponent implements OnInit {
     this.getUserInfo();
     this.getUsers();
 
-    this.createSuggestion();
-
   }
 
   getConnections() {
@@ -138,9 +136,9 @@ export class HomeComponent implements OnInit {
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
           object.profilePic = doc.data().profilePic;
-          
           this.allUsers.push(object);
-        });
+       });
+      this.createSuggestion();
        });
 
   }
@@ -183,12 +181,10 @@ export class HomeComponent implements OnInit {
     }
 
     createSuggestion(){
-
-      console.log(this.allUsers);
-
-      this.users.forEach(user => {
-        console.log(user);
-      });
+      //console.log(this.allUsers);
+      this.allUsers.forEach(user => {
+          console.log(user);
+      })
     }
     
 
