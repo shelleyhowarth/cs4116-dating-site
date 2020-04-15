@@ -134,7 +134,7 @@ export class UserProfileComponent implements OnInit {
     var ref = this.db.collection("Connections").doc(docId)
     ref.delete();
 
-    window.alert("You have deleted the User:  " + this.user.firstName);
+    window.alert("You have disconnected with  " + this.user.firstName);
     
   }
 }
