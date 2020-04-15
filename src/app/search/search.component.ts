@@ -86,6 +86,7 @@ export class SearchComponent implements OnInit {
     this.noResults = true;
     this.searchArray = [];
       this.users.forEach(user => {
+        console.log(user);
           if(user.gender === this.filter.gender || this.filter.gender === '')
           {
             if(user.county === this.filter.county || this.filter.county === '')

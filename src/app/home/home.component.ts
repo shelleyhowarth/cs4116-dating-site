@@ -20,14 +20,27 @@ export class HomeComponent implements OnInit {
   users: Array<User> = [];
   connectedUserIds: Array<String> = [];
   searchId: Array<String> = [];
-  connectedId;
-  receiverId;
+  connectedId: string;
+  receiverId: any;
+  allUsers: Array<User> = [];
+  currentUser = null;
+  uid = null;
+  email = null;
+  searchArray = [];
+  noResults = true;
+
 
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
+
+    this.getUserInfo();
+    this.getUsers();
+
+    this.createSuggestion();
+
   }
 
   getConnections() {
@@ -104,6 +117,81 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getUsers(){
+    const snapshot = this.db.collection('Users').get();
+    snapshot.subscribe(snap => {
+       snap.forEach(doc => {
+          let object = new User();
+          object.firstName = doc.data().firstName;
+          object.lastName = doc.data().lastName;
+          object.age = doc.data().age;
+          object.description = doc.data().description;
+          object.gender = doc.data().gender;
+          object.email = doc.data().email;
+          object.favoriteSong = doc.data().favoriteSong;
+          object.favoriteMovie = doc.data().favoriteMovie;
+          object.county =  doc.data().county;
+          object.drinker = doc.data().drinker;
+          object.maritalStatus = doc.data().maritalStatus;
+          object.occupation = doc.data().occupation;
+          object.smoker = doc.data().smoker;
+          object.interests = doc.data().interests;
+          object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
+          
+          this.allUsers.push(object);
+        });
+       });
+
+  }
+    getUserEmail(){
+      this.currentUser = firebase.auth().currentUser;
+  
+      if(this.currentUser != null){
+        this.email = this.currentUser.email;
+        this.uid = this.currentUser.uid;
+      }
+    }
+
+    getUserInfo(){
+      this.getUserEmail();
+      var docRef = this.db.collection("Users").doc(this.uid).get();
+  
+      docRef.subscribe(doc => {
+            var object = new User();
+            object.firstName = doc.data().firstName;
+            object.lastName = doc.data().lastName;
+            object.age = doc.data().age;
+            object.description = doc.data().description;
+            object.gender = doc.data().gender;
+            object.email = doc.data().email;
+            object.favoriteSong = doc.data().favoriteSong;
+            object.favoriteMovie = doc.data().favoriteMovie;
+            object.county =  doc.data().county;
+            object.drinker = doc.data().drinker;
+            object.maritalStatus = doc.data().maritalStatus;
+            object.occupation = doc.data().occupation;
+            object.smoker = doc.data().smoker;
+            object.interests = doc.data().interests;
+            object.uid = doc.data().uid;
+            object.profilePic = doc.data().profilePic;
+  
+            this.currentUser = object;
+            console.log(this.currentUser.interests);
+  
+      });
+    }
+
+    createSuggestion(){
+
+      console.log(this.allUsers);
+
+      this.users.forEach(user => {
+        console.log(user);
+      });
+    }
+    
+
   accept() {
     var docRef = this.db.collection("notifications").doc(this.userId).get();
     docRef.subscribe(doc => {
@@ -122,7 +210,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  updateDb(acceptStatus) {
+  updateDb(acceptStatus: boolean) {
     var ref = this.db.collection("Connections").doc(this.connectedId);
     ref.update({
       accepted: acceptStatus
