@@ -127,21 +127,12 @@ export class UserProfileComponent implements OnInit {
 
     var docId = this.currentId + this.otherUserId;
     var ref = this.db.collection("Connections").doc(docId);
-    ref.set({
-      userId1: this.currentId,
-      userId2: this.otherUserId,
-      date: time,
-      accepted: false
-    });
+    ref.delete();
+    
 
     var docId = this.otherUserId + this.currentId;
-    var ref = this.db.collection("Connections").doc(docId);
-    ref.set({
-      userId1: this.otherUserId,
-      userId2: this.currentId,
-      date: time,
-      accepted: false
-    });
+    var ref = this.db.collection("Connections").doc(docId)
+    ref.delete();
 
     window.alert("You have deleted the User:  " + this.user.firstName);
     
