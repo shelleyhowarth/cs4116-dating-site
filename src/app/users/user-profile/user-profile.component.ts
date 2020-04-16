@@ -118,6 +118,19 @@ export class UserProfileComponent implements OnInit {
     this.connectionPending = true;
   }
 
+  deleteConnection(){
+
+    var docId = this.currentId + this.otherUserId;
+    var ref = this.db.collection("Connections").doc(docId);
+    ref.delete();
+    
+    var docId = this.otherUserId + this.currentId;
+    var ref = this.db.collection("Connections").doc(docId)
+    ref.delete();
+
+    window.alert("You have disconnected with " + this.user.firstName);
+  }
+    
   isSmoker() {
     if(this.user.smoker === "smoker") {
       return "Yes";

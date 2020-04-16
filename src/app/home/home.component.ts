@@ -38,8 +38,6 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
-
-
   }
 
   getConnections() {
@@ -99,7 +97,6 @@ export class HomeComponent implements OnInit {
         });
       });
     })
-
     this.getUserInfo();
   }
 
@@ -185,42 +182,18 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  addToSuggestions(user) {
-    if (this.currentUser.uid != user.uid) {
-      this.suggestedUsers.push(user);
-    }
-  }
-
   createSuggestion() {
-    //console.log(this.allUsers);
     this.allUsers.forEach(user => {
-      if (this.users.some(u => u.email === user.email)) {
-        console.log("Connected")
-
-      }
-      else {
-        console.log("Not Connected")
-        const found = this.currentUser.interests.some((r: never) => user.interests.indexOf(r) >= 2)
-        console.log(found);
-
+      if (!this.users.some(u => u.email === user.email)) {
+        let found = this.currentUser.interests.some((r: never) => user.interests.indexOf(r) >= 2);
         if (found == true) {
-          this.addToSuggestions(user)
+          if (this.currentUser.uid != user.uid) {
+            this.suggestedUsers.push(user);
+          }
         }
       }
-    })
+    });
   }
-
-
-  //   const found = this.currentUser.interests.some((r: never)=> user.interests.indexOf(r) >= 2)
-  //   console.log(found);
-
-  //   if(found == true){
-  //     this.addToSuggestions(user)
-  //   }
-  //   }
-  // })
-
-
 
   accept() {
     var docRef = this.db.collection("notifications").doc(this.userId).get();
