@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-search',
@@ -13,7 +14,7 @@ export class SearchComponent implements OnInit {
 
   genders = ["male", "female"];
   ranges = ["55-60", "61-65", "66-70", "71-75", "76-80", "81-85", "85+"];
-  interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   counties = [
     "Antrim",
     "Armagh",
@@ -53,6 +54,7 @@ export class SearchComponent implements OnInit {
   users: Array<User> = [];
   searchArray = [];
   noResults = true;
+  userId = firebase.auth().currentUser.uid
 
   constructor(private fb: FormBuilder, private firestore: AngularFirestore, private usersService: UsersService) { }
 
@@ -79,6 +81,13 @@ export class SearchComponent implements OnInit {
           object.profilePic = doc.data().profilePic;
           this.users.push(object);
         });
+
+        this.users.forEach(user => {
+          if(user.uid === this.userId) {
+            this.users.splice(this.users.indexOf(user), 1);
+          }
+          
+        })
        });
   }
 

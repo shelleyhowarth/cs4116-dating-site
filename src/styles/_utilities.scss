@@ -89,3 +89,14 @@ p {
 .black-text {
     color: black;
 }
+
+.general {
+    @extend .age;
+    font-size: 100%;
+    color: black;
+}
+
+.profile-card {
+    @extend .card;
+    min-width: 70%;
+}

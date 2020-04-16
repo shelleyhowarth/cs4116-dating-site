@@ -23,12 +23,14 @@
 .details {
     color: black;
 }
+
 .notif-text {
     color: $red;
     font-weight: 500;
     font-size: larger;
 }
 
-.usercard{
-    margin: 10px;
+.point-wrap {
+    display: inline-flex;
+    cursor: pointer;
 }
