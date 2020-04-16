@@ -14,7 +14,7 @@ export class SearchComponent implements OnInit {
 
   genders = ["male", "female"];
   ranges = ["55-60", "61-65", "66-70", "71-75", "76-80", "81-85", "85+"];
-  interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   counties = [
     "Antrim",
     "Armagh",
@@ -95,6 +95,7 @@ export class SearchComponent implements OnInit {
     this.noResults = true;
     this.searchArray = [];
       this.users.forEach(user => {
+        console.log(user);
           if(user.gender === this.filter.gender || this.filter.gender === '')
           {
             if(user.county === this.filter.county || this.filter.county === '')

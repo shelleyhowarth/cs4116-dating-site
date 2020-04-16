@@ -18,7 +18,7 @@ export class MyProfileComponent implements OnInit {
   newUser: User = null;
   user = null;
 
-  interests = ["Reading", "Gardening", "Painting", "Baking"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   
   constructor(private usersService: UsersService, private firestore: AngularFirestore){ }
 
