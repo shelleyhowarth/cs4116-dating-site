@@ -31,6 +31,17 @@
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
             <p class="card-title">suggested users</p>
+            <div *ngFor="let user of suggestedUsers" style="display: inline-flex;">
+                <div [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
+                    <div>
+                        <img src="{{ user.profilePic }}" class="search-pic">
+                    </div>
+                    <div>
+                        <p class="details">{{ user.firstName | titlecase}}</p>
+                        <p class="details"> {{ user.age }}, {{ user.county }}</p>
+                    </div>
+                </div>
+            </div>
         </nz-card>
     </div>
 </div>

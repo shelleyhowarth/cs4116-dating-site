@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   connectedId: string;
   receiverId: any;
   allUsers: Array<User> = [];
+  suggestedUsers: Array<User> = [];
   currentUser = null;
   uid = null;
   email = null;
@@ -182,7 +183,13 @@ export class HomeComponent implements OnInit {
   createSuggestion(){
     //console.log(this.allUsers);
     this.allUsers.forEach(user => {
-      console.log(user);
+      const found = this.currentUser.interests.some((r: never)=> user.interests.indexOf(r) >= 2)
+      console.log(found);
+
+      if(found == true){
+        if(this.currentUser.uid != user.uid)
+          this.suggestedUsers.push(user);
+      }
     })
   }
     
