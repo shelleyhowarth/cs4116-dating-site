@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
-import { UsersService } from '../../services/users.service';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { NzModalService } from 'ng-zorro-antd';
+import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
+import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
+import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
 
   @Component({
     selector: 'app-my-profile',
@@ -12,26 +15,26 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 export class MyProfileComponent implements OnInit {
   users: Array<User> = [];
-  uid = null;
-  email = null;
+  uid;
+  email;
   avatarUrl: string;
-  newUser: User = null;
-  user = null;
+  newUser: User;
+  currentUser = firebase.auth().currentUser;
+
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(private usersService: UsersService, private firestore: AngularFirestore){ }
+  constructor(private firestore: AngularFirestore, private modalService: NzModalService){ }
 
   ngOnInit(): void {
     this.getUserInfo();
+    console.log(this.currentUser.uid);
   }
 
   getUserEmail(){
-    this.user = firebase.auth().currentUser;
-
-    if(this.user != null){
-      this.email = this.user.email;
-      this.uid = this.user.uid;
+    if(this.currentUser != null){
+      this.email = this.currentUser.email;
+      this.uid = this.currentUser.uid;
     }
   }
    
@@ -57,8 +60,37 @@ export class MyProfileComponent implements OnInit {
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
           object.profilePic = doc.data().profilePic;
-
           this.newUser = object;
+    });
+  }
+
+  editPictureComponent(){
+      this.modalService.create({
+        nzContent: EditProfilePictureComponent,
+        nzComponentParams: {
+          entry: this.newUser,
+          current: this.newUser.email
+        }
+    });
+  }
+
+  createInterestsComponent() {
+    this.modalService.create({
+        nzContent: EditInterestComponent,
+        nzComponentParams: {
+          entry: this.newUser,
+          current: this.newUser.interests
+        }
+    });
+  }
+
+  editBioComponent(){
+    this.modalService.create({
+      nzContent: EditBioComponent,
+      nzComponentParams: {
+        entry: this.newUser,
+        current: this.newUser.description
+      },
     });
   }
 }

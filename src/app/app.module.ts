@@ -36,6 +36,9 @@ import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { InterestsComponent } from './login/sign-up/interests/interests.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
+import { EditInterestComponent } from './users/my-profile/edit-profile/edit-interest/edit-interest.component';
+import { EditBioComponent } from './users/my-profile/edit-profile/edit-bio/edit-bio.component';
+import { EditProfilePictureComponent } from './users/my-profile/edit-profile/edit-profile-picture/edit-profile-picture.component';
 
 registerLocaleData(en);
 
@@ -61,7 +64,10 @@ const appRoutes: Routes = [
     MessageComponent,
     SearchComponent,
     InterestsComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    EditInterestComponent,
+    EditBioComponent,
+    EditProfilePictureComponent
   ],
   imports: [
     BrowserModule,
