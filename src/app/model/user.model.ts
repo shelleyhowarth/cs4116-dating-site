@@ -8,8 +8,8 @@ export class User {
     county: string;
     occupation: string; 
     maritalStatus: string; 
-    smoker: boolean;
-    drinker: boolean; 
+    smoker: string;
+    drinker: string; 
     favoriteSong: string; 
     favoriteMovie: string;
     interests: [];

@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
+import * as firebase from 'firebase';
 
 @Component({
   selector: 'app-search',
@@ -53,6 +54,7 @@ export class SearchComponent implements OnInit {
   users: Array<User> = [];
   searchArray = [];
   noResults = true;
+  userId = firebase.auth().currentUser.uid
 
   constructor(private fb: FormBuilder, private firestore: AngularFirestore, private usersService: UsersService) { }
 
@@ -79,6 +81,13 @@ export class SearchComponent implements OnInit {
           object.profilePic = doc.data().profilePic;
           this.users.push(object);
         });
+
+        this.users.forEach(user => {
+          if(user.uid === this.userId) {
+            this.users.splice(this.users.indexOf(user), 1);
+          }
+          
+        })
        });
   }
 

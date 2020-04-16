@@ -15,7 +15,7 @@ export class InterestsComponent implements OnInit {
   isSmoker;
   isDrinker;
   actualAge;
-  interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   chosenInterests;
   avatarUrl;
   constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, ) { }
