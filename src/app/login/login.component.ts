@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.modalService.create({
         nzContent: SignUpComponent,
     });
-}
+  }
 
   setUpForm() {
     this.form = this.fb.group({
@@ -43,7 +43,6 @@ export class LoginComponent implements OnInit {
       email: this.form.value.email,
       password: this.form.value.password
     }
-    console.log(loginDetails);
     this.authService.SignIn(loginDetails.email, loginDetails.password)
     return loginDetails;
   }
