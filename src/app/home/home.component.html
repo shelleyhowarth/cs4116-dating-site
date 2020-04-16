@@ -3,7 +3,7 @@
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
             <p class="card-title">connections</p>
-            <div *ngFor="let connect of users" style="display: inline-flex">
+            <div *ngFor="let connect of users" [routerLink]="['/user', { id: connect.uid }]" class="point-wrap">
                 <div>
                     <img class="search-pic" src= "{{ connect.profilePic }}">
                     <p class="notif-text">{{ connect.firstName | titlecase }}</p>
@@ -31,6 +31,15 @@
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
             <p class="card-title">suggested users</p>
+            <div *ngFor="let user of suggestedUsers" [routerLink]="['/user', { id: user.uid }]" class="point-wrap">
+                <div>
+                    <img src="{{ user.profilePic }}" class="search-pic">
+                    <p class="notif-text">{{ user.firstName | titlecase}}</p>
+                    <p class="details"> {{ user.age }}, {{ user.county }}</p>
+                </div>
+                &nbsp;
+                &nbsp;
+            </div>
         </nz-card>
     </div>
 </div>

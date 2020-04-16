@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-user-profile',
@@ -49,8 +48,6 @@ export class UserProfileComponent implements OnInit {
       
     })
 
-
-
     this.db.collection('Users').doc(this.otherUserId).get().subscribe( doc => {
         this.user = {  
           firstName: doc.data().firstName,
@@ -91,7 +88,6 @@ export class UserProfileComponent implements OnInit {
         profilePic: doc.data().profilePic
       };
     })
-
   }
 
   sendConnectRequest() {
@@ -123,18 +119,32 @@ export class UserProfileComponent implements OnInit {
 
   deleteConnection(){
 
-    const time = new Date().toLocaleString();
-
     var docId = this.currentId + this.otherUserId;
     var ref = this.db.collection("Connections").doc(docId);
     ref.delete();
     
-
     var docId = this.otherUserId + this.currentId;
     var ref = this.db.collection("Connections").doc(docId)
     ref.delete();
 
-    window.alert("You have disconnected with  " + this.user.firstName);
+    window.alert("You have disconnected with " + this.user.firstName);
+  }
     
+  isSmoker() {
+    if(this.user.smoker === "smoker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
+
+  isDrinker() {
+    if(this.user.drinker === "drinker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
   }
 }

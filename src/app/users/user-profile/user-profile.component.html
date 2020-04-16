@@ -1,62 +1,81 @@
 <div id="outside card" nz-row style="display: flex">
     <div nz-col nzSpan="3"></div>
-    <nz-card class="card">
-        <div id="first row" nz-row style="display: flex">
-            <div nz-col nzSpan="5">
-                <img src="{{ user.profilePic }}" class="profile-picture">
+    <div nc-col nzSpan="15">
+        <nz-card class="profile-card">
+            <div id="first row" nz-row style="display: flex">
+                <div nz-col nzSpan="7">
+                    <img src="{{ user.profilePic }}" class="profile-picture">
+                </div>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div id="name age location">
+                    <p class="name">{{ user.firstName | titlecase }}</p>
+                    <p class="age">{{ user.age }}, {{ user.county }}</p>
+                </div>
             </div>
-            <div id="empty space" nz-col nzSpan="3"></div>
-            <div id="name age location">
-                <p class="name">{{ user.firstName | titlecase }}</p>
-                <p class="age">{{ user.age }}, {{ user.county }}</p>
+            <div id="second row" nz-row>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div *ngIf="noConnection">
+                    <button nz-button class="connect-btn" (click)="sendConnectRequest()">connect</button>
+                </div>
+                <div *ngIf="connectionPending">
+                    <button nz-button class="connect-pend-btn">connection pending</button>
+                </div>
+                <div *ngIf="connectionAccepted">
+                    <button nz-button [routerLink]="['/message']" class="connect-btn">message</button>
+                <button nz-button class="connect-btn" (click)="deleteConnection()">delete connection</button>
+                </div>
             </div>
-        </div>
-        <div id="second row" nz-row>
-            <div id="empty space" nz-col nzSpan="7"></div>
-            <div *ngIf="noConnection">
-                <button nz-button class="connect-btn" (click)="sendConnectRequest()">connect</button>
+            <div style="margin-top: 3%"></div>
+            <div id="third row" nz-row style="display: flex">
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <p class="age">Bio</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="6"></div>
+                <div>
+                    <p class="age">Interests</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="6"></div>
+                <div>
+                    <p class="age">General</p>
+                </div>
             </div>
-            <div *ngIf="connectionPending">
-                <button nz-button class="connect-pend-btn">connection pending</button>
+            <div id="fourth row" nz-row>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div nz-col nzSpan="5">
+                    <p class="bio">{{ user.description }}</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div nz-col nzSpan="2">
+                    <ul>
+                        <li *ngFor="let interest of user.interests" class="bio"> {{ interest }} </li>
+                    </ul>
+                </div>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div style="display: flex">
+                    <p class="general">Smoker:</p>
+                    &nbsp;
+                    <p class="general">{{ isSmoker() }}</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div style="display: flex">
+                    <p class="general">Drinker:</p>
+                    &nbsp;
+                    <p class="general">{{ isDrinker() }}</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div style="display: flex">
+                    <p class="general">Favourite Song:</p>
+                    &nbsp;
+                    <p class="general">{{ user.favoriteSong }}</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="18"></div>
+                <div style="display: flex">
+                    <p class="general">Favourite Movie:</p>
+                    &nbsp;
+                    <p class="general">{{ user.favoriteMovie }}</p>
+                </div>
             </div>
-            <div *ngIf="connectionAccepted">
-<!--                 Add this after this branch is merged with message branch => [routerLink]="['/message']" -->
-                <button nz-button class="connect-btn">message</button>
-            </div>
-            <div *ngIf="connectionAccepted">
-                <button nz-button class="connect-btn"(click)="deleteConnection()" >Disconnect User</button>
-            </div>
-            
-        </div>
-        <div style="margin-top: 3%"></div>
-        <div id="third row" nz-row style="display: flex">
-            <div id="empty space" nz-col nzSpan="1"></div>
-            <div>
-                <p class="age">Bio</p>
-            </div>
-            <div id="empty space" nz-col nzSpan="4"></div>
-            <div>
-            </div>
-            <div id="empty space" nz-col nzSpan="6"></div>
-            <div>
-                <p class="age">Interests</p>
-            </div>
-            <div id="empty space" nz-col nzSpan="1"></div>
-            <div>
-            </div>
-        </div>
-        <div id="fourth row" nz-row>
-            <div id="empty space" nz-col nzSpan="1"></div>
-            <div nz-col nzSpan="5">
-                <p class="bio">{{ user.description }} </p>
-            </div>
-            <div id="empty space" nz-col nzSpan="6"></div>
-            <div nz-col nzSpan="3">
-                <ul>
-                    <li *ngFor="let interest of user.interests" class="bio"> {{interest}} </li>
-                </ul>
-            </div>
-        </div>
-    </nz-card>
+        </nz-card>
     <div nz-col nzSpan="3"></div>
 </div>
