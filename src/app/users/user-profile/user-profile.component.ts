@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
+import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-user-profile',

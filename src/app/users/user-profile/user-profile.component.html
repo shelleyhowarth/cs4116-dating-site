@@ -20,9 +20,9 @@
                 <div *ngIf="connectionPending">
                     <button nz-button class="connect-pend-btn">connection pending</button>
                 </div>
-                <div *ngIf="connectionAccepted">
+                <div *ngIf="connectionAccepted" style="display: flex">
                     <button nz-button [routerLink]="['/message']" class="connect-btn">message</button>
-                <button nz-button class="connect-btn" (click)="deleteConnection()">delete connection</button>
+                    <button nz-button class="connect-btn" (click)="deleteConnection()">delete connection</button>
                 </div>
             </div>
             <div style="margin-top: 3%"></div>
