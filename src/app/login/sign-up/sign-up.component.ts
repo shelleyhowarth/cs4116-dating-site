@@ -142,6 +142,8 @@ export class SignUpComponent implements OnInit {
     return differenceInCalendarDays(current, this.today) > 0;
   }
 
+ 
+
 
 
   beforeUpload = (file: File) => {
