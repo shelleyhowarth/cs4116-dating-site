@@ -19,6 +19,7 @@ export class EditProfilePictureComponent implements OnInit {
     user;
     email;
     url;
+    avatarUrl;
     selectedFile = null;
     fileObj = null;
     loading = false;
@@ -98,6 +99,12 @@ export class EditProfilePictureComponent implements OnInit {
       console.log(size);
       this.fileObj = event.fileList[size - 1].originFileObj;
       console.log(event);
+
+      this.getBase64(event.file!.originFileObj!, (img: string) => {
+        this.loading = false;
+        this.avatarUrl = img;
+        this.url = null;
+      });
       
     }
     
