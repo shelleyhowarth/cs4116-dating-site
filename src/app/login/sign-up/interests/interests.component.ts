@@ -16,8 +16,9 @@ export class InterestsComponent implements OnInit {
   isDrinker;
   actualAge;
   interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
-  chosenInterests;
+  chosenInterests = [];
   avatarUrl;
+  valid = false;
   constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, ) { }
 
   ngOnInit(): void {
@@ -25,6 +26,7 @@ export class InterestsComponent implements OnInit {
   }
 
   submit() {
+    if(this.valid == true){
     if(this.user.smoker == "smoker") {
       this.isSmoker = true;
     }
@@ -36,6 +38,7 @@ export class InterestsComponent implements OnInit {
       this.isDrinker = true;
     else
     this.isDrinker = false;
+
 
     var timeDiff = Math.abs(Date.now() - new Date(this.user.age).getTime());
     this.actualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25); 
@@ -49,11 +52,26 @@ export class InterestsComponent implements OnInit {
       this.avatarUrl = picUrl;
     });
 
+
+    
     this.authService.addUser(this.user.firstName, this.user.lastName, this.actualAge, this.user.email, this.user.gender, this.user.description,
                               this.user.county, this.user.occupation, this.user.maritalStatus, this.user.smoker, this.user.drinker,
                               this.user.favoriteSong, this.user.favoriteMovie, this.chosenInterests, uid, this.avatarUrl);
     this.router.navigate(['home']);
     this.modalService.closeAll();
+  }
+}
+
+  validate(){
+    if(this.chosenInterests.length >= 2){
+      this.valid = true;
+    }
+    else{
+      window.alert("Must have at least 2 Interests.Please try again");
+      this.valid = false;
+    }
+
+      this.submit();
   }
 
 }
