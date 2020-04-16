@@ -17,6 +17,7 @@ export class InterestsComponent implements OnInit {
   actualAge;
   interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
   chosenInterests;
+  avatarUrl;
   constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, ) { }
 
   ngOnInit(): void {
@@ -40,9 +41,17 @@ export class InterestsComponent implements OnInit {
     this.actualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25); 
 
     let uid = firebase.auth().currentUser.uid
+
+    var picLocation = "profilePics/"  + this.user.email;
+    var picRef = firebase.storage().ref(picLocation);
+    
+    picRef.getDownloadURL().then(picUrl => {
+      this.avatarUrl = picUrl;
+    });
+
     this.authService.addUser(this.user.firstName, this.user.lastName, this.actualAge, this.user.email, this.user.gender, this.user.description,
                               this.user.county, this.user.occupation, this.user.maritalStatus, this.user.smoker, this.user.drinker,
-                              this.user.favoriteSong, this.user.favoriteMovie, this.chosenInterests, uid);
+                              this.user.favoriteSong, this.user.favoriteMovie, this.chosenInterests, uid, this.avatarUrl);
     this.router.navigate(['home']);
     this.modalService.closeAll();
   }

@@ -1,10 +1,30 @@
 @import "../../styles/utilities";
 
-.first-row {
-    display: flex;
+.home-card {
+    @extend .card;
+    min-width: 10rem;
 }
 
-.notifcations-card {
+.details {
+    color: black;
+}
+
+.messages {
     @extend .card;
+    width: 2rem;
+}
+
+.message {
+    color: black;
     width: 10rem;
+    height: 8rem;
+}
+
+.details {
+    color: black;
+}
+.notif-text {
+    color: $red;
+    font-weight: 500;
+    font-size: larger;
 }

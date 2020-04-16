@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { UsersService } from '../../services/users.service';
-import { AngularFirestore, QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { NzModalService, NzMessageService} from 'ng-zorro-antd';
-import { InterestsComponent } from '../../login/sign-up/interests/interests.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { NzModalService } from 'ng-zorro-antd';
 import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
-import { ActivatedRoute, Router } from '@angular/router';
 import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
 
@@ -18,152 +14,83 @@ import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture
   })
 
 export class MyProfileComponent implements OnInit {
-
-  user =null;
   users: Array<User> = [];
-  uid = null;
-  email= null;
-  avatarUrl:string;
-  firstName;
-  age = {};
-  county = {};
-  bio = {};
-  newUser;
-  projects: QueryDocumentSnapshot<User>;
+  uid;
+  email;
+  avatarUrl: string;
+  newUser: User;
+  currentUser = firebase.auth().currentUser;
+
 
   interests = ["Reading", "Gardening", "Painting", "Baking"];
   
-  constructor(
-    private usersService: UsersService,
-     private firestore: AngularFirestore,
-    private modalService: NzModalService,
-    private msg: NzMessageService,
-  ){}
-    
+  constructor(private firestore: AngularFirestore, private modalService: NzModalService){ }
 
-  getCurrentUser(){
-    return this.user = firebase.auth().currentUser;
+  ngOnInit(): void {
+    this.getUserInfo();
+    console.log(this.currentUser.uid);
   }
 
   getUserEmail(){
-   this.getCurrentUser();
-
-    if(this.user != null){
-      this.email = this.user.email;
-      this.uid = this.user.uid;
-      console.log(this.uid);
+    if(this.currentUser != null){
+      this.email = this.currentUser.email;
+      this.uid = this.currentUser.uid;
     }
   }
-  
-  setProfilePicture(){
-    this.getUserEmail();
-    var picLocation = "profilePics/"  + this.email;
-    console.log(picLocation);
-    var picRef = firebase.storage().ref(picLocation);
-
-    
-    
-    picRef.getDownloadURL().then(picUrl => {
-      this.avatarUrl = picUrl;
-    });
-  }
-
+   
   getUserInfo(){
     this.getUserEmail();
-    var docRef = this.firestore.collection("Users").doc(this.uid).valueChanges();
-    
-    console.log(docRef);
-docRef.subscribe(doc => {
-          console.log("Document data:", doc);
+    var docRef = this.firestore.collection("Users").doc(this.uid).get();
 
-          this.newUser = doc
-
+    docRef.subscribe(doc => {
           var object = new User();
-          object.firstName = this.newUser.firstName;
-          object.lastName = this.newUser.lastName;
-          object.age =this.newUser.age;
-          object.description = this.newUser.description;
-          object.gender = this.newUser.gender;
-          object.email = this.newUser.email;
-          object.favoriteSong = this.newUser.favoriteSong;
-          object.favoriteMovie = this.newUser.favoriteMovie;
-          object.county =  this.newUser.county;
-          object.drinker = this.newUser.drinker;
-          object.maritalStatus = this.newUser.maritalStatus;
-          object.occupation = this.newUser.occupation;
-          object.smoker = this.newUser.smoker;
-          object.interests = this.newUser.interests;
-          object.uid = this.newUser.uid;
-
+          object.firstName = doc.data().firstName;
+          object.lastName = doc.data().lastName;
+          object.age = doc.data().age;
+          object.description = doc.data().description;
+          object.gender = doc.data().gender;
+          object.email = doc.data().email;
+          object.favoriteSong = doc.data().favoriteSong;
+          object.favoriteMovie = doc.data().favoriteMovie;
+          object.county =  doc.data().county;
+          object.drinker = doc.data().drinker;
+          object.maritalStatus = doc.data().maritalStatus;
+          object.occupation = doc.data().occupation;
+          object.smoker = doc.data().smoker;
+          object.interests = doc.data().interests;
+          object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
           this.newUser = object;
-          console.log(this.newUser);
     });
-
   }
 
-  setProfileDetails(){
-    this.getUserInfo();
-    
+  editPictureComponent(){
+      this.modalService.create({
+        nzContent: EditProfilePictureComponent,
+        nzComponentParams: {
+          entry: this.newUser,
+          current: this.newUser.email
+        }
+    });
   }
 
   createInterestsComponent() {
     this.modalService.create({
         nzContent: EditInterestComponent,
         nzComponentParams: {
-          entry: this.getCurrentUser(),
-          current: this.getInterests()
-        },
-    }
-    );
-}
+          entry: this.newUser,
+          current: this.newUser.interests
+        }
+    });
+  }
 
   editBioComponent(){
     this.modalService.create({
       nzContent: EditBioComponent,
       nzComponentParams: {
-        entry: this.getCurrentUser(),
-        current: this.getBio()
+        entry: this.newUser,
+        current: this.newUser.description
       },
+    });
   }
-  );
-  }
-
-    editPictureComponent(){
-    this.modalService.create({
-      nzContent: EditProfilePictureComponent,
-      nzComponentParams: {
-        entry: this.getCurrentUser(),
-        current: this.email
-      },
-  }
-  );
-  }
-
-  
-  getName() {
-    return this.newUser.firstName;
-  }
-
-  getAge() {
-    return this.newUser.age;
-  }
-
-  getCounty() {
-    return this.newUser.county;
-  }
-
-  getBio() {
-    return this.newUser.description;
-  }
-
-  getInterests() {
-    return this.newUser.interests;
-  }
-
-  ngOnInit(): void {
-    this.setProfilePicture();
-    this.setProfileDetails();
-  }
-  
-
 }
