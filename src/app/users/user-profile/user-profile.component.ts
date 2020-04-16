@@ -4,8 +4,26 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
-import * as admin from 'firebase-admin';
 import { Message } from '@angular/compiler/src/i18n/i18n_ast';
+import * as admin from 'firebase-admin'
+import * as serviceAccount from 'cs4116-group4-dating-firebase-adminsdk-d7v3a-a5fef2a427.json'
+
+const params = {
+  type: serviceAccount.type,
+  projectId: serviceAccount.project_id,
+  privateKeyId: serviceAccount.private_key_id,
+  privateKey: serviceAccount.private_key,
+  clientEmail: serviceAccount.client_email,
+  clientId: serviceAccount.client_id,
+  authUri: serviceAccount.auth_uri,
+  tokenUri: serviceAccount.token_uri,
+  authProviderX509CertUrl: serviceAccount.auth_provider_x509_cert_url,
+  clientC509CertUrl: serviceAccount.client_x509_cert_url
+}
+
+admin.initializeApp({
+  credential: admin.credential.cert(params),
+})
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +40,6 @@ export class UserProfileComponent implements OnInit {
   connectionPending = false;
   connectionAccepted = false;
   isAdmin = false;
-  admin = require('firebase-admin');
 
   constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore, public afAuth: AngularFireAuth) { }
 
@@ -135,12 +152,19 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteAccount() {
-  //  admin.auth().deleteUser(this.otherUserId).then(function () {
-   //   console.log('Successfully deleted user');
-   //   this.db.collection("Users").doc(this.otherUserId).delete()
-    //})
-    //.catch(function (error) {
-    //    console.log('Error deleting user:', error);
-   // });;
+
+    this.afAuth.idToken.subscribe(user => {
+      
+    })
+    firebase.auth().onAuthStateChanged((user) => {
+      console.log(user.uid);
+      if (user.uid === this.otherUserId) {
+        user.delete();
+        console.log(user.uid);
+        this.db.collection("Users").doc(this.otherUserId).delete();
+      } else {
+        console.log("Delete unsuccessful")
+      }
+    });
   }
 }
