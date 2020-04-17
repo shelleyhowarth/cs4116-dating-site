@@ -28,23 +28,23 @@
     <div nz-col nzSpan="3"></div>
     <div nz-col nzSpan="15">
         <nz-card class="card" *ngIf=userSelected>
-            <div id="second row">
+            <div id="second row" class="convo-box">
                 <p class="card-title">Conversation</p>
                 <div *ngFor="let message of messages">
-                    <nz-card class="message">
+                    <nz-card [ngClass]="{'message': message.sendSelf==true, 'other-message': message.sendSelf==false}">
                         <p class="details"> {{ message.message }} </p>
                         <p class="black-text">{{ message.timeSent | date:'short'}}</p>
                     </nz-card>
                 </div>
-                <hr>
-                <div id="third row">
-                    <p class="card-title">Message</p>
-                    <div style="display: flex" nz-row>
-                        <textarea class="message-box" [(ngModel)]="message" (keydown)="handleSubmit($event)"></textarea>
-                        &nbsp;
-                        <div class="center">
-                            <button nz-button class="send" (click)="send()">Send</button>
-                        </div>
+            </div>
+            <hr>
+            <div id="third row">
+                <p class="card-title">Message</p>
+                <div style="display: flex" nz-row>
+                    <textarea class="message-box" [(ngModel)]="message" (keydown)="handleSubmit($event)"></textarea>
+                    &nbsp;
+                    <div class="center">
+                        <button nz-button class="send" (click)="send()">Send</button>
                     </div>
                 </div>
             </div>

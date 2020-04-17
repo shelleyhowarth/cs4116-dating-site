@@ -11,8 +11,14 @@
 
 .message {
     color: white;
+    width: fit-content;
+    border-radius: 15px;
 }
 
+.other-message {
+    @extend .message;
+    color: lightblue;
+}
 .send {
     @extend .sign-up-btn;
     width: auto
@@ -25,4 +31,9 @@
 
 .center {
     align-self: center;
+}
+
+.convo-box {
+    max-height: 30%;
+    overflow: scroll;
 }
