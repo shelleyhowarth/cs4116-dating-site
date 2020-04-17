@@ -31,7 +31,7 @@
             <div id="second row" class="convo-box">
                 <p class="card-title">Conversation</p>
                 <div *ngFor="let message of messages">
-                    <nz-card [ngClass]="{'message': message.sendSelf==true, 'other-message': message.sendSelf==false}">
+                    <nz-card [ngClass]="{'message': message.sendSelf===true, 'other': message.sendSelf===false}">
                         <p class="details"> {{ message.message }} </p>
                         <p class="black-text">{{ message.timeSent | date:'short'}}</p>
                     </nz-card>

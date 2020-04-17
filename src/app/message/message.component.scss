@@ -1,5 +1,6 @@
 @import "../../styles/utilities";
-
+/* @import "../../styles/variables";
+ */
 .first-row {
     display: flex;
 }
@@ -13,11 +14,15 @@
     color: white;
     width: fit-content;
     border-radius: 15px;
+    float: right;
+    clear: right;
 }
 
-.other-message {
-    @extend .message;
-    color: lightblue;
+.other {
+   @extend .message;
+    background-color: $darkPink;
+    float: left;
+    clear: right;
 }
 .send {
     @extend .sign-up-btn;
@@ -34,6 +39,7 @@
 }
 
 .convo-box {
-    max-height: 30%;
-    overflow: scroll;
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }

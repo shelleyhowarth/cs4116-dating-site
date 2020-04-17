@@ -44,7 +44,6 @@ export class BaseComponent implements OnInit {
 
   constructor(public routing: Router, public authService: AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }
