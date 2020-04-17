@@ -39,8 +39,11 @@ export class MyProfileComponent implements OnInit {
     private modalService: NzModalService,
     private msg: NzMessageService,
   ){}
-    
 
+  ngOnInit(): void {
+    this.getUserInfo();
+  }
+  
   getCurrentUser(){
     return this.user = firebase.auth().currentUser;
   }
@@ -55,25 +58,12 @@ export class MyProfileComponent implements OnInit {
     }
   }
   
-  setProfilePicture(){
-    this.getUserEmail();
-    var picLocation = "profilePics/"  + this.email;
-    console.log(picLocation);
-    var picRef = firebase.storage().ref(picLocation);
-
-    
-    
-    picRef.getDownloadURL().then(picUrl => {
-      this.avatarUrl = picUrl;
-    });
-  }
-
   getUserInfo(){
     this.getUserEmail();
     var docRef = this.firestore.collection("Users").doc(this.uid).valueChanges();
     
     console.log(docRef);
-docRef.subscribe(doc => {
+    docRef.subscribe(doc => {
           console.log("Document data:", doc);
 
           this.newUser = doc
@@ -94,6 +84,7 @@ docRef.subscribe(doc => {
           object.smoker = this.newUser.smoker;
           object.interests = this.newUser.interests;
           object.uid = this.newUser.uid;
+          object.profilePic = this.newUser.profilePic;
 
           this.newUser = object;
           console.log(this.newUser);
@@ -101,32 +92,26 @@ docRef.subscribe(doc => {
 
   }
 
-  setProfileDetails(){
-    this.getUserInfo();
-    
-  }
-
   createInterestsComponent() {
     this.modalService.create({
         nzContent: EditInterestComponent,
         nzComponentParams: {
           entry: this.getCurrentUser(),
-          current: this.getInterests()
+          current: this.newUser.interests
         },
-    }
-    );
-}
+    });
+  }
 
   editBioComponent(){
     this.modalService.create({
       nzContent: EditBioComponent,
       nzComponentParams: {
         entry: this.getCurrentUser(),
-        current: this.getBio()
+        current: this.newUser.description
       },
+    });
   }
-  );
-  }
+    
 
     editPictureComponent(){
     this.modalService.create({
@@ -135,35 +120,24 @@ docRef.subscribe(doc => {
         entry: this.getCurrentUser(),
         current: this.email
       },
-  }
-  );
-  }
-
-  
-  getName() {
-    return this.newUser.firstName;
+    });
   }
 
-  getAge() {
-    return this.newUser.age;
+  isSmoker() {
+    if(this.user.smoker === "smoker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
   }
 
-  getCounty() {
-    return this.newUser.county;
+  isDrinker() {
+    if(this.user.drinker === "drinker") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
   }
-
-  getBio() {
-    return this.newUser.description;
-  }
-
-  getInterests() {
-    return this.newUser.interests;
-  }
-
-  ngOnInit(): void {
-    this.setProfilePicture();
-    this.setProfileDetails();
-  }
-  
-
 }
