@@ -13,7 +13,8 @@ export class SearchComponent implements OnInit {
 
   genders = ["male", "female"];
   ranges = ["55-60", "61-65", "66-70", "71-75", "76-80", "81-85", "85+"];
-  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]  counties = [
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
+  counties = [
     "Antrim",
     "Armagh",
     "Carlow",

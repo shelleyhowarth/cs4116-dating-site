@@ -18,11 +18,10 @@ export class MyProfileComponent implements OnInit {
   uid;
   email;
   avatarUrl: string;
-  newUser: User;
+  newUser;
   currentUser = firebase.auth().currentUser;
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
 
-
-  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]  
   constructor( private firestore: AngularFirestore, private modalService: NzModalService){}
 
   ngOnInit(): void {
@@ -42,6 +41,7 @@ export class MyProfileComponent implements OnInit {
     
     console.log(docRef);
     docRef.subscribe(doc => {
+          this.newUser = doc
           var object = new User();
           object.firstName = this.newUser.firstName;
           object.lastName = this.newUser.lastName;
