@@ -1,13 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'firebase/app';
 import { User } from "../../model/user.model";
-import { Variable } from '@angular/compiler/src/render3/r3_ast';
-import { UsersService } from '../../services/users.service';
-import { AngularFirestore, QueryDocumentSnapshot } from '@angular/fire/firestore';
-import { NzModalService, NzMessageService} from 'ng-zorro-antd';
-import { InterestsComponent } from '../../login/sign-up/interests/interests.component';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { NzModalService } from 'ng-zorro-antd';
 import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
-import { ActivatedRoute, Router } from '@angular/router';
 import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
 
@@ -18,43 +14,25 @@ import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture
   })
 
 export class MyProfileComponent implements OnInit {
-
-  user =null;
   users: Array<User> = [];
-  uid = null;
-  email= null;
-  avatarUrl:string;
-  firstName;
-  age = {};
-  county = {};
-  bio = {};
-  newUser;
-  projects: QueryDocumentSnapshot<User>;
+  uid;
+  email;
+  avatarUrl: string;
+  newUser: User;
+  currentUser = firebase.auth().currentUser;
 
-  interests = ["Reading", "Gardening", "Painting", "Baking"];
-  
-  constructor(
-    private usersService: UsersService,
-     private firestore: AngularFirestore,
-    private modalService: NzModalService,
-    private msg: NzMessageService,
-  ){}
+
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]  
+  constructor( private firestore: AngularFirestore, private modalService: NzModalService){}
 
   ngOnInit(): void {
     this.getUserInfo();
   }
   
-  getCurrentUser(){
-    return this.user = firebase.auth().currentUser;
-  }
-
   getUserEmail(){
-   this.getCurrentUser();
-
-    if(this.user != null){
-      this.email = this.user.email;
-      this.uid = this.user.uid;
-      console.log(this.uid);
+    if(this.currentUser != null){
+      this.email = this.currentUser.email;
+      this.uid = this.currentUser.uid;
     }
   }
   
@@ -64,10 +42,6 @@ export class MyProfileComponent implements OnInit {
     
     console.log(docRef);
     docRef.subscribe(doc => {
-          console.log("Document data:", doc);
-
-          this.newUser = doc
-
           var object = new User();
           object.firstName = this.newUser.firstName;
           object.lastName = this.newUser.lastName;
@@ -85,18 +59,15 @@ export class MyProfileComponent implements OnInit {
           object.interests = this.newUser.interests;
           object.uid = this.newUser.uid;
           object.profilePic = this.newUser.profilePic;
-
           this.newUser = object;
-          console.log(this.newUser);
     });
-
   }
 
   createInterestsComponent() {
     this.modalService.create({
         nzContent: EditInterestComponent,
         nzComponentParams: {
-          entry: this.getCurrentUser(),
+          entry: this.currentUser,
           current: this.newUser.interests
         },
     });
@@ -106,7 +77,7 @@ export class MyProfileComponent implements OnInit {
     this.modalService.create({
       nzContent: EditBioComponent,
       nzComponentParams: {
-        entry: this.getCurrentUser(),
+        entry: this.currentUser,
         current: this.newUser.description
       },
     });
@@ -117,14 +88,14 @@ export class MyProfileComponent implements OnInit {
     this.modalService.create({
       nzContent: EditProfilePictureComponent,
       nzComponentParams: {
-        entry: this.getCurrentUser(),
+        entry: this.currentUser,
         current: this.email
       },
     });
   }
 
   isSmoker() {
-    if(this.user.smoker === "smoker") {
+    if(this.newUser.smoker === "true") {
       return "Yes";
     }
     else {
@@ -133,7 +104,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   isDrinker() {
-    if(this.user.drinker === "drinker") {
+    if(this.newUser.drinker === "true") {
       return "Yes";
     }
     else {

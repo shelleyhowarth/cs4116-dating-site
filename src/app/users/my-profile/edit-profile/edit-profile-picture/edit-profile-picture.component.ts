@@ -24,7 +24,7 @@ export class EditProfilePictureComponent implements OnInit {
     fileObj = null;
     loading = false;
   
-    constructor(private modal: NzModalRef, public router: Router, private modalService: NzModalService,private msg: NzMessageService) {}
+    constructor(private modal: NzModalRef, public router: Router, private modalService: NzModalService, private msg: NzMessageService) {}
   
   
     ngOnInit(): void {

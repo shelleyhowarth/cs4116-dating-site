@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
 export class EditInterestComponent implements OnInit {
   @Input() entry;
   @Input() current;
-  interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]
   currentInterests;
   user;
   defaultOption;

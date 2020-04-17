@@ -13,8 +13,7 @@ export class SearchComponent implements OnInit {
 
   genders = ["male", "female"];
   ranges = ["55-60", "61-65", "66-70", "71-75", "76-80", "81-85", "85+"];
-  interests = ["gardening", "painting", "reading", "walking", "cooking", "baking", "chess"];
-  counties = [
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]  counties = [
     "Antrim",
     "Armagh",
     "Carlow",
@@ -76,23 +75,15 @@ export class SearchComponent implements OnInit {
           object.smoker = doc.data().smoker;
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
           this.users.push(object);
         });
        });
   }
 
-  getName(user) {
-    return user.firstName;
-  }
-
-  getAgeAndLocation(user) {
-    return " " + user.age + ", " + user.county + " ";
-  }
-
   search() {
     this.noResults = true;
     this.searchArray = [];
-    console.log(this.filter);
       this.users.forEach(user => {
           if(user.gender === this.filter.gender || this.filter.gender === '')
           {
@@ -107,20 +98,31 @@ export class SearchComponent implements OnInit {
                   }
                   else if(this.searchArray.length == 0) {
                     this.noResults = true;
-                } 
+                }
               }
             }
           }
         }
       });
-    console.log(this.searchArray);
    }
 
-   getAgeRange(userAge) {
+  getAgeRange(userAge) {
     let firstNumber = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("-"));
     let secondNumber = +this.filter.ageRange.substring(this.filter.ageRange.indexOf("-") + 1, this.filter.ageRange.length);
-    return (userAge >= firstNumber && userAge <= secondNumber);
+    let eightyFive = +this.filter.ageRange.substring(0, this.filter.ageRange.indexOf("+"));
+
+    if(firstNumber !== 85 && userAge >= firstNumber && userAge <= secondNumber) {
+      return true;
     }
+    else if(eightyFive == 85 && userAge >= eightyFive) {
+      return true;
+      }
+  }
+
+  reset() {
+    this.filter = { gender: '', ageRange: '', county: '', interests: '' };
+    this.search();
+  }
 
 
 }
