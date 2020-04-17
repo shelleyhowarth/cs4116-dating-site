@@ -12,6 +12,7 @@ export class AuthService {
   loggedIn;
   _db: AngularFirestore;
   admin = false;
+  users;
   
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -31,12 +32,22 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
-    return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-      .then((result) => {
-        this.router.navigate(['home']);
-      }).catch((error) => {
-        window.alert(error.message)
-      })
+    const snapshot = this.fs.collection('Users').get();
+    snapshot.subscribe(snap => {
+       snap.forEach(doc => {
+          if(doc.data().email === email) {
+            return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+            .then((result) => {
+              this.router.navigate(['home']);
+            }).catch((error) => {
+              window.alert(error.message)
+            })
+          }
+          else {
+            window.alert("Your account was deleted.")
+          }
+        });
+    });
   }
 
   /* Sign out */
@@ -57,8 +68,8 @@ export class AuthService {
 
   addUser(fName: string, lName: string, fAge: number, fEmail: string,
           fGender: string, fDescription: string, fcounty: string,
-          foccupation: string, fmaritalStatus: string, fSmoker: boolean,
-          fDrinker: boolean, fFavSong: string, fFavMovie: string, fInterests: [], fUid: string, fProfilePic: string) {
+          foccupation: string, fmaritalStatus: string, fSmoker: string,
+          fDrinker: string, fFavSong: string, fFavMovie: string, fInterests: Array<string>, fUid: string, fProfilePic: string) {
       let userCollection = this._db.collection<User>('Users');
 
       userCollection.doc(fUid).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,

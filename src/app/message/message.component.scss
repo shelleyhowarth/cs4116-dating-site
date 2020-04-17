@@ -1,0 +1,28 @@
+@import "../../styles/utilities";
+
+.first-row {
+    display: flex;
+}
+
+.messages {
+    @extend .card;
+    width: 2rem;
+}
+
+.message {
+    color: white;
+}
+
+.send {
+    @extend .sign-up-btn;
+    width: auto
+}
+
+.message-box {
+    width: 60%;
+    height: 40%;
+}
+
+.center {
+    align-self: center;
+}

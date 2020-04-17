@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
-import { Message } from '@angular/compiler/src/i18n/i18n_ast';
 
 @Component({
   selector: 'app-user-profile',
@@ -22,7 +21,7 @@ export class UserProfileComponent implements OnInit {
   connectionAccepted = false;
   isAdmin = false;
 
-  constructor(private route: ActivatedRoute, private router: Router, private db: AngularFirestore, public afAuth: AngularFireAuth) { }
+  constructor(private router: Router, private db: AngularFirestore, public afAuth: AngularFireAuth) { }
 
   ngOnInit(): void {
     this.otherUserId = this.router.url.substring(this.router.url.indexOf("=") + 1, this.router.url.length);
@@ -51,8 +50,6 @@ export class UserProfileComponent implements OnInit {
       })
       
     })
-
-
 
     this.db.collection('Users').doc(this.otherUserId).get().subscribe( doc => {
         this.user = {  
@@ -98,7 +95,6 @@ export class UserProfileComponent implements OnInit {
       this.isAdmin = this.currentUser.admin
       console.log(this.isAdmin);
     })
-
   }
 
   sendConnectRequest() {
@@ -128,24 +124,40 @@ export class UserProfileComponent implements OnInit {
     this.connectionPending = true;
   }
 
-  disableAccount() {
-    
-  }
+  disableAccount() { }
 
   deleteAccount() {
+    this.db.collection('Users').doc(this.otherUserId).delete();
+  }
 
-    this.afAuth.idToken.subscribe(user => {
-      
-    })
-    firebase.auth().onAuthStateChanged((user) => {
-      console.log(user.uid);
-      if (user.uid === this.otherUserId) {
-        user.delete();
-        console.log(user.uid);
-        this.db.collection("Users").doc(this.otherUserId).delete();
-      } else {
-        console.log("Delete unsuccessful")
-      }
-    });
+  deleteConnection(){
+
+    var docId = this.currentId + this.otherUserId;
+    var ref = this.db.collection("Connections").doc(docId);
+    ref.delete();
+    
+    var docId = this.otherUserId + this.currentId;
+    var ref = this.db.collection("Connections").doc(docId)
+    ref.delete();
+
+    window.alert("You have disconnected with " + this.user.firstName);
+  }
+    
+  isSmoker() {
+    if(this.user.smoker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
+
+  isDrinker() {
+    if(this.user.drinker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
   }
 }

@@ -18,7 +18,7 @@ export class MyProfileComponent implements OnInit {
   newUser: User = null;
   user = null;
 
-  interests = ["Reading", "Gardening", "Painting", "Baking"];
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   
   constructor(private usersService: UsersService, private firestore: AngularFirestore){ }
 
@@ -32,6 +32,24 @@ export class MyProfileComponent implements OnInit {
     if(this.user != null){
       this.email = this.user.email;
       this.uid = this.user.uid;
+    }
+  }
+
+  isSmoker() {
+    if(this.user.smoker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
+
+  isDrinker() {
+    if(this.user.drinker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
     }
   }
    

@@ -30,6 +30,7 @@ import { BaseComponent } from './base/base.component';
 import { AuthGuardService as AuthGuard } from './services/auth-guard.service';
 import { HomeComponent } from './home/home.component';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { MessageComponent } from './message/message.component';
 import { MyProfileComponent } from './users/my-profile/my-profile.component';
 import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
@@ -43,6 +44,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: '', component: HomeComponent, canActivate: [AuthGuard]},
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  { path: 'message', component: MessageComponent, canActivate: [AuthGuard]},
   { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
   { path: 'user', component: UserProfileComponent, canActivate: [AuthGuard] },
@@ -56,7 +58,9 @@ const appRoutes: Routes = [
     SignUpComponent,
     BaseComponent,
     HomeComponent,
+    MessageComponent,
     MyProfileComponent,
+    MessageComponent,
     SearchComponent,
     InterestsComponent,
     UserProfileComponent,

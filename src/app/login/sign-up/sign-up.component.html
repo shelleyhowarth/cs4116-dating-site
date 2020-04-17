@@ -70,7 +70,8 @@
             <nz-date-picker nzPlaceholder="Select a date"
                             nzFormat="dd/MM/yyyy"
                             [nzDisabledDate]="disabledDate"
-                            formControlName="age"
+                            [nzShowToday] = false
+                            formControlName="age"            
             ></nz-date-picker>
         </div>
     </div>
@@ -99,8 +100,8 @@
             <nz-form-label class="form-label"
             [nzNoColon]="true">smoker*</nz-form-label>
             <nz-radio-group class="form-field" formControlName="smoker">
-                <label nz-radio nzValue="smoker">Yes</label>
-                <label nz-radio nzValue="nonSmoker">No</label>
+                <label nz-radio nzValue=true>Yes</label>
+                <label nz-radio nzValue=false>No</label>
             </nz-radio-group>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
@@ -108,8 +109,8 @@
             <nz-form-label class="form-label"
             [nzNoColon]="true">drinker*</nz-form-label>
             <nz-radio-group class="form-field" formControlName="drinker">
-                <label nz-radio nzValue="drinker">Yes</label>
-                <label nz-radio nzValue="nonDrinker">No</label>
+                <label nz-radio nzValue=true>Yes</label>
+                <label nz-radio nzValue=false>No</label>
             </nz-radio-group>
         </div>
     </div>
@@ -155,8 +156,6 @@
             
         </div>
     </div>
-
-
     <div *nzModalFooter class="btn">
         <button nz-button 
                 (click)="submit()"
