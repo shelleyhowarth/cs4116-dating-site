@@ -1,6 +1,5 @@
 @import "../../styles/utilities";
-/* @import "../../styles/variables";
- */
+
 .first-row {
     display: flex;
 }
@@ -42,4 +41,9 @@
     max-height: 50vh;
     overflow-y: scroll;
     overflow-x: hidden;
+}
+
+.black-text {
+    color: black;
+    font-size: 75%;
 }
