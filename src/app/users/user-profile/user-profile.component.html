@@ -4,7 +4,8 @@
         <nz-card class="profile-card">
             <div id="first row" nz-row style="display: flex">
                 <div *ngIf="isAdmin">
-                    <button nz-button class="disable-acc-btn" (click)="disableAccount()">Disable account</button>
+                    <button *ngIf=!user.disabled nz-button class="disable-acc-btn" (click)="disableAccount()">Disable account</button>
+                    <button *ngIf=user.disabled nz-button class="disable-acc-btn" (click)="reEnableAccount()">Re-Enable account</button>
                 </div>
                 <div *ngIf="isAdmin">
                     <button nz-button class="delete-acc-btn" (click)="deleteAccount()">Delete account</button>

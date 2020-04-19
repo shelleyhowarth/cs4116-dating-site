@@ -38,6 +38,8 @@ export class AdminComponent implements OnInit {
         object.interests = doc.data().interests;
         object.uid = doc.data().uid;
         object.profilePic = doc.data().profilePic;
+        object.admin = doc.data().admin;
+        object.disabled = doc.data().disabled;
         this.users.push(object);
       });
     });

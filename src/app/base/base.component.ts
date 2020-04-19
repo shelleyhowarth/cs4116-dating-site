@@ -93,6 +93,7 @@ export class BaseComponent implements OnInit {
       object.uid = doc.data().uid;
       object.profilePic = doc.data().profilePic;
       object.admin = doc.data().admin;
+      object.disabled = doc.data().disabled;
       console.log(object.admin);
       this.newUser = object;
     });

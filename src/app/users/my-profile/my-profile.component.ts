@@ -76,6 +76,7 @@ export class MyProfileComponent implements OnInit {
           object.uid = doc.data().uid;
           object.profilePic = doc.data().profilePic;
           object.admin = doc.data().admin;
+          object.disabled = doc.data().disabled
           this.newUser = object;
     });
   }

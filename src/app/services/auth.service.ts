@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import * as firebase from "firebase";
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,13 @@ export class AuthService {
   loggedIn;
   _db: AngularFirestore;
   admin = false;
+  disabled = false;
   users;
   
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
               private fs: AngularFirestore,
+              private userService: UsersService
               ) { 
                 this._db = fs;
     }
@@ -32,21 +35,34 @@ export class AuthService {
 
   // Sign in with email/password
   SignIn(email, password) {
+    var isUser = false
+    var isDisabled = false;
     const snapshot = this.fs.collection('Users').get();
     snapshot.subscribe(snap => {
-       snap.forEach(doc => {
-          if(doc.data().email === email) {
-            return this.afAuth.auth.signInWithEmailAndPassword(email, password)
-            .then((result) => {
-              this.router.navigate(['home']);
-            }).catch((error) => {
-              window.alert(error.message)
-            })
+      snap.forEach(doc => {
+          if (doc.data().disabled === true) {
+            isDisabled = true;
+            if (isDisabled) {
+              window.alert("Account is disabled");
+            }
           }
-          else {
-            window.alert("Your account was deleted.")
+          else if (doc.data().email === email) {
+            console.log(isUser);
+            isUser = true;
+            if (isUser) {
+              console.log("here");
+              return this.afAuth.auth.signInWithEmailAndPassword(email, password)
+                .then((result) => {
+                  this.router.navigate(['home']);
+                }).catch((error) => {
+                  window.alert(error.message)
+                })
+            }
+            else {
+              window.alert("No Account");
+            }
           }
-        });
+      });
     });
   }
 
@@ -76,7 +92,7 @@ export class AuthService {
       gender: fGender, description: fDescription, county: fcounty,
       occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
       drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid,
-      profilePic: fProfilePic, admin: this.admin});
+      profilePic: fProfilePic, admin: this.admin, disabled: this.disabled});
       
   }
 

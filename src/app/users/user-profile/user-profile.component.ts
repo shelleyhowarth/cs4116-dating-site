@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
+//import * as admin from 'firebase.js';
 
 @Component({
   selector: 'app-user-profile',
@@ -69,7 +70,8 @@ export class UserProfileComponent implements OnInit {
           interests: doc.data().interests,
           uid: doc.data().uid,
           profilePic: doc.data().profilePic,
-          admin: doc.data().admin
+          admin: doc.data().admin,
+          disabled: doc.data().disabled
         };
     })
     this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
@@ -90,7 +92,8 @@ export class UserProfileComponent implements OnInit {
         interests: doc.data().interests,
         uid: doc.data().uid,
         profilePic: doc.data().profilePic,
-        admin: doc.data().admin
+        admin: doc.data().admin,
+        disabled: doc.data().disabled
       };
       this.isAdmin = this.currentUser.admin
       console.log(this.isAdmin);
@@ -124,10 +127,19 @@ export class UserProfileComponent implements OnInit {
     this.connectionPending = true;
   }
 
-  disableAccount() { }
+  disableAccount() { 
+    this.db.collection('Users').doc(this.otherUserId).update({ disabled: true });
+    window.alert("Account disabled");
+  }
+
+  reEnableAccount() {
+    this.db.collection('Users').doc(this.otherUserId).update({ disabled: false });
+    window.alert("Account re-enabled");
+  }
 
   deleteAccount() {
     this.db.collection('Users').doc(this.otherUserId).delete();
+    window.alert("Account successfully deleted");
   }
 
   deleteConnection(){
