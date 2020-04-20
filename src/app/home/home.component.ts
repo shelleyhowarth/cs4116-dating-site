@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   userId = firebase.auth().currentUser.uid
   connections: Array<Connection> = [];
   notifications: Array<Notification> = [];
+  messageNotifications: Array<Notification> = [];
   users: Array<User> = [];
   connectedUserIds: Array<String> = [];
   searchId: Array<String> = [];
@@ -38,6 +39,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
+    this.getMessageNotifications();
   }
 
   getConnections() {
@@ -116,6 +118,21 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  getMessageNotifications() {
+    var ref = this.db.collection("notifications").get();
+    ref.subscribe(snap => {
+      snap.forEach(doc => {
+        let object = new Notification;
+        var data = doc.data();
+        if (doc.id.includes(this.userId) && !(doc.data().seen)) {
+          object.date = data.date;
+          object.notification = data.messageNotifications;
+          object.seen = data.seen;
+          this.messageNotifications.push(object);
+        }
+      });
+    });
+  }
   getUsers() {
     const snapshot = this.db.collection('Users').get();
     snapshot.subscribe(snap => {

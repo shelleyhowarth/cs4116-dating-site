@@ -21,8 +21,11 @@ export class MessageComponent implements OnInit {
   chatId2;
   receiverUid;
   currentUser = firebase.auth().currentUser;
+  currentId = firebase.auth().currentUser.uid;
+  currUser;
   senderUid = this.currentUser.uid;
   userSelected: boolean = false;
+  user: User;
   receiver;
   messages: Array<ChatMessage>;
   avatarUrl;
@@ -111,6 +114,23 @@ export class MessageComponent implements OnInit {
       receiver: this.receiverUid
     });
     console.log('Called sendMessage()');
+  }
+
+  messageNotification() {
+    const time = new Date().toLocaleString();
+    var docId = this.currentUser + this.senderUid;
+
+    window.alert("Your message has been sent to  " + this.user.firstName);
+
+    var ref2 = this.db.collection("notifications").doc(this.receiver);
+    ref2.set({
+      date: time,
+      notification: (this.currUser.firstName + " has sent you a message"),
+      seen: false,
+      connectionId: docId,
+      sender: this.senderUid,
+      receiver: this.receiverUid
+    });
   }
 
   handleSubmit(event){
