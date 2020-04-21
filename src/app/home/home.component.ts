@@ -39,7 +39,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
-    this.getMessageNotifications();
+   
   }
 
   getConnections() {
@@ -113,22 +113,6 @@ export class HomeComponent implements OnInit {
           object.notification = data.notification;
           object.seen = data.seen;
           this.notifications.push(object);
-        }
-      });
-    });
-  }
-
-  getMessageNotifications() {
-    var ref = this.db.collection("notifications").get();
-    ref.subscribe(snap => {
-      snap.forEach(doc => {
-        let object = new Notification;
-        var data = doc.data();
-        if (doc.id.includes(this.userId) && !(doc.data().seen)) {
-          object.date = data.date;
-          object.notification = data.messageNotifications;
-          object.seen = data.seen;
-          this.messageNotifications.push(object);
         }
       });
     });

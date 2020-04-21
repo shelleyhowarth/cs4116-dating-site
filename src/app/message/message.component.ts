@@ -102,6 +102,7 @@ export class MessageComponent implements OnInit {
     this.sendMessage(this.message);
     this.message = '';
     this.getMessages();
+    //this.messageNotification() 
   }
 
   sendMessage(message){
@@ -118,17 +119,24 @@ export class MessageComponent implements OnInit {
 
   messageNotification() {
     const time = new Date().toLocaleString();
-    var docId = this.currentUser + this.senderUid;
+    var docId = this.currentId + this.receiverUid;
 
-    window.alert("Your message has been sent to  " + this.user.firstName);
+    var ref = this.db.collection("Connections").doc(docId);
+    ref.set({
+      userId1: this.currentId,
+      userId2: this.receiverUid,
+      date: time,
+      accepted: false
+    });
+    window.alert("You succesfully sent a message to " + this.user.firstName);
 
-    var ref2 = this.db.collection("notifications").doc(this.receiver);
+    var ref2 = this.db.collection("notifications").doc(this.receiverUid);
     ref2.set({
       date: time,
-      notification: (this.currUser.firstName + " has sent you a message"),
+      notification: (this.currUser.firstName + " sent you a message"),
       seen: false,
       connectionId: docId,
-      sender: this.senderUid,
+      sender: this.currentId,
       receiver: this.receiverUid
     });
   }
@@ -136,6 +144,7 @@ export class MessageComponent implements OnInit {
   handleSubmit(event){
     if(event.keycode === 13){
       this.send();
+      this.messageNotification();
     }
   }
 
