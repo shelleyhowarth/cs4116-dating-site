@@ -36,5 +36,4 @@ export class EditBioComponent implements OnInit {
     });
     this.modalService.closeAll();
   }
-
 }
