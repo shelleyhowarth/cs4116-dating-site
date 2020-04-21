@@ -56,13 +56,14 @@ export class SignUpComponent implements OnInit {
     "Wexford",
     "Wicklow"
   ];
-  today = new Date();
+  today = new Date("1965");
   form: FormGroup;
   isSmoker: boolean;
   isDrinker: boolean;
   ActualAge: number;
   _db:AngularFirestore;
   users:  Observable<any[]>;
+  
 
   constructor(
     private fb: FormBuilder,
@@ -140,6 +141,10 @@ export class SignUpComponent implements OnInit {
   disabledDate = (current: Date): boolean => {
     return differenceInCalendarDays(current, this.today) > 0;
   }
+
+ 
+
+
 
   beforeUpload = (file: File) => {
     return new Observable((observer: Observer<boolean>) => {

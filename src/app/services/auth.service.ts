@@ -66,10 +66,4 @@ export class AuthService {
       
   }
 
-  updateInterests(updatedInterests:[] ,userId:string){
-    let userCollection = this._db.collection<User>('Users');
-    userCollection.doc(userId).update({interests:updatedInterests})
-
-  }
-
 }

@@ -16,10 +16,11 @@ import { EditGeneralComponent } from './edit-profile/edit-general/edit-general.c
 
 export class MyProfileComponent implements OnInit {
   users: Array<User> = [];
-  uid;
-  email;
+  uid = null;
+  email = null;
   avatarUrl: string;
   newUser;
+  user;
   currentUser = firebase.auth().currentUser;
   interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
 
@@ -30,9 +31,11 @@ export class MyProfileComponent implements OnInit {
   }
   
   getUserEmail(){
-    if(this.currentUser != null){
-      this.email = this.currentUser.email;
-      this.uid = this.currentUser.uid;
+    this.user = firebase.auth().currentUser;
+
+    if(this.user != null){
+      this.email = this.user.email;
+      this.uid = this.user.uid;
     }
   }
   

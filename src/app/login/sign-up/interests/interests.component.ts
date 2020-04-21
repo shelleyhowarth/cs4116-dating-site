@@ -15,7 +15,7 @@ export class InterestsComponent implements OnInit {
   isSmoker;
   isDrinker;
   actualAge;
-  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"]
+  interests = ["Gardening", "Painting", "Reading", "Walking", "Cooking", "Baking", "Puzzles", "Music", "Exercising"];
   chosenInterests;
   avatarUrl;
   constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, ) { }
@@ -37,6 +37,7 @@ export class InterestsComponent implements OnInit {
     else
     this.isDrinker = false;
 
+
     var timeDiff = Math.abs(Date.now() - new Date(this.user.age).getTime());
     this.actualAge = Math.floor(timeDiff / (1000 * 3600 * 24) / 365.25); 
 
@@ -49,6 +50,8 @@ export class InterestsComponent implements OnInit {
       this.avatarUrl = picUrl;
     });
 
+
+    
     this.authService.addUser(this.user.firstName, this.user.lastName, this.actualAge, this.user.email, this.user.gender, this.user.description,
                               this.user.county, this.user.occupation, this.user.maritalStatus, this.user.smoker, this.user.drinker,
                               this.user.favoriteSong, this.user.favoriteMovie, this.chosenInterests, uid, this.avatarUrl);
@@ -56,4 +59,12 @@ export class InterestsComponent implements OnInit {
     this.modalService.closeAll();
   }
 
+  validate(){
+    if(this.chosenInterests.length >= 2){
+      this.submit();
+    }
+    else {
+      window.alert("Must have at least 2 Interests. Please try again");
+    }
+  }
 }

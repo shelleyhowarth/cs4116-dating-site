@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
-import * as firebase from 'firebase';
-import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-base',
@@ -46,7 +44,6 @@ export class BaseComponent implements OnInit {
 
   constructor(public routing: Router, public authService: AuthService) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
 }

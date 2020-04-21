@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import * as firebase from "firebase";
 import { User } from '../model/user.model';
-import { notification } from '../model/notification.model';
-import { ChatService } from '../services/chat.service';
 import { Connection } from 'src/app/model/connections.model';
 import { Notification } from '../model/notifications.model';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-home',
