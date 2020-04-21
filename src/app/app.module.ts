@@ -39,6 +39,8 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 import { EditInterestComponent } from './users/my-profile/edit-profile/edit-interest/edit-interest.component';
 import { EditBioComponent } from './users/my-profile/edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './users/my-profile/edit-profile/edit-profile-picture/edit-profile-picture.component';
+import { EditGeneralComponent } from './users/my-profile/edit-profile/edit-general/edit-general.component';
+import { NzSpinModule } from 'ng-zorro-antd/spin';
 
 registerLocaleData(en);
 
@@ -67,7 +69,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     EditInterestComponent,
     EditBioComponent,
-    EditProfilePictureComponent
+    EditProfilePictureComponent,
+    EditGeneralComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +94,8 @@ const appRoutes: Routes = [
     NzDatePickerModule,
     RouterModule.forRoot(appRoutes),
     NzGridModule,
-    NzSliderModule
+    NzSliderModule,
+    NzSpinModule
   ],
 
   exports: [RouterModule],

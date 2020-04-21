@@ -71,6 +71,7 @@ export class UserProfileComponent implements OnInit {
           profilePic: doc.data().profilePic 
         };
     })
+    
     this.db.collection('Users').doc(this.currentId).get().subscribe(doc => {
       this.currentUser = {
         firstName: doc.data().firstName,
@@ -119,5 +120,23 @@ export class UserProfileComponent implements OnInit {
 
     this.noConnection = false;
     this.connectionPending = true;
+  }
+
+  isSmoker() {
+    if(this.user.smoker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
+  }
+
+  isDrinker() {
+    if(this.user.drinker === "true") {
+      return "Yes";
+    }
+    else {
+      return "No";
+    }
   }
 }

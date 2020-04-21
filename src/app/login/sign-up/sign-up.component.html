@@ -1,9 +1,9 @@
-<h2 class="sign-up">sign up</h2>
+<h2 class="sign-up">Sign up</h2>
 <form nzForm [formGroup]="form">
     <div id="row 2" nz-row style="display: flex">
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">email*</nz-form-label>
+            [nzNoColon]="true">Email*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     formControlName="email">
@@ -11,7 +11,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">password*</nz-form-label>
+            [nzNoColon]="true">Password*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     type="password"
@@ -21,7 +21,7 @@
     <div id="row 1" style="display: flex">
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">first name*</nz-form-label>
+            [nzNoColon]="true">First name*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     formControlName="firstName">
@@ -29,7 +29,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">gender*</nz-form-label>
+            [nzNoColon]="true">Gender*</nz-form-label>
             <nz-select class="form-field" formControlName="gender">
                 <nz-option nzValue="male" nzLabel="male"></nz-option> 
                 <nz-option nzValue="female" nzLabel="female"></nz-option>
@@ -47,7 +47,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">bio*</nz-form-label>
+            [nzNoColon]="true">Bio*</nz-form-label>
             <textarea class="form-field" 
                      nz-input 
                      placeholder="Write a description of yourself..." 
@@ -58,7 +58,7 @@
     <div id="row 3" style="display: flex"> 
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">county*</nz-form-label>
+            [nzNoColon]="true">County*</nz-form-label>
             <nz-select class="form-field" formControlName="county">
                 <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option> 
             </nz-select>
@@ -66,7 +66,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">date of birth*</nz-form-label>
+            [nzNoColon]="true">Date of birth*</nz-form-label>
             <nz-date-picker nzPlaceholder="Select a date"
                             nzFormat="dd/MM/yyyy"
                             [nzDisabledDate]="disabledDate"
@@ -77,7 +77,7 @@
     <div id="row 4" style="display: flex">
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">occupation*</nz-form-label>
+            [nzNoColon]="true">Occupation*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     formControlName="occupation">
@@ -85,7 +85,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">marital status*</nz-form-label>
+            [nzNoColon]="true">Marital status*</nz-form-label>
             <nz-select class="form-field" formControlName="maritalStatus">
                 <nz-option nzValue="separated" nzLabel="separated"></nz-option> 
                 <nz-option nzValue="widowed" nzLabel="widowed"></nz-option>
@@ -97,7 +97,7 @@
     <div id="row 5" style="display: flex">
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">smoker*</nz-form-label>
+            [nzNoColon]="true">Smoker*</nz-form-label>
             <nz-radio-group class="form-field" formControlName="smoker">
                 <label nz-radio nzValue=true>Yes</label>
                 <label nz-radio nzValue=false>No</label>
@@ -106,7 +106,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">drinker*</nz-form-label>
+            [nzNoColon]="true">Drinker*</nz-form-label>
             <nz-radio-group class="form-field" formControlName="drinker">
                 <label nz-radio nzValue=true>Yes</label>
                 <label nz-radio nzValue=false>No</label>
@@ -116,7 +116,7 @@
     <div id="row 6" style="display: flex">
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">favourite song*</nz-form-label>
+            [nzNoColon]="true">Favourite song*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     formControlName="favoriteSong">
@@ -124,7 +124,7 @@
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-label class="form-label"
-            [nzNoColon]="true">favourite movie*</nz-form-label>
+            [nzNoColon]="true">Favourite movie*</nz-form-label>
             <input class="form-field" 
                     nz-input
                     formControlName="favoriteMovie">
@@ -136,7 +136,6 @@
             <nz-form-label class = "form-label">
                 Profile Picture
             </nz-form-label>
-
             <nz-upload 
             class="avatar-uploader"
             nzName="avatar"
@@ -144,15 +143,12 @@
             [nzShowUploadList]="false"
             [nzBeforeUpload]="beforeUpload"
             (nzChange)="handleChange($event)">
-
-            <ng-container *ngIf="!avatarUrl">
-                <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus' "></i>
-                <div class="ant-upload-text">Upload</div>
-              </ng-container>
-              <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
+                <ng-container *ngIf="!avatarUrl">
+                    <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus' "></i>
+                    <div class="ant-upload-text">Upload</div>
+                </ng-container>
+                <img *ngIf="avatarUrl" [src]="avatarUrl" class="avatar" />
             </nz-upload>
-
-            
         </div>
     </div>
 
@@ -161,7 +157,7 @@
         <button nz-button 
                 (click)="submit()"
                 [disabled]="!form.valid"
-                class="sign-up-btn">sign up</button>
+                class="sign-up-btn">Sign up</button>
     </div>
 </form>
 

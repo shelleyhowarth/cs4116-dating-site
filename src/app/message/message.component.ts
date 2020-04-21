@@ -166,22 +166,26 @@ export class MessageComponent implements OnInit {
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
         var data = doc.data();
-        console.log(data);
          let object = new ChatMessage;
          object.userUid = data.sender;
          object.message = data.message;
          object.timeSent = new Date(data.timeSent);
+         if(object.userUid === this.senderUid) {
+           object.sendSelf = true;
+         }
+         else {
+           object.sendSelf = false;
+         }
          this.messages.push(object);
        });
+       this.sortByDate();
     });
-    this.sortByDate();
     return this.messages;
   }
 
   private getTime(date?: Date) {
     return date != null ? date.getTime() : 0;
   }
-
 
   public sortByDate(): void {
     this.messages.sort((a: ChatMessage, b: ChatMessage) => {

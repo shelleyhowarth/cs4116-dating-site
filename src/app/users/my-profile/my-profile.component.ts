@@ -6,6 +6,7 @@ import { NzModalService } from 'ng-zorro-antd';
 import { EditInterestComponent } from './edit-profile/edit-interest/edit-interest.component';
 import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
+import { EditGeneralComponent } from './edit-profile/edit-general/edit-general.component';
 
   @Component({
     selector: 'app-my-profile',
@@ -63,7 +64,12 @@ export class MyProfileComponent implements OnInit {
     });
   }
 
-  createInterestsComponent() {
+/*   generalObject = {
+    occupation: this.newUser.occupation,
+    and so on..
+  } */
+
+  editInterestsComponent() {
     this.modalService.create({
         nzContent: EditInterestComponent,
         nzComponentParams: {
@@ -83,8 +89,7 @@ export class MyProfileComponent implements OnInit {
     });
   }
     
-
-    editPictureComponent(){
+  editPictureComponent(){
     this.modalService.create({
       nzContent: EditProfilePictureComponent,
       nzComponentParams: {
@@ -92,6 +97,16 @@ export class MyProfileComponent implements OnInit {
         current: this.email
       },
     });
+  }
+
+  editGeneralComponent() {
+    this.modalService.create({
+      nzContent: EditGeneralComponent,
+      nzComponentParams: {
+        entry: this.currentUser
+        //pass in generalObject
+      }
+    })
   }
 
   isSmoker() {

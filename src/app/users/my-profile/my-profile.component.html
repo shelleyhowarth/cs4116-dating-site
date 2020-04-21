@@ -32,7 +32,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="createInterestsComponent()"><i nz-icon nzType="edit"></i></button>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editInterestsComponent()"><i nz-icon nzType="edit"></i></button>
                 </div>
                 <div id="empty space" nz-col nzSpan="4"></div>
                 <div>
@@ -40,7 +40,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <p class="edit">edit</p>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editGeneralComponent()"><i nz-icon nzType="edit"></i></button>
                 </div>
             </div>
             <div id="fourth row" nz-row>
@@ -53,6 +53,12 @@
                     <ul>
                         <li *ngFor="let interest of newUser.interests" class="bio"> {{ interest }} </li>
                     </ul>
+                </div>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div style="display: flex">
+                    <p class="bio">Occupation:</p>
+                    &nbsp;
+                    <p class="bio">{{ newUser.occupation }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div style="display: flex">
