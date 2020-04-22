@@ -104,19 +104,23 @@ export class HomeComponent implements OnInit {
       snap.forEach(doc => {
         let object = new Notification;
         var data = doc.data();
-        if (doc.id.includes(this.userId) && !(doc.data().seen) && (doc.data().connectionId.includes(this.userId))) {
+
+      if(doc.data().isConnection == true){
+        if(doc.data().isSeen == false) // validation needs to be sorted here
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
           this.notifications.push(object);
         }
-        else if (doc.id.includes(this.userId) && !(doc.data().seen)){
+      
+        if(!doc.data().isConnection == false){
+          if(doc.data().isSeen == false) // and here
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
           this.messageNotifications.push(object);
         }
-        console.log(this.messageNotifications);
+       console.log(this.messageNotifications);
       });
     });
   }

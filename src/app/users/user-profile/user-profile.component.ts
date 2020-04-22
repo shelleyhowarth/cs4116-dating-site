@@ -107,6 +107,7 @@ export class UserProfileComponent implements OnInit {
       date: time,
       notification: (this.currentUser.firstName + " wants to connect with you."),
       seen: false,
+      isConnection: true,
       connectionId: docId,
       sender: this.currentId,
       receiver: this.otherUserId
