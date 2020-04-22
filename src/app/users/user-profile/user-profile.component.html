@@ -1,6 +1,6 @@
 <div id="outside card" nz-row style="display: flex">
     <div nz-col nzSpan="3"></div>
-    <div nc-col nzSpan="15">
+    <div nz-col nzSpan="15">
         <nz-card class="profile-card">
             <div id="first row" nz-row style="display: flex">
                 <div nz-col nzSpan="7">
@@ -50,6 +50,12 @@
                     <ul>
                         <li *ngFor="let interest of user.interests" class="bio"> {{ interest }} </li>
                     </ul>
+                </div>
+                <div id="empty space" nz-col nzSpan="7"></div>
+                <div style="display: flex">
+                    <p class="general">Occupation:</p>
+                    &nbsp;
+                    <p class="general">{{ user.occupation }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div style="display: flex">

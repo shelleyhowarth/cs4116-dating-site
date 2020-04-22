@@ -25,14 +25,14 @@ export class InterestsComponent implements OnInit {
   }
 
   submit() {
-    if(this.user.smoker == "smoker") {
+    if(this.user.smoker === "true") {
       this.isSmoker = true;
     }
     else {
       this.isSmoker = false;
     }
 
-    if(this.user.drinker == "drinker")
+    if(this.user.drinker == "true")
       this.isDrinker = true;
     else
     this.isDrinker = false;
