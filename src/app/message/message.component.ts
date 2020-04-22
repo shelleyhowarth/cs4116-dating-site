@@ -152,6 +152,7 @@ export class MessageComponent implements OnInit {
       date: time,
       notification: (this.currUser.firstName + " sent you a message"),
       seen: false,
+      isConnection: false,
       sender: this.currentId,
       receiver: this.receiverUid
     });

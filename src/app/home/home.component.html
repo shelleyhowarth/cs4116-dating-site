@@ -22,9 +22,9 @@
                 <button nz-button (click)="accept()" class="sign-up-btn">accept</button>
                 <button nz-button (click)="reject()" class="sign-up-btn">reject</button>
             </div>
-            <div *ngFor="let messageNotifications of messageNotifications">
-                <p class="notif-text">{{ messageNotifications.notification }}</p>
-                <button nz-button (click)="accept()" class="sign-up-btn">seen</button>
+            <div *ngFor="let messageNotification of messageNotifications">
+                <p class="notif-text">{{ messageNotification.notification }}</p>
+                <button nz-button (click)="accept()" class="sign-up-btn">Discard</button>
                 
             </div>
         </nz-card>
