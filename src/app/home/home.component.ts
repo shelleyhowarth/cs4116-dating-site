@@ -108,15 +108,23 @@ export class HomeComponent implements OnInit {
       snap.forEach(doc => {
         let object = new Notification;
         var data = doc.data();
-        if (doc.id.includes(this.userId) && !(doc.data().seen)) {
+        if (doc.id.includes(this.userId) && !(doc.data().seen) && (doc.data().connectionId.includes(this.userId))) {
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
           this.notifications.push(object);
         }
+        else if (doc.id.includes(this.userId) && !(doc.data().seen)){
+          object.date = data.date;
+          object.notification = data.notification;
+          object.seen = data.seen;
+          this.messageNotifications.push(object);
+        }
+        console.log(this.messageNotifications);
       });
     });
   }
+
   getUsers() {
     const snapshot = this.db.collection('Users').get();
     snapshot.subscribe(snap => {
