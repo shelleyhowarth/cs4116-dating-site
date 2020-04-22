@@ -109,19 +109,19 @@ export class HomeComponent implements OnInit {
         let object = new Notification;
         var data = doc.data();
 
-      if(doc.data().isConnection == true){
-        if(doc.data().isSeen == false) // validation needs to be sorted here
+      if(doc.data().isConnection == true && (doc.id.includes(this.userId) && !(doc.data().seen) && (doc.data().connectionId.includes(this.userId)))){
+
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
           this.notifications.push(object);
         }
-      
-        if(!doc.data().isConnection == false){
-          if(doc.data().isSeen == false) // and here
+        else if(doc.data().isConnection == false  && (doc.id.includes(this.userId) && (doc.id == data.receiver) && (doc.id != data.sender) && (data.seen == false))){
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
+          object.receiver = data.receiver;
+          object.sender = data.sender;
           this.messageNotifications.push(object);
         }
        console.log(this.messageNotifications);
@@ -226,6 +226,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  discardedNotification() {
+    var docRef = this.db.collection("notifications").doc(this.userId).get();
+    docRef.subscribe(doc => {
+      doc.data().seen = true;
+      this.receiverId = doc.data().receiver;
+      this.updateDbNotif(true);
+    });
+  }
+
   updateDb(acceptStatus: boolean) {
     var ref = this.db.collection("Connections").doc(this.connectedId);
     ref.update({
@@ -234,6 +243,13 @@ export class HomeComponent implements OnInit {
 
     var ref2 = this.db.collection("notifications").doc(this.userId);
     ref2.update({
+      seen: true
+    });
+  }
+
+  updateDbNotif(discardStatus: boolean) {
+    var ref = this.db.collection("notifications").doc(this.userId);
+    ref.update({
       seen: true
     });
   }
