@@ -1,5 +1,6 @@
 export class ChatMessage {
-    userUid: string;
+    senderUid: string;
+    receiverUid: string;
     message: string;
     timeSent: Date;
     sendSelf: boolean;

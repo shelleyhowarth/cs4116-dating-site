@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import { User } from '../model/user.model';
 import { Connection } from 'src/app/model/connections.model';
 import { Notification } from '../model/notifications.model';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ export class HomeComponent implements OnInit {
   userId = firebase.auth().currentUser.uid
   connections: Array<Connection> = [];
   notifications: Array<Notification> = [];
+  messageNotifications: Array<Notification> = [];
   users: Array<User> = [];
   connectedUserIds: Array<String> = [];
   searchId: Array<String> = [];
@@ -34,6 +36,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
+   
   }
 
   getConnections() {
@@ -97,17 +100,31 @@ export class HomeComponent implements OnInit {
   }
 
   getNotifications() {
-    var ref = this.db.collection("notifications").get();
-    ref.subscribe(snap => {
+    var ref2 = this.db.collection("notifications").get();
+
+    ref2.subscribe(snap => {
       snap.forEach(doc => {
         let object = new Notification;
         var data = doc.data();
-        if (doc.id.includes(this.userId) && !(doc.data().seen)) {
+
+        if(data.isConnection == true && (doc.id.includes(this.userId) && !(doc.data().seen) && (doc.data().connectionId.includes(this.userId)))){
+
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
+          object.connectionId = doc.id;
+          console.log(object.connectionId);
           this.notifications.push(object);
         }
+        else if(doc.data().isConnection == false  && (doc.id.includes(this.userId) && (doc.id == data.receiver) && (doc.id != data.sender) && (data.seen == false))){
+          object.date = data.date;
+          object.notification = data.notification;
+          object.seen = data.seen;
+          object.receiver = data.receiver;
+          object.sender = data.sender;
+          this.messageNotifications.push(object);
+        }
+       console.log(this.messageNotifications);
       });
     });
   }
@@ -189,13 +206,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  accept() {
-    var docRef = this.db.collection("notifications").doc(this.userId).get();
-    docRef.subscribe(doc => {
-      this.connectedId = doc.data().connectionId;
-      this.receiverId = doc.data().receiver;
-      this.updateDb(true);
+  accept(id) {
+    var docRef = this.db.collection("notifications").doc(id).update({
+      seen: true
     });
+
+    var docRef2 = this.db.collection("Connections").doc(id).update({
+      accepted: true
+    });
+    this.getNotifications();
   }
 
   reject() {
@@ -205,6 +224,14 @@ export class HomeComponent implements OnInit {
       this.receiverId = doc.data().receiver;
       this.updateDb(false);
     });
+    this.getNotifications();
+  }
+
+  discardedNotification() {
+    var docRef = this.db.collection("notifications").doc(this.userId).update({
+      seen: true
+    })
+    this.getNotifications();
   }
 
   updateDb(acceptStatus: boolean) {
@@ -215,6 +242,13 @@ export class HomeComponent implements OnInit {
 
     var ref2 = this.db.collection("notifications").doc(this.userId);
     ref2.update({
+      seen: true
+    });
+  }
+
+  updateDbNotif(discardStatus: boolean) {
+    var ref = this.db.collection("notifications").doc(this.userId);
+    ref.update({
       seen: true
     });
   }

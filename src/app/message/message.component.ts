@@ -21,8 +21,11 @@ export class MessageComponent implements OnInit {
   chatId2;
   receiverUid;
   currentUser = firebase.auth().currentUser;
+  currentId = firebase.auth().currentUser.uid;
+  currUser;
   senderUid = this.currentUser.uid;
   userSelected: boolean = false;
+  user: User;
   receiver;
   messages: Array<ChatMessage>;
   avatarUrl;
@@ -32,8 +35,8 @@ export class MessageComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
-   this.getConnections();
-   console.log(this.users);
+    this.getConnections();
+    console.log(this.users);
   }
 
   getConnections() {
@@ -97,13 +100,56 @@ export class MessageComponent implements OnInit {
 
   send(){
     this.sendMessage(this.message);
+    console.log("message notification");
     this.message = '';
-    this.getMessages();
+    var docRef = this.db.collection("Users").doc(this.currentId).get();
+
+    docRef.subscribe(doc => {
+      var object = new User();
+      object.firstName = doc.data().firstName;
+      object.lastName = doc.data().lastName;
+      object.age = doc.data().age;
+      object.description = doc.data().description;
+      object.gender = doc.data().gender;
+      object.email = doc.data().email;
+      object.favoriteSong = doc.data().favoriteSong;
+      object.favoriteMovie = doc.data().favoriteMovie;
+      object.county = doc.data().county;
+      object.drinker = doc.data().drinker;
+      object.maritalStatus = doc.data().maritalStatus;
+      object.occupation = doc.data().occupation;
+      object.smoker = doc.data().smoker;
+      object.interests = doc.data().interests;
+      object.uid = doc.data().uid;
+      object.profilePic = doc.data().profilePic;
+
+      this.currUser = object;
+      this.messageNotification() 
+    });
+    
   }
 
   sendMessage(message){
     console.log(this.currentUser.uid);
     const timestamp = new Date().toLocaleString()
+
+    var object = new ChatMessage;
+    object.message = message;
+    object.timeSent = new Date(timestamp);
+    object.senderUid = this.senderUid;
+    object.receiverUid = this.receiverUid;
+    if (object.senderUid === this.senderUid) {
+      object.sendSelf = true;
+    }
+    else {
+      object.sendSelf = false;
+    }
+    
+    console.log(object);
+
+    this.messages.push(object);
+    console.log(this.messages);
+
     this.db.collection('chats').doc(this.chatId).collection('messages').add({
       message: message,
       timeSent: timestamp,
@@ -113,9 +159,24 @@ export class MessageComponent implements OnInit {
     console.log('Called sendMessage()');
   }
 
+  messageNotification() {
+    const time = new Date().toLocaleString();
+
+    var ref2 = this.db.collection("notifications").doc(this.receiverUid);
+    ref2.set({
+      date: time,
+      notification: (this.currUser.firstName + " sent you a message"),
+      seen: false,
+      isConnection: false,
+      sender: this.currentId,
+      receiver: this.receiverUid
+    });
+  }
+
   handleSubmit(event){
     if(event.keycode === 13){
       this.send();
+      //this.messageNotification();
     }
   }
 
@@ -129,6 +190,7 @@ export class MessageComponent implements OnInit {
 
   checkForUser(secondUser) {
     this.receiverUid = secondUser.uid;
+
     this.chatId1 = this.senderUid + this.receiverUid;
     this.chatId2 = this.receiverUid + this.senderUid;
     console.log("Chat 1" + this.chatId1);
@@ -145,13 +207,36 @@ export class MessageComponent implements OnInit {
            this.chatId = this.chatId2;
            this.messages = this.getMessages();
          }
-         else {
+         else if(this.chatId !== this.chatId1 && this.chatId !== this.chatId2){
            this.chatId = this.chatId1;
            this.createUser();
          }
        });
        console.log("chatId " + this.chatId);
-      });
+    });
+    
+    var docRef = this.db.collection("Users").doc(this.receiverUid).get();
+
+    docRef.subscribe(doc => {
+      var object = new User();
+      object.firstName = doc.data().firstName;
+      object.lastName = doc.data().lastName;
+      object.age = doc.data().age;
+      object.description = doc.data().description;
+      object.gender = doc.data().gender;
+      object.email = doc.data().email;
+      object.favoriteSong = doc.data().favoriteSong;
+      object.favoriteMovie = doc.data().favoriteMovie;
+      object.county = doc.data().county;
+      object.drinker = doc.data().drinker;
+      object.maritalStatus = doc.data().maritalStatus;
+      object.occupation = doc.data().occupation;
+      object.smoker = doc.data().smoker;
+      object.interests = doc.data().interests;
+      object.uid = doc.data().uid;
+      object.profilePic = doc.data().profilePic;
+      this.user = object;
+    });
   }
 
   createUser() {
@@ -165,17 +250,20 @@ export class MessageComponent implements OnInit {
     const snapshot = this.db.collection('chats').doc(this.chatId).collection('messages').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
-        var data = doc.data();
+         var data = doc.data();
+         console.log(doc.id);
          let object = new ChatMessage;
-         object.userUid = data.sender;
+         object.senderUid = data.sender;
+         object.receiverUid = data.receiver;
          object.message = data.message;
          object.timeSent = new Date(data.timeSent);
-         if(object.userUid === this.senderUid) {
+         if(object.senderUid === this.senderUid) {
            object.sendSelf = true;
          }
          else {
            object.sendSelf = false;
          }
+         console.log(object);
          this.messages.push(object);
        });
        this.sortByDate();
