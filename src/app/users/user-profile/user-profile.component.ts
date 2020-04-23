@@ -102,7 +102,7 @@ export class UserProfileComponent implements OnInit {
     });
     window.alert("Your connection request has been sent to " + this.user.firstName);
 
-    var ref2 = this.db.collection("notifications").doc(this.otherUserId);
+    var ref2 = this.db.collection("notifications").doc(docId);
     ref2.set({
       date: time,
       notification: (this.currentUser.firstName + " wants to connect with you."),

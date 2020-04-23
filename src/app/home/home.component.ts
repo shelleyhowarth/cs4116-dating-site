@@ -110,6 +110,8 @@ export class HomeComponent implements OnInit {
           object.date = data.date;
           object.notification = data.notification;
           object.seen = data.seen;
+          object.connectionId = doc.id;
+          console.log(object.connectionId);
           this.notifications.push(object);
         }
         else if(doc.data().isConnection == false  && (doc.id.includes(this.userId) && (doc.id == data.receiver) && (doc.id != data.sender) && (data.seen == false))){
@@ -202,12 +204,9 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  accept() {
-    var docRef = this.db.collection("notifications").doc(this.userId).get();
-    docRef.subscribe(doc => {
-      this.connectedId = doc.data().connectionId;
-      this.receiverId = doc.data().receiver;
-      this.updateDb(true);
+  accept(id) {
+    var docRef = this.db.collection("notifications").doc(id).update({
+      seen: true
     });
   }
 
@@ -221,12 +220,9 @@ export class HomeComponent implements OnInit {
   }
 
   discardedNotification() {
-    var docRef = this.db.collection("notifications").doc(this.userId).get();
-    docRef.subscribe(doc => {
-      doc.data().seen = true;
-      this.receiverId = doc.data().receiver;
-      this.updateDbNotif(true);
-    });
+    var docRef = this.db.collection("notifications").doc(this.userId).update({
+      seen: true
+    })
   }
 
   updateDb(acceptStatus: boolean) {
