@@ -101,9 +101,7 @@ export class MessageComponent implements OnInit {
   send(){
     this.sendMessage(this.message);
     console.log("message notification");
-    //this.messageNotification();
     this.message = '';
-    this.getMessages();
     var docRef = this.db.collection("Users").doc(this.currentId).get();
 
     docRef.subscribe(doc => {
@@ -134,6 +132,24 @@ export class MessageComponent implements OnInit {
   sendMessage(message){
     console.log(this.currentUser.uid);
     const timestamp = new Date().toLocaleString()
+
+    var object = new ChatMessage;
+    object.message = message;
+    object.timeSent = new Date(timestamp);
+    object.senderUid = this.senderUid;
+    object.receiverUid = this.receiverUid;
+    if (object.senderUid === this.senderUid) {
+      object.sendSelf = true;
+    }
+    else {
+      object.sendSelf = false;
+    }
+    
+    console.log(object);
+
+    this.messages.push(object);
+    console.log(this.messages);
+
     this.db.collection('chats').doc(this.chatId).collection('messages').add({
       message: message,
       timeSent: timestamp,
@@ -145,7 +161,6 @@ export class MessageComponent implements OnInit {
 
   messageNotification() {
     const time = new Date().toLocaleString();
-    window.alert("You succesfully sent a message to " + this.user.firstName);
 
     var ref2 = this.db.collection("notifications").doc(this.receiverUid);
     ref2.set({
