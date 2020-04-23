@@ -207,7 +207,7 @@ export class MessageComponent implements OnInit {
            this.chatId = this.chatId2;
            this.messages = this.getMessages();
          }
-         else {
+         else if(this.chatId !== this.chatId1 && this.chatId !== this.chatId2){
            this.chatId = this.chatId1;
            this.createUser();
          }
