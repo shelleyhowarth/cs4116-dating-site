@@ -214,7 +214,6 @@ export class HomeComponent implements OnInit {
     var docRef2 = this.db.collection("Connections").doc(id).update({
       accepted: true
     });
-    this.getNotifications();
   }
 
   reject() {
@@ -224,14 +223,12 @@ export class HomeComponent implements OnInit {
       this.receiverId = doc.data().receiver;
       this.updateDb(false);
     });
-    this.getNotifications();
   }
 
   discardedNotification() {
     var docRef = this.db.collection("notifications").doc(this.userId).update({
       seen: true
     })
-    this.getNotifications();
   }
 
   updateDb(acceptStatus: boolean) {
