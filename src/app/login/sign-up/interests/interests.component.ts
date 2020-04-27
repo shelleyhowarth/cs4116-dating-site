@@ -60,11 +60,15 @@ export class InterestsComponent implements OnInit {
   }
 
   validate(){
-    if(this.chosenInterests.length >= 2){
+    if(this.chosenInterests == null){
+      window.alert("Must have at least 2 Interests. Please try again");
+    }else if(this.chosenInterests.length >= 2){
+      console.log(this.chosenInterests.length);
       this.submit();
     }
     else {
       window.alert("Must have at least 2 Interests. Please try again");
+      console.log(this.chosenInterests);
     }
   }
 }
