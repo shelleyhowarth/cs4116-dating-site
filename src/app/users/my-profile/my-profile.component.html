@@ -4,7 +4,7 @@
         <nz-card class="profile-card">
             <div id="first row" nz-row style="display: flex">
                 <div nz-col nzSpan="7">
-                    <img src = "{{ newUser.profilePic }}" class="profile-picture">
+                    <img src="{{ newUser.profilePic }}" class="profile-picture">
                 </div>
                 <div id="empty space" nz-col nzSpan="3"></div>
                 <div id="name age location">
@@ -13,7 +13,7 @@
                 </div>
             </div>
             <div id="second row" nz-row>
-                <div nz-col nzSpan="4"></div>
+                <div nz-col nzSpan="7"></div>
                 <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editPictureComponent()"><i nz-icon nzType="edit"></i></button>
             </div>
             <div style="margin-top: 3%"></div>
@@ -72,7 +72,7 @@
                     &nbsp;
                     <p class="bio">{{ isDrinker() }}</p>
                 </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
+                <div id="empty space" nz-col nzSpan="18"></div>
                 <div style="display: flex">
                     <p class="bio">Favourite Song:</p>
                     &nbsp;
@@ -86,5 +86,5 @@
                 </div>
             </div>
         </nz-card>
-    <div nz-col nzSpan="3"></div>
-</div>
+        <div nz-col nzSpan="3"></div>
+    </div>
