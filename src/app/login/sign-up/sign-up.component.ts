@@ -151,7 +151,7 @@ export class SignUpComponent implements OnInit {
       const isJPG = file.type === 'image/jpeg';
       
       if (!isJPG) {
-        this.msg.error('You can only upload JPG file!');
+        this.msg.error('You can only upload JPG file!' + " Image file type: " + file.type);
         observer.complete();
         return;
       }
