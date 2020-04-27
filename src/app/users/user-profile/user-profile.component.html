@@ -32,21 +32,42 @@
                     <button nz-button class="connect-btn" (click)="deleteConnection()">delete connection</button>
                 </div>
             </div>
+            <div *ngIf="isAdmin" id="second row" nz-row>
+                <div nz-col nzSpan="7"></div>
+                <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editPictureComponent()"><i nz-icon
+                        nzType="edit"></i></button>
+            </div>
             <div style="margin-top: 3%"></div>
-            <div id="third row" nz-row style="display: flex">
+            <div *ngIf="isAdmin" id="third row" nz-row style="display: flex">
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
                     <p class="age">Bio</p>
                 </div>
-                <div id="empty space" nz-col nzSpan="6"></div>
+                <div id="empty space" nz-col nzSpan="2"></div>
+                <div>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editBioComponent()"><i nz-icon
+                            nzType="edit"></i></button>
+                </div>
+                <div id="empty space" nz-col nzSpan="4"></div>
                 <div>
                     <p class="age">Interests</p>
                 </div>
-                <div id="empty space" nz-col nzSpan="6"></div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editInterestsComponent()"><i nz-icon
+                            nzType="edit"></i></button>
+                </div>
+                <div id="empty space" nz-col nzSpan="4"></div>
                 <div>
                     <p class="age">General</p>
                 </div>
+                <div id="empty space" nz-col nzSpan="1"></div>
+                <div>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editGeneralComponent()"><i nz-icon
+                            nzType="edit"></i></button>
+                </div>
             </div>
+            <div style="margin-top: 3%"></div>
             <div id="fourth row" nz-row>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div nz-col nzSpan="5">

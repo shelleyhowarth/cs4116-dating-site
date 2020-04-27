@@ -18,7 +18,7 @@ export class EditBioComponent implements OnInit {
   currentBio;
   user;
   defaultOption;
-  uid = firebase.auth().currentUser.uid
+  uid;
 
 
   constructor(private modal: NzModalRef, public router: Router, private modalService: NzModalService, private fs: AngularFirestore) { }
@@ -26,7 +26,8 @@ export class EditBioComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.modal.getInstance().nzComponentParams.entry;
     this.currentBio = this.modal.getInstance().nzComponentParams.current;
-    this.defaultOption = this.currentBio
+    this.uid = this.modal.getInstance().nzComponentParams.uid;
+    this.defaultOption = this.currentBio;
   }
 
   update(){
