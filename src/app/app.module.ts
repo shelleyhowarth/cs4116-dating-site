@@ -69,7 +69,7 @@ const appRoutes: Routes = [
     SearchComponent,
     InterestsComponent,
     UserProfileComponent,
-    AdminComponent
+    AdminComponent,
     EditInterestComponent,
     EditBioComponent,
     EditProfilePictureComponent,
