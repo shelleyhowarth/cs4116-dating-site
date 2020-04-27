@@ -149,8 +149,9 @@ export class SignUpComponent implements OnInit {
   beforeUpload = (file: File) => {
     return new Observable((observer: Observer<boolean>) => {
       const isJPG = file.type === 'image/jpeg';
+      
       if (!isJPG) {
-        this.msg.error('You can only upload JPG file!');
+        this.msg.error('You can only upload JPG file!' + " Image file type: " + file.type);
         observer.complete();
         return;
       }
@@ -160,10 +161,10 @@ export class SignUpComponent implements OnInit {
         observer.complete();
         return;
       }
-      // check height
+      // check heightw
       this.checkImageDimension(file).then(dimensionRes => {
         if (!dimensionRes) {
-          this.msg.error('Image only 300x300 above');
+          this.msg.error('Image width and height must be equal and above 300px or above');
           observer.complete();
           return;
         }
@@ -183,7 +184,8 @@ export class SignUpComponent implements OnInit {
         const height = img.naturalHeight;
         window.URL.revokeObjectURL(img.src!);
         resolve(width === height && width >= 300);
-      };
+        this.msg.info("Image width: "+ width + "  height: "+height + " type: " + file.type);
+              };
     });
   }
 
@@ -209,3 +211,4 @@ export class SignUpComponent implements OnInit {
   }
 
 }
+
