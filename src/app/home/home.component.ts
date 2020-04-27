@@ -107,7 +107,7 @@ export class HomeComponent implements OnInit {
         let object = new Notification;
         var data = doc.data();
 
-        if(data.isConnection == true && (doc.id.includes(this.userId) && !(doc.data().seen) && (doc.data().connectionId.includes(this.userId)))){
+        if(doc.data().isConnection == true && (doc.id.includes(this.userId) && (data.seen == false) && (this.userId != data.sender) &&(doc.data().connectionId.includes(this.userId)))){
 
           object.date = data.date;
           object.notification = data.notification;
