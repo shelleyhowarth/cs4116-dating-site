@@ -1,11 +1,8 @@
 <div class="btn">
     <nz-select class="interest-dropdown" nzPlaceHolder="interests" nzMode="multiple" [(ngModel)]="chosenInterests">
-        <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest"></nz-option> 
+        <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest"></nz-option>
     </nz-select>
 </div>
 <div *nzModalFooter class="btn">
-    <button nz-button 
-            (click)="validate()"
-            class="sign-up-btn"
-            >Add interests</button>
+    <button nz-button (click)="validate()" class="sign-up-btn">Add interests</button>
 </div>

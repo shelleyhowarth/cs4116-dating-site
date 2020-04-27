@@ -4,7 +4,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireAuth } from "@angular/fire/auth";
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
-//import * as admin from 'firebase.js';
 
 @Component({
   selector: 'app-user-profile',
@@ -113,11 +112,12 @@ export class UserProfileComponent implements OnInit {
     });
     window.alert("Your connection request has been sent to " + this.user.firstName);
 
-    var ref2 = this.db.collection("notifications").doc(this.otherUserId);
+    var ref2 = this.db.collection("notifications").doc(docId);
     ref2.set({
       date: time,
       notification: (this.currentUser.firstName + " wants to connect with you."),
       seen: false,
+      isConnection: true,
       connectionId: docId,
       sender: this.currentId,
       receiver: this.otherUserId

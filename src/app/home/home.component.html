@@ -2,7 +2,7 @@
     <div id="empty space" nz-col nzSpan="2"></div>
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
-            <p class="card-title">connections</p>
+            <p class="card-title">Connections</p>
             <div *ngFor="let connect of users" [routerLink]="['/user', { id: connect.uid }]" class="point-wrap">
                 <div>
                     <img class="search-pic" src= "{{ connect.profilePic }}">
@@ -11,16 +11,23 @@
                 &nbsp;
                 &nbsp;
             </div>
+            <div *ngIf="users.length == 0">
+                <p class="notif-text">No connections to display.</p>
+            </div>
         </nz-card>
     </div>
     <div id="empty space" nz-col nzSpan="3"></div>
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
-            <p class="card-title">notifications</p>
+            <p class="card-title">Notifications</p>
             <div *ngFor="let notification of notifications">
                 <p class="notif-text">{{ notification.notification }}</p>
-                <button nz-button (click)="accept()" class="sign-up-btn">accept</button>
+                <button nz-button (click)="accept(notification.connectionId)" class="sign-up-btn">accept</button>
                 <button nz-button (click)="reject()" class="sign-up-btn">reject</button>
+            </div>
+            <div *ngFor="let messageNotification of messageNotifications">
+                <p class="notif-text">{{ messageNotification.notification }}</p>
+                <button nz-button (click)="discardedNotification()" class="sign-up-btn">Discard</button>
             </div>
         </nz-card>
     </div>
@@ -30,7 +37,7 @@
     <div id="empty space" nz-col nzSpan="2"></div>
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
-            <p class="card-title">suggested users</p>
+            <p class="card-title">Suggested users</p>
             <div *ngFor="let user of suggestedUsers" [routerLink]="['/user', { id: user.uid }]" class="point-wrap">
                 <div>
                     <img src="{{ user.profilePic }}" class="search-pic">
@@ -39,6 +46,9 @@
                 </div>
                 &nbsp;
                 &nbsp;
+            </div>
+            <div *ngIf="suggestedUsers.length == 0">
+                <p class="notif-text">No suggested users to display.</p>
             </div>
         </nz-card>
     </div>

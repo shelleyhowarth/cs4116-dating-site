@@ -4,7 +4,7 @@
         <nz-card class="profile-card">
             <div id="first row" nz-row style="display: flex">
                 <div nz-col nzSpan="7">
-                    <img src = "{{ newUser.profilePic }}" class="profile-picture">
+                    <img src="{{ newUser.profilePic }}" class="profile-picture">
                 </div>
                 <div id="empty space" nz-col nzSpan="3"></div>
                 <div id="name age location">
@@ -13,8 +13,8 @@
                 </div>
             </div>
             <div id="second row" nz-row>
-                <div nz-col nzSpan="4"></div>
-                <p class="edit">edit</p>
+                <div nz-col nzSpan="7"></div>
+                <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editPictureComponent()"><i nz-icon nzType="edit"></i></button>
             </div>
             <div style="margin-top: 3%"></div>
             <div id="third row" nz-row style="display: flex">
@@ -24,7 +24,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="2"></div>
                 <div>
-                    <p class="edit">edit</p>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editBioComponent()"><i nz-icon nzType="edit"></i></button>
                 </div>
                 <div id="empty space" nz-col nzSpan="4"></div>
                 <div>
@@ -32,7 +32,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <p class="edit">edit</p>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editInterestsComponent()"><i nz-icon nzType="edit"></i></button>
                 </div>
                 <div id="empty space" nz-col nzSpan="4"></div>
                 <div>
@@ -40,7 +40,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <p class="edit">edit</p>
+                    <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editGeneralComponent()"><i nz-icon nzType="edit"></i></button>
                 </div>
             </div>
             <div id="fourth row" nz-row>
@@ -56,29 +56,35 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div style="display: flex">
-                    <p class="general">Smoker:</p>
+                    <p class="bio">Occupation:</p>
                     &nbsp;
-                    <p class="general">{{ isSmoker() }}</p>
+                    <p class="bio">{{ newUser.occupation }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div style="display: flex">
-                    <p class="general">Drinker:</p>
+                    <p class="bio">Smoker:</p>
                     &nbsp;
-                    <p class="general">{{ isDrinker() }}</p>
+                    <p class="bio">{{ isSmoker() }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div style="display: flex">
-                    <p class="general">Favourite Song:</p>
+                    <p class="bio">Drinker:</p>
                     &nbsp;
-                    <p class="general">{{ newUser.favoriteSong }}</p>
+                    <p class="bio">{{ isDrinker() }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="18"></div>
                 <div style="display: flex">
-                    <p class="general">Favourite Movie:</p>
+                    <p class="bio">Favourite Song:</p>
                     &nbsp;
-                    <p class="general">{{ newUser.favoriteMovie }}</p>
+                    <p class="bio">{{ newUser.favoriteSong }}</p>
+                </div>
+                <div id="empty space" nz-col nzSpan="18"></div>
+                <div style="display: flex">
+                    <p class="bio">Favourite Movie:</p>
+                    &nbsp;
+                    <p class="bio">{{ newUser.favoriteMovie }}</p>
                 </div>
             </div>
         </nz-card>
-    <div nz-col nzSpan="3"></div>
-</div>
+        <div nz-col nzSpan="3"></div>
+    </div>

@@ -11,8 +11,18 @@
 
 .message {
     color: white;
+    width: fit-content;
+    border-radius: 15px;
+    float: right;
+    clear: right;
 }
 
+.other {
+   @extend .message;
+    background-color: $darkPink;
+    float: left;
+    clear: right;
+}
 .send {
     @extend .sign-up-btn;
     width: auto
@@ -25,4 +35,15 @@
 
 .center {
     align-self: center;
+}
+
+.convo-box {
+    max-height: 50vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.black-text {
+    color: black;
+    font-size: 75%;
 }
