@@ -101,6 +101,13 @@ export class SignUpComponent implements OnInit {
 
 
   submit() {
+
+    if(this.fileObj == null){
+      console.log("Image Blank")
+      window.alert("Please Add A Valid Profile Picture!");
+    }
+
+    else{
     const user = {
       email: this.form.value.email,
       password: this.form.value.password,
@@ -123,6 +130,7 @@ export class SignUpComponent implements OnInit {
     this.form.reset;
     this.modalService.closeAll();   
     this.createInterestsComponent(user);
+  }
   }
 
   createInterestsComponent(user) {
