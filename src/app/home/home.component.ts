@@ -211,24 +211,21 @@ export class HomeComponent implements OnInit {
       seen: true
       
     });
-  
     var docRef2 = this.db.collection("Connections").doc(id).update({
       accepted: true
     });
-
     window.alert("You have accepted the request");
-
-   
-
   }
 
-  reject() {
-    var docRef = this.db.collection("notifications").doc(this.userId).get();
-    docRef.subscribe(doc => {
-      this.connectedId = doc.data().connectionId;
-      this.receiverId = doc.data().receiver;
-      this.updateDb(false);
+  reject(id) {
+    var docRef = this.db.collection("notifications").doc(id).update({
+      seen: true
+
     });
+    var docRef2 = this.db.collection("Connections").doc(id).update({
+      accepted: false
+    });
+    window.alert("You have rejected the request");
   }
 
   discardedNotification() {
