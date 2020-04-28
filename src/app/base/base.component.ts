@@ -46,7 +46,7 @@ export class BaseComponent implements OnInit {
       name: 'Admin',
       routing: 'admin',
       imgName: 'pic',
-      imgSrc: ''
+      imgSrc: 'https://firebasestorage.googleapis.com/v0/b/cs4116-group4-dating.appspot.com/o/icons%2Fadmin.svg?alt=media&token=ede67592-6d31-4a52-9480-920c8a670050'
     },
     {
       name: 'Log Out',
