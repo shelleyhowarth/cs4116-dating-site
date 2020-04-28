@@ -13,8 +13,15 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your password!">
+                <nz-form-control [nzErrorTip]="combinePass">
                     <input nz-input type="password" id="password" formControlName="password" />
+
+                    <ng-template #combinePass let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 12</ng-container>
+                        <ng-container *ngIf="control.hasError('minlength')">Min length is 6</ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -24,8 +31,15 @@
             <nz-form-item>
                 <nz-form-label nzFor="firstName" nzRequired>
                     First Name</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your firstName!">
+                <nz-form-control [nzErrorTip]="combineFirst">
                     <input nz-input id="firstName" formControlName="firstName" />
+
+                    <ng-template #combineFirst let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 15</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -47,8 +61,14 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="LastName" nzRequired>Last Name</nz-form-label>
-                <nz-form-control nzErrorTip="Please input your Last Name!">
+                <nz-form-control [nzErrorTip]="combineLast">
                     <input nz-input id="lastName" formControlName="lastName" />
+
+                    <ng-template #combineLast let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 15</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -56,8 +76,13 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="description" nzRequired>Bio</nz-form-label>
-                <nz-form-control nzErrorTip="Please add a Bio">
+                <nz-form-control [nzErrorTip]="combineBio">
                     <textarea class="form-field" nz-input placeholder="Write a description of yourself..." nzAutosize formControlName="description"></textarea>
+                    <ng-template #combineBio let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 250</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -77,6 +102,7 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="age" nzRequired>Date of Birth</nz-form-label>
+                <i nz-icon nz-tooltip nzTitle="Must be older than 55 (1965)" nzType="question-circle" nzTheme="outline"></i>
                 <nz-form-control nzErrorTip="Please select Birth Date">
                     <nz-date-picker nzPlaceholder="Select a date" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate" [nzShowToday]=false formControlName="age"></nz-date-picker>
                 </nz-form-control>
@@ -87,8 +113,15 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="occupation" nzRequired>Occupation</nz-form-label>
-                <nz-form-control nzErrorTip="Please add an Occupation">
+                <nz-form-control [nzErrorTip]="combineOccu">
                     <input class="form-field" nz-input formControlName="occupation">
+
+                    <ng-template #combineOccu let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 26</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -139,8 +172,15 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="favoriteSong" nzRequired>Favourite Song</nz-form-label>
-                <nz-form-control nzErrorTip="Please enter Favorite Song">
+                <nz-form-control [nzErrorTip]="combineSong">
                     <input class="form-field" nz-input formControlName="favoriteSong">
+
+                    <ng-template #combineSong let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 40</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
                 </nz-form-control>
             </nz-form-item>
         </div>
@@ -148,8 +188,14 @@
         <div>
             <nz-form-item>
                 <nz-form-label nzFor="favoriteMovie" nzRequired>Favourite Movie</nz-form-label>
-                <nz-form-control nzErrorTip="Please enter Favorite Movie">
+                <nz-form-control [nzErrorTip]="combineMov">
                     <input class="form-field" nz-input formControlName="favoriteMovie">
+
+                    <ng-template #combineMov let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 40</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
                 </nz-form-control>
             </nz-form-item>
         </div>

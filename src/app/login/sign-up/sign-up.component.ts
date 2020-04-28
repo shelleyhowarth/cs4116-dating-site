@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { differenceInCalendarDays } from 'date-fns';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { NzModalService, NzMessageService} from 'ng-zorro-antd';
 import { UploadFile } from 'ng-zorro-antd/upload';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -22,6 +22,7 @@ export class SignUpComponent implements OnInit {
   avatarUrl:string;
   selectedFile = null;
   fileObj = null;
+  
 
   counties = [
     "Antrim",
@@ -85,25 +86,32 @@ export class SignUpComponent implements OnInit {
   setUpForm() {
     this.form = this.fb.group({
       email:[null, [Validators.email, Validators.required]],
-      password: ['', Validators.required],
-      firstName: [null, Validators.required],
-      lastName: [null, Validators.required],
+      password: ['', [Validators.required, this.noWhitespaceValidator,Validators.maxLength(11), Validators.minLength(6)]],
+      firstName: [null,[Validators.required, this.noWhitespaceValidator, Validators.maxLength(15)]],
+      lastName: ['',[Validators.required, this.noWhitespaceValidator,Validators.maxLength(15)]],
       age: ['', Validators.required],
       county: ['', Validators.required],
-      description: ['', Validators.compose([Validators.required, Validators.maxLength(250)])],
+      description: ['', Validators.compose([Validators.required, Validators.maxLength(250), this.noWhitespaceValidator])],
       gender: ['', Validators.required],
-      occupation: ['', Validators.required],
+      occupation: ['', Validators.required, this.noWhitespaceValidator, Validators.maxLength(15)],
       maritalStatus: ['', Validators.required],
       smoker: ['', Validators.required],
       drinker: ['', Validators.required],
-      favoriteSong: ['', Validators.required],
-      favoriteMovie: ['', Validators.required]
+      favoriteSong: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(40)]],
+      favoriteMovie: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(40)]]
     })
   }
+
+  public noWhitespaceValidator(control: FormControl) {
+    const isWhitespace = (control.value || '').trim().length === 0;
+    const isValid = !isWhitespace;
+    return isValid ? null : { 'whitespace': true };
+}
 
   submit() {
 
     for (const i in this.form.controls) {
+      console.log(this.form.controls[i]);
       this.form.controls[i].markAsDirty();
       this.form.controls[i].updateValueAndValidity();
     }
@@ -111,6 +119,11 @@ export class SignUpComponent implements OnInit {
     if(this.fileObj == null){
       console.log("Image Blank")
       window.alert("Please Add A Valid Profile Picture!");
+    }
+
+    if( this.form.value.firstName.length > 15){
+      console.log("max length")
+      window.alert("Max characters 15");
     }
 
     else{
