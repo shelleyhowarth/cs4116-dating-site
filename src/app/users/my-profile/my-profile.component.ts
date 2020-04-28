@@ -7,6 +7,7 @@ import { EditInterestComponent } from './edit-profile/edit-interest/edit-interes
 import { EditBioComponent } from './edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './edit-profile/edit-profile-picture/edit-profile-picture.component';
 import { EditGeneralComponent } from './edit-profile/edit-general/edit-general.component';
+import { generate } from 'rxjs';
 
   @Component({
     selector: 'app-my-profile',
@@ -64,13 +65,10 @@ export class MyProfileComponent implements OnInit {
           object.uid = this.newUser.uid;
           object.profilePic = this.newUser.profilePic;
           this.newUser = object;
+
     });
   }
 
-/*   generalObject = {
-    occupation: this.newUser.occupation,
-    and so on..
-  } */
 
   editInterestsComponent() {
     this.modalService.create({
@@ -103,17 +101,26 @@ export class MyProfileComponent implements OnInit {
   }
 
   editGeneralComponent() {
+
+    const generalObject = {
+      occupation: this.newUser.occupation,
+      smoker: this.newUser.smoker,
+      drinker:this.newUser.drinker,
+      favMov:this.newUser.favoriteMovie,
+      favSong:this.newUser.favoriteSong
+    } 
+
     this.modalService.create({
       nzContent: EditGeneralComponent,
       nzComponentParams: {
-        entry: this.currentUser
-        //pass in generalObject
-      }
-    })
+        entry: this.currentUser,
+        current: generalObject
+      },
+    });
   }
 
   isSmoker() {
-    if(this.newUser.smoker === "true") {
+    if(this.newUser.smoker === "smoker") {
       return "Yes";
     }
     else {
@@ -122,7 +129,7 @@ export class MyProfileComponent implements OnInit {
   }
 
   isDrinker() {
-    if(this.newUser.drinker === "true") {
+    if(this.newUser.drinker === "drinker") {
       return "Yes";
     }
     else {
