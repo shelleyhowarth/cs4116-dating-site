@@ -121,10 +121,6 @@ export class SignUpComponent implements OnInit {
       window.alert("Please Add A Valid Profile Picture!");
     }
 
-    if( this.form.value.firstName.length > 15){
-      console.log("max length")
-      window.alert("Max characters 15");
-    }
 
     else{
     const user = {
