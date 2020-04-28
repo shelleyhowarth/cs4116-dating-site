@@ -216,6 +216,8 @@ export class HomeComponent implements OnInit {
       accepted: true
     });
 
+    window.alert("You have accepted the request");
+
    
 
   }
