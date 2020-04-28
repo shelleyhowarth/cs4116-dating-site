@@ -4,7 +4,6 @@ import * as firebase from "firebase";
 import { User } from '../model/user.model';
 import { Connection } from 'src/app/model/connections.model';
 import { Notification } from '../model/notifications.model';
-import { UserProfileComponent } from '../users/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-home',

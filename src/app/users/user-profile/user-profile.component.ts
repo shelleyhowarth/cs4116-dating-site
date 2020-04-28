@@ -90,12 +90,6 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-  setConnectionBooleans(connectionAccept: boolean, connectionPend: boolean, noConnect: boolean) {
-    this.connectionAccepted = connectionAccept;
-    this.connectionPending = connectionPend;
-    this.noConnection = noConnect;
-  }
-
   sendConnectRequest() {
     const time = new Date().toLocaleString();
     var docId = this.currentId + this.otherUserId;
