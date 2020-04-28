@@ -4,7 +4,7 @@ import * as firebase from "firebase";
 import { User } from '../model/user.model';
 import { Connection } from 'src/app/model/connections.model';
 import { Notification } from '../model/notifications.model';
-import { map } from 'rxjs/operators';
+import { UserProfileComponent } from '../users/user-profile/user-profile.component';
 
 @Component({
   selector: 'app-home',
@@ -30,6 +30,7 @@ export class HomeComponent implements OnInit {
   searchArray = [];
   noResults = true;
   connected: Boolean;
+  
 
   constructor(private db: AngularFirestore) { }
 
@@ -222,9 +223,7 @@ export class HomeComponent implements OnInit {
       seen: true
 
     });
-    var docRef2 = this.db.collection("Connections").doc(id).update({
-      accepted: false
-    });
+    var docRef2 = this.db.collection("Connections").doc(id).delete();
     window.alert("You have rejected the request");
   }
 

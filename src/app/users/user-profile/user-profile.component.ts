@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/app/model/user.model';
 import * as firebase from 'firebase';
+
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -87,6 +88,12 @@ export class UserProfileComponent implements OnInit {
         profilePic: doc.data().profilePic
       };
     })
+  }
+
+  setConnectionBooleans(connectionAccept: boolean, connectionPend: boolean, noConnect: boolean) {
+    this.connectionAccepted = connectionAccept;
+    this.connectionPending = connectionPend;
+    this.noConnection = noConnect;
   }
 
   sendConnectRequest() {
