@@ -122,9 +122,17 @@ export class UserProfileComponent implements OnInit {
     var docId = this.currentId + this.otherUserId;
     var ref = this.db.collection("Connections").doc(docId);
     ref.delete();
+
+    var docId1 = this.currentId + this.otherUserId;
+    var ref = this.db.collection("chats").doc(docId1);
+    ref.delete();
     
-    var docId = this.otherUserId + this.currentId;
-    var ref = this.db.collection("Connections").doc(docId)
+    var docId2 = this.otherUserId + this.currentId;
+    var ref = this.db.collection("Connections").doc(docId2)
+    ref.delete();
+
+    var docId3 = this.otherUserId + this.currentId;
+    var ref = this.db.collection("chats").doc(docId3);
     ref.delete();
 
     window.alert("You have disconnected with " + this.user.firstName);

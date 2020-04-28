@@ -209,11 +209,15 @@ export class HomeComponent implements OnInit {
   accept(id) {
     var docRef = this.db.collection("notifications").doc(id).update({
       seen: true
+      
     });
-
+  
     var docRef2 = this.db.collection("Connections").doc(id).update({
       accepted: true
     });
+
+   
+
   }
 
   reject() {
