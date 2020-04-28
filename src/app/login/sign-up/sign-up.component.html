@@ -3,17 +3,17 @@
     <div id="row 2" nz-row style="display: flex">
         <div>
             <nz-form-item>
-                <nz-form-label [nzSm]="9" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-                <nz-form-control [nzSm]="20" [nzXs]="27" nzErrorTip="The input is not valid E-mail!">
+                <nz-form-label nzRequired nzFor="email">E-mail</nz-form-label>
+                <nz-form-control nzErrorTip="The input is not valid E-mail!">
                     <input nz-input formControlName="email" id="email" />
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div id="empty space" nz-col nzSpan="4"></div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-item>
-                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="password" nzRequired>Password</nz-form-label>
-                <nz-form-control [nzSm]="20" [nzXs]="40" nzErrorTip="Please input your password!">
+                <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
+                <nz-form-control nzErrorTip="Please input your password!">
                     <input nz-input type="password" id="password" formControlName="password" />
                 </nz-form-control>
             </nz-form-item>
@@ -22,19 +22,19 @@
     <div id="row 1" style="display: flex">
         <div>
             <nz-form-item>
-                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="firstName" nzRequired>
+                <nz-form-label nzFor="firstName" nzRequired>
                     First Name</nz-form-label>
-                <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Please input your firstName!">
+                <nz-form-control nzErrorTip="Please input your firstName!">
                     <input nz-input id="firstName" formControlName="firstName" />
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div id="empty space" nz-col nzSpan="2"></div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
 
             <nz-form-item>
-                <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired nzFor="gender">Gender</nz-form-label>
-                <nz-form-control [nzSm]="17" [nzXs]="24" nzErrorTip="Please select Gender">
+                <nz-form-label nzRequired nzFor="gender">Gender</nz-form-label>
+                <nz-form-control nzErrorTip="Please select Gender">
                     <nz-select class="form-field" formControlName="gender">
                         <nz-option nzValue="male" nzLabel="male"></nz-option>
                         <nz-option nzValue="female" nzLabel="female"></nz-option>
@@ -46,80 +46,112 @@
     <div id="row 2" style="display: flex">
         <div>
             <nz-form-item>
-                <nz-form-label [nzSm]="10" [nzXs]="24" nzFor="LastName" nzRequired>Last Name</nz-form-label>
-                <nz-form-control [nzSm]="20" [nzXs]="24" nzErrorTip="Please input your Last Name!">
+                <nz-form-label nzFor="LastName" nzRequired>Last Name</nz-form-label>
+                <nz-form-control nzErrorTip="Please input your Last Name!">
                     <input nz-input id="lastName" formControlName="lastName" />
                 </nz-form-control>
             </nz-form-item>
         </div>
-        <div id="empty space" nz-col nzSpan="1"></div>
+        <div id="empty space" nz-col nzSpan="3"></div>
         <div>
             <nz-form-item>
-                <nz-form-label [nzSm]="4" [nzXs]="24" nzFor="description" nzRequired>Bio</nz-form-label>
-                <nz-form-control [nzSm]="21" [nzXs]="24" nzErrorTip="Please add a Bio">
+                <nz-form-label nzFor="description" nzRequired>Bio</nz-form-label>
+                <nz-form-control nzErrorTip="Please add a Bio">
                     <textarea class="form-field" nz-input placeholder="Write a description of yourself..." nzAutosize formControlName="description"></textarea>
                 </nz-form-control>
             </nz-form-item>
-
-
-
         </div>
     </div>
     <div id="row 3" style="display: flex">
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">County*</nz-form-label>
-            <nz-select class="form-field" formControlName="county">
-                <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
-            </nz-select>
+            <nz-form-item>
+                <nz-form-label nzFor="county" nzRequired>County</nz-form-label>
+                <nz-form-control nzErrorTip="Please select a County">
+                    <nz-select class="form-field" formControlName="county">
+                        <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Date of birth*</nz-form-label>
-            <nz-date-picker nzPlaceholder="Select a date" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate" [nzShowToday]=f alse formControlName="age"></nz-date-picker>
+            <nz-form-item>
+                <nz-form-label nzFor="age" nzRequired>Date of Birth</nz-form-label>
+                <nz-form-control nzErrorTip="Please select Birth Date">
+                    <nz-date-picker nzPlaceholder="Select a date" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate" [nzShowToday]=false formControlName="age"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 4" style="display: flex">
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Occupation*</nz-form-label>
-            <input class="form-field" nz-input formControlName="occupation">
+            <nz-form-item>
+                <nz-form-label nzFor="occupation" nzRequired>Occupation</nz-form-label>
+                <nz-form-control nzErrorTip="Please add an Occupation">
+                    <input class="form-field" nz-input formControlName="occupation">
+                </nz-form-control>
+            </nz-form-item>
         </div>
+
         <div id="empty space" nz-col nzSpan="3"></div>
+
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Marital status*</nz-form-label>
-            <nz-select class="form-field" formControlName="maritalStatus">
-                <nz-option nzValue="separated" nzLabel="separated"></nz-option>
-                <nz-option nzValue="widowed" nzLabel="widowed"></nz-option>
-                <nz-option nzValue="divorced" nzLabel="divorced"></nz-option>
-                <nz-option nzValue="single" nzLabel="single"></nz-option>
-            </nz-select>
+            <nz-form-item>
+                <nz-form-label nzFor="maritalStatus" nzRequired>Marital Status</nz-form-label>
+                <nz-form-control nzErrorTip="Please add an Occupation">
+                    <nz-select class="form-field" formControlName="maritalStatus">
+                        <nz-option nzValue="separated" nzLabel="separated"></nz-option>
+                        <nz-option nzValue="widowed" nzLabel="widowed"></nz-option>
+                        <nz-option nzValue="divorced" nzLabel="divorced"></nz-option>
+                        <nz-option nzValue="single" nzLabel="single"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 5" style="display: flex">
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Smoker*</nz-form-label>
-            <nz-radio-group class="form-field" formControlName="smoker">
-                <label nz-radio nzValue=true>Yes</label>
-                <label nz-radio nzValue=false>No</label>
-            </nz-radio-group>
+
+            <nz-form-item>
+                <nz-form-label nzFor="smoker" nzRequired>Smoker</nz-form-label>
+                <nz-form-control nzErrorTip="Please select an option">
+                    <nz-radio-group class="form-field" formControlName="smoker">
+                        <label nz-radio nzValue=true>Yes</label>
+                        <label nz-radio nzValue=false>No</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Drinker*</nz-form-label>
-            <nz-radio-group class="form-field" formControlName="drinker">
-                <label nz-radio nzValue=true>Yes</label>
-                <label nz-radio nzValue=false>No</label>
-            </nz-radio-group>
+            <nz-form-item>
+                <nz-form-label nzFor="drinker" nzRequired>Drinker</nz-form-label>
+                <nz-form-control nzErrorTip="Please select an option">
+                    <nz-radio-group class="form-field" formControlName="drinker">
+                        <label nz-radio nzValue=true>Yes</label>
+                        <label nz-radio nzValue=false>No</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 6" style="display: flex">
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Favourite song*</nz-form-label>
-            <input class="form-field" nz-input formControlName="favoriteSong">
+            <nz-form-item>
+                <nz-form-label nzFor="favoriteSong" nzRequired>Favourite Song</nz-form-label>
+                <nz-form-control nzErrorTip="Please enter Favorite Song">
+                    <input class="form-field" nz-input formControlName="favoriteSong">
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label" [nzNoColon]="true">Favourite movie*</nz-form-label>
-            <input class="form-field" nz-input formControlName="favoriteMovie">
+            <nz-form-item>
+                <nz-form-label nzFor="favoriteMovie" nzRequired>Favourite Movie</nz-form-label>
+                <nz-form-control nzErrorTip="Please enter Favorite Movie">
+                    <input class="form-field" nz-input formControlName="favoriteMovie">
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
 
@@ -138,6 +170,6 @@
         </div>
     </div>
     <div *nzModalFooter class="btn">
-        <button nz-button (click)="submit()" [disabled]="!form.valid" class="sign-up-btn">Sign up</button>
+        <button nz-button (click)="submit()" class="sign-up-btn">Sign up</button>
     </div>
 </form>

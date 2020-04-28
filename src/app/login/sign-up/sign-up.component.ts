@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
 import { Observable, Observer } from 'rxjs';
 import * as firebase from 'firebase';
 import { InterestsComponent } from './interests/interests.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -63,6 +64,7 @@ export class SignUpComponent implements OnInit {
   ActualAge: number;
   _db:AngularFirestore;
   users:  Observable<any[]>;
+  validateForm: any;
   
 
   constructor(
@@ -82,10 +84,10 @@ export class SignUpComponent implements OnInit {
 
   setUpForm() {
     this.form = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      email:[null, [Validators.email, Validators.required]],
       password: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstName: [null, Validators.required],
+      lastName: [null, Validators.required],
       age: ['', Validators.required],
       county: ['', Validators.required],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(250)])],
@@ -99,8 +101,12 @@ export class SignUpComponent implements OnInit {
     })
   }
 
-
   submit() {
+
+    for (const i in this.form.controls) {
+      this.form.controls[i].markAsDirty();
+      this.form.controls[i].updateValueAndValidity();
+    }
 
     if(this.fileObj == null){
       console.log("Image Blank")
