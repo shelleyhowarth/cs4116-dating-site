@@ -93,7 +93,7 @@ export class SignUpComponent implements OnInit {
       county: ['', Validators.required],
       description: ['', Validators.compose([Validators.required, Validators.maxLength(250), this.noWhitespaceValidator])],
       gender: ['', Validators.required],
-      occupation: ['', Validators.required, this.noWhitespaceValidator, Validators.maxLength(15)],
+      occupation: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(15)]],
       maritalStatus: ['', Validators.required],
       smoker: ['', Validators.required],
       drinker: ['', Validators.required],
@@ -120,8 +120,6 @@ export class SignUpComponent implements OnInit {
       console.log("Image Blank")
       window.alert("Please Add A Valid Profile Picture!");
     }
-
-
     else{
     const user = {
       email: this.form.value.email,
