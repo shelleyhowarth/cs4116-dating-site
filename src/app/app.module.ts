@@ -36,7 +36,6 @@ import { SearchComponent } from './search/search.component';
 import { NzSliderModule } from 'ng-zorro-antd/slider';
 import { InterestsComponent } from './login/sign-up/interests/interests.component';
 import { UserProfileComponent } from './users/user-profile/user-profile.component';
-import { AdminComponent } from './admin/admin.component';
 import { EditInterestComponent } from './users/my-profile/edit-profile/edit-interest/edit-interest.component';
 import { EditBioComponent } from './users/my-profile/edit-profile/edit-bio/edit-bio.component';
 import { EditProfilePictureComponent } from './users/my-profile/edit-profile/edit-profile-picture/edit-profile-picture.component';
@@ -53,7 +52,6 @@ const appRoutes: Routes = [
   { path: 'my-profile', component: MyProfileComponent, canActivate: [AuthGuard]},
   { path: 'search', component: SearchComponent, canActivate: [AuthGuard]},
   { path: 'user', component: UserProfileComponent, canActivate: [AuthGuard] },
-  { path: 'admin', component: AdminComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
@@ -69,7 +67,6 @@ const appRoutes: Routes = [
     SearchComponent,
     InterestsComponent,
     UserProfileComponent,
-    AdminComponent,
     EditInterestComponent,
     EditBioComponent,
     EditProfilePictureComponent,

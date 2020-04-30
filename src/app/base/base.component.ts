@@ -43,12 +43,6 @@ export class BaseComponent implements OnInit {
       imgSrc: 'https://firebasestorage.googleapis.com/v0/b/cs4116-group4-dating.appspot.com/o/icons%2Fuser.svg?alt=media&token=060e1187-1f0d-4dc7-9712-63e6d6525f2b'
     },
     {
-      name: 'Admin',
-      routing: 'admin',
-      imgName: 'pic',
-      imgSrc: 'https://firebasestorage.googleapis.com/v0/b/cs4116-group4-dating.appspot.com/o/icons%2Fadmin.svg?alt=media&token=ede67592-6d31-4a52-9480-920c8a670050'
-    },
-    {
       name: 'Log Out',
       routing: 'login',
       imgName: 'switch',
