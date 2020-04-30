@@ -140,13 +140,13 @@ export class SearchComponent implements OnInit {
   }
 
   getDisabled() {
-    this.disabledUsers = [];
+    this.searchArray = [];
     this.users.forEach(user => {
       console.log(user);
       if (user.disabled === true) {
-        this.disabledUsers.push(user);
+        this.searchArray.push(user);
       }
     });
-    console.log(this.disabledUsers);
+    console.log(this.searchArray);
   }
 }

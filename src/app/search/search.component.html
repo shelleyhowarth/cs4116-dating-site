@@ -80,17 +80,6 @@
                             <p class="details"> {{ user.age }}, {{ user.county }}</p>
                         </div>
                     </div>
-                    <div *ngFor="let user of disabledUsers" style="display: inline-flex;">
-                        <div [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
-                            <div>
-                                <img src="{{ user.profilePic }}" class="search-pic">
-                            </div>
-                            <div>
-                                <p class="details">{{ user.firstName | titlecase}}</p>
-                                <p class="details"> {{ user.age }}, {{ user.county }}</p>
-                            </div>
-                        </div>
-                    </div>
                     &nbsp;
                     &nbsp;
                     &nbsp;
