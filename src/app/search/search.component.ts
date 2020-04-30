@@ -55,6 +55,8 @@ export class SearchComponent implements OnInit {
   searchArray = [];
   noResults = true;
   userId = firebase.auth().currentUser.uid
+  disabledUsers = [];
+  admin;
 
   constructor(private fb: FormBuilder, private firestore: AngularFirestore, private usersService: UsersService) { }
 
@@ -87,6 +89,7 @@ export class SearchComponent implements OnInit {
         this.users.forEach(user => {
           if(user.uid === this.userId) {
             this.users.splice(this.users.indexOf(user), 1);
+            this.admin = user.admin;
           }
         })
        });
@@ -136,5 +139,14 @@ export class SearchComponent implements OnInit {
     this.search();
   }
 
-
+  getDisabled() {
+    this.disabledUsers = [];
+    this.users.forEach(user => {
+      console.log(user);
+      if (user.disabled === true) {
+        this.disabledUsers.push(user);
+      }
+    });
+    console.log(this.disabledUsers);
+  }
 }

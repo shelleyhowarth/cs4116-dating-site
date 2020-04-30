@@ -40,7 +40,7 @@ export class AuthService {
     const snapshot = this.fs.collection('Users').get();
     snapshot.subscribe(snap => {
       snap.forEach(doc => {
-          if (doc.data().disabled === true) {
+        if (doc.data().disabled === true && doc.data().email === email) {
             isDisabled = true;
             if (isDisabled) {
               window.alert("Account is disabled");
