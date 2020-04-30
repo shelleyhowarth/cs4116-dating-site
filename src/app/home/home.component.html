@@ -20,14 +20,14 @@
     <div nz-col nzSpan="6">
         <nz-card class="home-card">
             <p class="card-title">Notifications</p>
-            <div *ngFor="let notification of notifications">
+            <div *ngFor="let notification of notifications let i = index" [attr.data-index]="i">
                 <p class="notif-text">{{ notification.notification }}</p>
-                <button nz-button (click)="accept(notification.connectionId)" class="sign-up-btn">accept</button>
-                <button nz-button (click)="reject(notification.connectionId)" class="sign-up-btn">reject</button>
+                <button nz-button (click)="accept(notification.connectionId, i)" class="sign-up-btn">accept</button>
+                <button nz-button (click)="reject(notification.connectionId, i)" class="sign-up-btn">reject</button>
             </div>
-            <div *ngFor="let messageNotification of messageNotifications">
+            <div *ngFor="let messageNotification of messageNotifications let i = index" [attr.data-index]="i">
                 <p class="notif-text">{{ messageNotification.notification }}</p>
-                <button nz-button (click)="discardedNotification()" class="sign-up-btn">Discard</button>
+                <button nz-button (click)="discardedNotification(i)" class="sign-up-btn">Discard</button>
             </div>
         </nz-card>
     </div>

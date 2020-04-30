@@ -206,30 +206,33 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  accept(id) {
+  accept(id, index) {
     var docRef = this.db.collection("notifications").doc(id).update({
       seen: true
-      
     });
+    console.log("index " + index);
+    this.notifications
+    this.notifications.splice(index, 1);
     var docRef2 = this.db.collection("Connections").doc(id).update({
       accepted: true
     });
     window.alert("You have accepted the request");
   }
 
-  reject(id) {
+  reject(id, index) {
     var docRef = this.db.collection("notifications").doc(id).update({
       seen: true
-
     });
+    this.notifications.splice(index, 1);
     var docRef2 = this.db.collection("Connections").doc(id).delete();
     window.alert("You have rejected the request");
   }
 
-  discardedNotification() {
+  discardedNotification(index) {
     var docRef = this.db.collection("notifications").doc(this.userId).update({
       seen: true
     })
+    this.messageNotifications.splice(index, 1);
   }
 
   updateDb(acceptStatus: boolean) {
