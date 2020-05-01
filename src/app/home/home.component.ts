@@ -36,6 +36,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getConnections();
     this.getNotifications();
+
+    sessionStorage.setItem('userName', this.userId);
    
   }
 

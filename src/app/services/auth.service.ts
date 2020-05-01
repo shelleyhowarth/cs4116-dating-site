@@ -9,7 +9,7 @@ import { User } from '../model/user.model';
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn;
+  loggedIn = JSON.parse(localStorage.getItem('logged in') || 'false');
   _db: AngularFirestore;
   
   constructor(public afAuth: AngularFireAuth,
@@ -22,6 +22,7 @@ export class AuthService {
   SignUp(email, password) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
+        localStorage.setItem('userName', 'true');
         window.alert("You have been successfully registered!");
       }).catch((error) => {
         window.alert(error.message)
@@ -32,6 +33,7 @@ export class AuthService {
   SignIn(email, password) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then((result) => {
+        localStorage.setItem('userName', 'true');
         this.router.navigate(['home']);
       }).catch((error) => {
         window.alert(error.message)
@@ -41,6 +43,7 @@ export class AuthService {
   /* Sign out */
   SignOut() {
     this.afAuth.auth.signOut();
+    sessionStorage.clear();
   }
 
   isAuthenticated() {
@@ -50,7 +53,7 @@ export class AuthService {
     else {
       this.loggedIn = false;
     }
-    return this.loggedIn;
+    return JSON.parse(localStorage.getItem('logged in') || this.loggedIn.toString());
   }
 
   addUser(fName: string, lName: string, fAge: number, fEmail: string,
