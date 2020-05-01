@@ -124,12 +124,13 @@ export class UserProfileComponent implements OnInit {
     var ref = this.db.collection("Connections").doc(docId);
     ref.delete();
 
-    var ref = this.db.collection("chats").doc(docId); // messages collection needs to be deleted to prevent older messages appearing
+    var ref = this.db.collection("chats").doc(docId);
     ref.delete();
 
     var docIdNot = this.currentId;
-    var ref = this.db.collection("notifications").doc(docIdNot);
-    ref.delete();
+    var docRef = this.db.collection("notifications").doc(docIdNot).update({
+      seen: true
+    });
     
     var docId2= this.otherUserId + this.currentId;
     var ref = this.db.collection("Connections").doc(docId2)
@@ -139,8 +140,10 @@ export class UserProfileComponent implements OnInit {
     ref.delete();
 
     var docIdNot2 = this.otherUserId;
-    var ref = this.db.collection("notifications").doc(docId2);
-    ref.set(seen ==)
+    var docRef = this.db.collection("notifications").doc(docIdNot2).update({
+      seen: true
+    });
+  
 
     window.alert("You have disconnected with " + this.user.firstName);
   }
