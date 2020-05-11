@@ -37,11 +37,13 @@ export class HomeComponent implements OnInit {
     this.getConnections();
     this.getNotifications();
 
+    this.uid = firebase.auth().currentUser.uid;
     sessionStorage.setItem('userName', this.userId);
    
   }
 
   getConnections() {
+    this.connections = [];
     var ref = this.db.collection("Connections").get();
     ref.subscribe(snap => {
       snap.forEach(doc => {
@@ -61,7 +63,7 @@ export class HomeComponent implements OnInit {
 
   getConnectedUsers() {
     var ref = this.db.collection("Users").get();
-
+    this.users = [];
     this.connections.forEach(object => {
       if (object.userId1 === this.userId) {
         this.searchId.push(object.userId2);
@@ -93,7 +95,6 @@ export class HomeComponent implements OnInit {
             object.uid = doc.data().uid;
             object.profilePic = doc.data().profilePic;
             this.users.push(object);
-
           }
         });
       });
@@ -208,16 +209,60 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  updateUsers(search) {
+    var ref = this.db.collection("Users");
+    console.log("search " + search);
+    ref.doc(search).get().subscribe(doc => {
+        let object = new User();
+        object.firstName = doc.data().firstName;
+        object.lastName = doc.data().lastName;
+        object.age = doc.data().age;
+        object.description = doc.data().description;
+        object.gender = doc.data().gender;
+        object.email = doc.data().email;
+        object.favoriteSong = doc.data().favoriteSong;
+        object.favoriteMovie = doc.data().favoriteMovie;
+        object.county = doc.data().county;
+        object.drinker = doc.data().drinker;
+        object.maritalStatus = doc.data().maritalStatus;
+        object.occupation = doc.data().occupation;
+        object.smoker = doc.data().smoker;
+        object.interests = doc.data().interests;
+        object.uid = doc.data().uid;
+        object.profilePic = doc.data().profilePic;
+        this.users.push(object);
+    });
+  }
+
   accept(id, index) {
-    var docRef = this.db.collection("notifications").doc(id).update({
+    
+    var docRef2 = this.db.collection("Connections").doc(id).get();
+    var id1, id2, search;  
+    docRef2.subscribe(doc => {
+      let object = new Connection;
+      var data = doc.data();
+      object.date = data.date;
+      object.userId1 = data.userId1;
+      object.userId2 = data.userId2;
+      object.accepted = data.accepted
+      this.connections.push(object);
+      id1 = object.userId1;
+      id2 = object.userId2
+      if (id1 === this.uid)
+        search = id2;
+      else
+        search = id1
+      this.updateUsers(search);
+    });  
+    this.db.collection("notifications").doc(id).update({
       seen: true
     });
-    console.log("index " + index);
     this.notifications
     this.notifications.splice(index, 1);
-    var docRef2 = this.db.collection("Connections").doc(id).update({
+
+    this.db.collection("Connections").doc(id).update({
       accepted: true
-    });
+    }); 
     window.alert("You have accepted the request");
   }
 
