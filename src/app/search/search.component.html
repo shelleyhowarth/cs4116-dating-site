@@ -4,23 +4,23 @@
     <div id="first card" nz-col nzSpan="15">
         <nz-card class="card" > 
             <div id="first row">
-                <p class="card-title">what are you looking for?</p>
+                <p class="card-title">What are you looking for?</p>
             </div>
             <div nz-row id="second row" style="display: flex">
                 <div>
-                    <p class="search-title">gender</p>
+                    <p class="search-title">Gender</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="3"></div>
                 <div>
-                    <p class="search-title">age range</p>
+                    <p class="search-title">Age Range</p>
                 </div>
                 <div nz-col nzSpan="2"></div>
                 <div>
-                    <p class="search-title">interests</p>
+                    <p class="search-title">Interests</p>
                 </div>
                 <div nz-col nzSpan="2"></div>
                 <div>
-                    <p class="search-title">county</p>
+                    <p class="search-title">County</p>
                 </div>
             </div>
             <div nz-row id="third row" style="display: flex">
@@ -68,7 +68,7 @@
     <div nz-col nzSpan="15">
         <nz-card class="card">
             <div id="first row">
-                <p class="card-title">users</p>
+                <p class="card-title">Users</p>
                 <div *ngFor="let user of searchArray" style="display: inline-flex;">
                     <div [routerLink]="['/user', { id: user.uid }]" style="cursor: pointer">
                         <div>
