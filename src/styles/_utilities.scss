@@ -97,3 +97,9 @@ p {
     @extend .card;
     min-width: 70%;
 }
+
+.notif-text {
+    color: $red;
+    font-weight: 500;
+    font-size: larger;
+}
