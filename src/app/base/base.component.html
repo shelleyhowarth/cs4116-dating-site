@@ -1,10 +1,6 @@
-<nz-layout>
-    <nz-sider *ngIf="authService.isAuthenticated()">
-        <ul
-            nz-menu
-            nzMode="inline"
-            class="nav-container"
-        >
+<nz-layout style='background-color: whitesmoke;'>
+    <nz-sider style='position:fixed;' *ngIf="authService.isAuthenticated()">
+        <ul nz-menu nzMode='inline' class="nav-container">
             <li
                 nz-menu-item
                 *ngFor="let navItem of navItems"
@@ -21,8 +17,8 @@
             </li>
         </ul>
     </nz-sider>
-    <nz-layout>
-        <nz-content>
+    <nz-layout style='background-color: whitesmoke;'>
+        <nz-content style='margin-left:10%; background-color:whitesmoke; height:100%'>
             <div class="component-container">
                 <router-outlet> </router-outlet>
             </div>

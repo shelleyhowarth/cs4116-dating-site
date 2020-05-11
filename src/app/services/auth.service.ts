@@ -10,6 +10,10 @@ import { User } from '../model/user.model';
 })
 export class AuthService {
   loggedIn;
+  signUp = false;
+  signUpFinished = false;
+  users;
+  uid;
   _db: AngularFirestore;
   
   constructor(public afAuth: AngularFireAuth,
@@ -20,6 +24,7 @@ export class AuthService {
     }
 
   SignUp(email, password) {
+    this.signUp = true;
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         window.alert("You have been successfully registered!");
@@ -44,7 +49,13 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if(firebase.auth().currentUser != null) {
+    if (this.signUp && this.signUpFinished) {
+      this.loggedIn = true;
+    }
+    else if (this.signUp && !this.signUpFinished) {
+      this.loggedIn = false;
+    }
+    else if(firebase.auth().currentUser != null) {
       this.loggedIn = true;
     }
     else {
@@ -57,13 +68,15 @@ export class AuthService {
           fGender: string, fDescription: string, fcounty: string,
           foccupation: string, fmaritalStatus: string, fSmoker: string,
           fDrinker: string, fFavSong: string, fFavMovie: string, fInterests: [], fUid: string, fProfilePic: string) {
-      let userCollection = this._db.collection<User>('Users');
-
-      userCollection.doc(fUid).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
-      gender: fGender, description: fDescription, county: fcounty,
-      occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
-      drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid, profilePic: fProfilePic});
       
+    let userCollection = this._db.collection<User>('Users');
+
+    userCollection.doc(fUid).set({ firstName: fName, lastName: lName, age: fAge, email: fEmail,
+                                  gender: fGender, description: fDescription, county: fcounty,
+                                  occupation: foccupation, maritalStatus: fmaritalStatus, smoker: fSmoker,
+                                  drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie,
+                                  interests: fInterests, uid: fUid, profilePic: fProfilePic});
+    this.signUpFinished = true;
   }
 
   updateInterests(updatedInterests:[] ,userId:string){
