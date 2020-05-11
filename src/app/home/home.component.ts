@@ -4,6 +4,7 @@ import * as firebase from "firebase";
 import { User } from '../model/user.model';
 import { Connection } from 'src/app/model/connections.model';
 import { Notification } from '../model/notifications.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit {
   connected: Boolean;
   
 
-  constructor(private db: AngularFirestore) { }
+  constructor(private db: AngularFirestore,   public router: Router) { }
 
   ngOnInit(): void {
     this.getConnections();
@@ -300,4 +301,9 @@ export class HomeComponent implements OnInit {
       seen: true
     });
   }
-}
+    refreshHome(){
+      window.location.reload();
+      this.router.navigate(['Home']);
+    }
+  }
+

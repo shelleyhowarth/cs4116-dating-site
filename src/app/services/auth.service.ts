@@ -48,6 +48,8 @@ export class AuthService {
     if(firebase.auth().currentUser != null) {
       this.loggedIn = true;
       sessionStorage.setItem('logged in', 'true');
+
+      
     }
     else {
       this.loggedIn = false;
