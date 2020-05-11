@@ -12,9 +12,6 @@
                 &nbsp;
                 &nbsp;
             </div>
-            <div *ngIf="users.length == 0">
-                <p class="notif-text">You have no connections yet.</p>
-            </div>
             <div *ngIf=userSelected>
                 <img class="search-pic" src= "{{ receiver.profilePic }}">
                 <p class="details">{{ receiver.firstName }}</p>
