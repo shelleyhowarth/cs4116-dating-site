@@ -119,7 +119,6 @@ export class UserProfileComponent implements OnInit {
   }
 
   deleteConnection(){
-
     var docId = this.currentId + this.otherUserId;
     var ref = this.db.collection("Connections").doc(docId);
     ref.delete();
@@ -128,7 +127,7 @@ export class UserProfileComponent implements OnInit {
     ref.delete();
 
     var docIdNot = this.currentId;
-    var docRef = this.db.collection("notifications").doc(docIdNot).update({
+    this.db.collection("notifications").doc(docIdNot).update({
       seen: true
     });
     
@@ -140,11 +139,13 @@ export class UserProfileComponent implements OnInit {
     ref.delete();
 
     var docIdNot2 = this.otherUserId;
-    var docRef = this.db.collection("notifications").doc(docIdNot2).update({
+    this.db.collection("notifications").doc(docIdNot2).update({
       seen: true
     });
   
-
+    this.noConnection = true;
+    this.connectionPending = false;
+    this.connectionAccepted = false;
     window.alert("You have disconnected with " + this.user.firstName);
   }
     

@@ -15,14 +15,14 @@
             <div id="second row" nz-row>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div *ngIf="noConnection">
-                    <button nz-button class="connect-btn" (click)="sendConnectRequest()">connect</button>
+                    <button nz-button class="connect-btn" (click)="sendConnectRequest()">Connect</button>
                 </div>
                 <div *ngIf="connectionPending">
-                    <button nz-button class="connect-pend-btn">connection pending</button>
+                    <button nz-button class="connect-pend-btn">Connection pending</button>
                 </div>
                 <div *ngIf="connectionAccepted" style="display: flex">
-                    <button nz-button [routerLink]="['/message']" class="connect-btn">message</button>
-                    <button nz-button class="connect-btn" (click)="deleteConnection()">delete connection</button>
+                    <button nz-button [routerLink]="['/message']" class="connect-btn">Message</button>
+                    <button nz-button class="connect-btn" (click)="deleteConnection()">Delete connection</button>
                 </div>
             </div>
             <div style="margin-top: 3%"></div>
