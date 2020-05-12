@@ -49,40 +49,42 @@
                     <p class="bio">{{ newUser.description }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="3"></div>
-                <div nz-col nzSpan="2">
+                <div style="min-height: 6rem;" nz-col nzSpan="6">
                     <ul>
                         <li *ngFor="let interest of newUser.interests" class="bio"> {{ interest }} </li>
                     </ul>
                 </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="bio">Occupation:</p>
-                    &nbsp;
-                    <p class="bio">{{ newUser.occupation }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="bio">Smoker:</p>
-                    &nbsp;
-                    <p class="bio">{{ isSmoker() }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="bio">Drinker:</p>
-                    &nbsp;
-                    <p class="bio">{{ isDrinker() }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="18"></div>
-                <div style="display: flex">
-                    <p class="bio">Favourite Song:</p>
-                    &nbsp;
-                    <p class="bio">{{ newUser.favoriteSong }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="18"></div>
-                <div style="display: flex">
-                    <p class="bio">Favourite Movie:</p>
-                    &nbsp;
-                    <p class="bio">{{ newUser.favoriteMovie }}</p>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div>
+                    <div style="display: flex">
+                        <p class="bio">Occupation:</p>
+                        &nbsp;
+                        <p class="bio">{{ newUser.occupation }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Smoker:</p>
+                        &nbsp;
+                        <p class="bio">{{ isSmoker() }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Drinker:</p>
+                        &nbsp;
+                        <p class="bio">{{ isDrinker() }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Favourite Song:</p>
+                        &nbsp;
+                        <p class="bio">{{ newUser.favoriteSong }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Favourite Movie:</p>
+                        &nbsp;
+                        <p class="bio">{{ newUser.favoriteMovie }}</p>
+                    </div>
                 </div>
             </div>
         </nz-card>

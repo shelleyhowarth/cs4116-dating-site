@@ -146,7 +146,9 @@ export class SearchComponent implements OnInit {
       if (user.disabled === true) {
         this.searchArray.push(user);
       }
+      if(this.searchArray.length !== 0) {
+        this.noResults = false;
+      }
     });
-    console.log(this.searchArray);
   }
 }

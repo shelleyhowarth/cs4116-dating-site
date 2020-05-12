@@ -1,15 +1,14 @@
 <div id="row 5" style="display: flex">
     <div>
         <nz-form-label class="form-label" [nzNoColon]="true">Smoker*</nz-form-label>
-        <nz-radio-group class="form-field" [(ngModel)]="currentSmoker">
+        <nz-radio-group class="form-field" [(ngModel)]="currentSmoker" (ngModelChange)="onEdit(currentSmoker)">
             <label nz-radio nzValue="smoker">Yes</label>
             <label nz-radio nzValue="nonSmoker">No</label>
         </nz-radio-group>
     </div>
-    <div id="empty space" nz-col nzSpan="3"></div>
     <div>
         <nz-form-label class="form-label" [nzNoColon]="true">Drinker*</nz-form-label>
-        <nz-radio-group class="form-field" [(ngModel)]="currentDrinker">
+        <nz-radio-group class="form-field" [(ngModel)]="currentDrinker" (ngModelChange)="onEdit(currentDrinker)">
             <label nz-radio nzValue=drinker>Yes</label>
             <label nz-radio nzValue=nonDrinker>No</label>
         </nz-radio-group>
@@ -18,21 +17,24 @@
 <div id="row 6" style="display: flex">
     <div>
         <nz-form-label class="form-label" [nzNoColon]="true">Favourite song*</nz-form-label>
-        <input class="form-field" nz-input [(ngModel)]="currentFavSong">
+        <input class="form-field" nz-input [(ngModel)]="currentFavSong" (ngModelChange)="onEdit(currentFavSong)">
     </div>
     <div id="empty space" nz-col nzSpan="3"></div>
     <div>
         <nz-form-label class="form-label" [nzNoColon]="true">Favourite movie*</nz-form-label>
-        <input class="form-field" nz-input [(ngModel)]="currentFavMov">
+        <input class="form-field" nz-input [(ngModel)]="currentFavMov" (ngModelChange)="onEdit(currentFavMov)">
     </div>
-
-    <div id="empty space" nz-col nzSpan="3"></div>
+</div>
+<div id="row 7" style="display: flex">
     <div>
         <nz-form-label class="form-label" [nzNoColon]="true">Occupation*</nz-form-label>
-        <input class="form-field" nz-input [(ngModel)]="currentOccupation">
     </div>
-
-    <div *nzModalFooter class="btn">
-        <button nz-button (click)="update()" class="sign-up-btn">Update Info</button>
+</div>
+<div id="row 8" style="display: flex">
+    <div>
+        <input class="form-field" nz-input [(ngModel)]="currentOccupation" (ngModelChange)="onEdit(currentOccupation)">
     </div>
+</div>
+<div *nzModalFooter class="btn">
+    <button nz-button (click)="update()" class="sign-up-btn" [disabled]="!edited">Update Info</button>
 </div>
