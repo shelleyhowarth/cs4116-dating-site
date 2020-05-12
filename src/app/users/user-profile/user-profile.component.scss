@@ -12,6 +12,12 @@
     cursor: not-allowed;
 }
 
+.disableBtn {
+    font-size: 16px;
+    background-color: $red;
+    color: white;
+}
+
 .profile-pic {
     width: 50px;
     height: 50px;
