@@ -11,10 +11,13 @@ import { UsersService } from './users.service';
 })
 export class AuthService {
   loggedIn;
+  signUp = false;
+  signUpFinished = false;
+  users;
+  uid;
   _db: AngularFirestore;
   admin = false;
   disabled = false;
-  users;
   
   constructor(public afAuth: AngularFireAuth,
               public router: Router,
@@ -25,6 +28,7 @@ export class AuthService {
     }
 
   SignUp(email, password) {
+    this.signUp = true;
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then((result) => {
         window.alert("You have been successfully registered!");
@@ -72,7 +76,13 @@ export class AuthService {
   }
 
   isAuthenticated() {
-    if(firebase.auth().currentUser != null) {
+    if (this.signUp && this.signUpFinished) {
+      this.loggedIn = true;
+    }
+    else if (this.signUp && !this.signUpFinished) {
+      this.loggedIn = false;
+    }
+    else if(firebase.auth().currentUser != null) {
       this.loggedIn = true;
     }
     else {
@@ -94,6 +104,7 @@ export class AuthService {
       drinker: fDrinker, favoriteSong: fFavSong, favoriteMovie: fFavMovie, interests: fInterests, uid: fUid,
       profilePic: fProfilePic, admin: this.admin, disabled: this.disabled});
       
+    this.signUpFinished = true;
   }
 
   updateInterests(updatedInterests:[] ,userId:string){
