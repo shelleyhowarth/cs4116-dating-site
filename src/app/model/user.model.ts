@@ -15,5 +15,7 @@ export class User {
     interests: [];
     uid: string;
     profilePic: string;
+    admin: boolean;
+    disabled: boolean;
 }
 

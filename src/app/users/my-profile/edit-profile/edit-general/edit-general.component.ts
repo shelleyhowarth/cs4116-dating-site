@@ -20,13 +20,14 @@ export class EditGeneralComponent implements OnInit {
   currentFavMov;
   currentFavSong;
   generalObject;
-  uid = firebase.auth().currentUser.uid
+  uid;
 
   
   constructor(private modal: NzModalRef, public router: Router, private modalService: NzModalService, private fs: AngularFirestore) { }
 
   ngOnInit(): void {
     this.user = this.modal.getInstance().nzComponentParams.entry;
+    this.uid = this.modal.getInstance().nzComponentParams.uid;
     this.generalObject = this.modal.getInstance().nzComponentParams.current;
 
     console.log(this.user);

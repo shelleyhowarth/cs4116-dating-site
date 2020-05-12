@@ -3,6 +3,8 @@ import { NzModalRef, NzModalService } from 'ng-zorro-antd';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import * as firebase from 'firebase';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'src/app/model/user.model';
 
 
 @Component({
@@ -17,13 +19,15 @@ export class EditInterestComponent implements OnInit {
   currentInterests;
   user;
   defaultOption;
+  uid;
 
-  constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, private zone: NgZone) { }
+  constructor(private modal: NzModalRef, private authService: AuthService, public router: Router, private modalService: NzModalService, private zone: NgZone, private db: AngularFirestore) { }
 
 
 
   ngOnInit(): void {
     this.user = this.modal.getInstance().nzComponentParams.entry;
+    this.uid = this.modal.getInstance().nzComponentParams.uid;
     let currInterests = this.modal.getInstance().nzComponentParams.current;
     this.currentInterests =  currInterests;
     this.defaultOption = [...this.currentInterests];
@@ -34,9 +38,13 @@ export class EditInterestComponent implements OnInit {
   }
 
   update(){
-    let uid = firebase.auth().currentUser.uid
-    this.authService.updateInterests(this.currentInterests, uid);
+    this.updateInterests(this.currentInterests, this.uid);
     this.modalService.closeAll();
+  }
+
+  updateInterests(updatedInterests: [], userId: string) {
+    let userCollection = this.db.collection<User>('Users');
+    userCollection.doc(userId).update({ interests: updatedInterests })
   }
 
 }
