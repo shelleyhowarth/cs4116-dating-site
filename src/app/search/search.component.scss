@@ -8,6 +8,13 @@
     width: 7rem;
 }
 
+.disabled {
+    @extend .sign-in;
+    margin-left: 0;
+    font-size: 150%;
+    width: 10rem;
+}
+
 .search-title {
     color: black;
     font-size: 140%

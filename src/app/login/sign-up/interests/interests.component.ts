@@ -32,10 +32,12 @@ export class InterestsComponent implements OnInit {
       this.isSmoker = false;
     }
 
-    if(this.user.drinker == "true")
+    if(this.user.drinker === "true"){
       this.isDrinker = true;
-    else
-    this.isDrinker = false;
+    }
+    else {
+      this.isDrinker = false;
+    }
 
 
     var timeDiff = Math.abs(Date.now() - new Date(this.user.age).getTime());

@@ -49,12 +49,16 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <button nz-button class="search" (click)="search()">search</button>
+                    <button nz-button class="search" (click)="search()">Search</button>
                 </div>
                 &nbsp;
                 <div>
-                    <button nz-button class="search" (click)="reset()">reset</button>
+                    <button nz-button class="search" (click)="reset()">Reset</button>
+                    
                 </div>
+            </div>
+            <div>
+                <button *ngIf="admin" nz-button class="disabled" (click)="getDisabled()">Get Disabled</button>
             </div>
         </nz-card>
     </div>

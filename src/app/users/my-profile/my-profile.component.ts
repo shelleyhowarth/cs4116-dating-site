@@ -75,7 +75,8 @@ export class MyProfileComponent implements OnInit {
         nzContent: EditInterestComponent,
         nzComponentParams: {
           entry: this.currentUser,
-          current: this.newUser.interests
+          current: this.newUser.interests,
+          uid: this.newUser.uid
         },
     });
   }
@@ -85,7 +86,8 @@ export class MyProfileComponent implements OnInit {
       nzContent: EditBioComponent,
       nzComponentParams: {
         entry: this.currentUser,
-        current: this.newUser.description
+        current: this.newUser.description,
+        uid: this.newUser.uid
       },
     });
   }
@@ -95,7 +97,8 @@ export class MyProfileComponent implements OnInit {
       nzContent: EditProfilePictureComponent,
       nzComponentParams: {
         entry: this.currentUser,
-        current: this.email
+        current: this.email,
+        uid: this.newUser.uid
       },
     });
   }
@@ -114,7 +117,8 @@ export class MyProfileComponent implements OnInit {
       nzContent: EditGeneralComponent,
       nzComponentParams: {
         entry: this.currentUser,
-        current: generalObject
+        current: generalObject,
+        uid: this.newUser.uid
       },
     });
   }

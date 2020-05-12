@@ -30,6 +30,9 @@ export class UsersService {
           object.smoker = doc.data().smoker;
           object.interests = doc.data().interests;
           object.uid = doc.data().uid;
+          object.profilePic = doc.data().profilePic;
+          object.admin = doc.data().admin;
+          object.disabled = doc.data().disabled;
           array.push(object);
         });
        });
