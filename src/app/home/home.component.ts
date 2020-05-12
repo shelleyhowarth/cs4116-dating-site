@@ -302,9 +302,5 @@ export class HomeComponent implements OnInit {
       seen: true
     });
   }
-    refreshHome(){
-      window.location.reload();
-      this.router.navigate(['Home']);
-    }
-  }
+}
 
