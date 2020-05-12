@@ -38,9 +38,7 @@ export class HomeComponent implements OnInit {
     this.getConnections();
     this.getNotifications();
 
-    this.uid = firebase.auth().currentUser.uid;
-    sessionStorage.setItem('userName', this.userId);
-   
+    this.uid = firebase.auth().currentUser.uid; 
   }
 
   getConnections() {

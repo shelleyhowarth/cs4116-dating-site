@@ -10,7 +10,7 @@ import { UsersService } from './users.service';
   providedIn: 'root'
 })
 export class AuthService {
-  loggedIn = JSON.parse(sessionStorage.getItem('logged in') || 'false');
+  loggedIn;
   signUp = false;
   signUpFinished = false;
   users;
@@ -73,7 +73,6 @@ export class AuthService {
   /* Sign out */
   SignOut() {
     this.afAuth.auth.signOut();
-    sessionStorage.clear();
   }
 
   isAuthenticated() {
@@ -85,14 +84,11 @@ export class AuthService {
     }
     else if(firebase.auth().currentUser != null) {
       this.loggedIn = true;
-      sessionStorage.setItem('logged in', 'true');
-
-      
     }
     else {
       this.loggedIn = false;
     }
-    return JSON.parse(sessionStorage.getItem('logged in') || this.loggedIn.toString());
+    return this.loggedIn;
   }
 
 
