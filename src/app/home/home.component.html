@@ -22,8 +22,8 @@
             <p class="card-title">Notifications</p>
             <div *ngFor="let notification of notifications let i = index" [attr.data-index]="i">
                 <p class="notif-text">{{ notification.notification }}</p>
-                <button nz-button (click)="accept(notification.connectionId, i)" class="sign-up-btn">accept</button>
-                <button nz-button (click)="reject(notification.connectionId, i)" class="sign-up-btn">reject</button>
+                <button nz-button (click)="accept(notification.connectionId, i)" class="sign-up-btn">Accept</button>
+                <button nz-button (click)="reject(notification.connectionId, i)" class="sign-up-btn">Reject</button>
             </div>
             <div *ngFor="let messageNotification of messageNotifications let i = index" [attr.data-index]="i">
                 <p class="notif-text">{{ messageNotification.notification }}</p>

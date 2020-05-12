@@ -100,7 +100,9 @@ export class MessageComponent implements OnInit {
   }
 
   send(){
-    this.sendMessage(this.message);
+    if(this.message.length === 0) {
+      this.sendMessage(this.message);
+    }
     console.log("message notification");
     this.message = '';
     var docRef = this.db.collection("Users").doc(this.currentId).get();

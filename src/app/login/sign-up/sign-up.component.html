@@ -2,148 +2,211 @@
 <form nzForm [formGroup]="form">
     <div id="row 2" nz-row style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Email*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="email">
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="email">E-mail</nz-form-label>
+                <nz-form-control nzErrorTip="The input is not valid E-mail!">
+                    <input nz-input formControlName="email" id="email" />
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Password*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    type="password"
-                    formControlName="password">
+            <nz-form-item>
+                <nz-form-label nzFor="password" nzRequired>Password</nz-form-label>
+                <nz-form-control [nzErrorTip]="combinePass">
+                    <input nz-input type="password" id="password" formControlName="password" />
+
+                    <ng-template #combinePass let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 12</ng-container>
+                        <ng-container *ngIf="control.hasError('minlength')">Min length is 6</ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 1" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">First name*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="firstName">
+            <nz-form-item>
+                <nz-form-label nzFor="firstName" nzRequired>
+                    First Name</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineFirst">
+                    <input nz-input id="firstName" formControlName="firstName" />
+
+                    <ng-template #combineFirst let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 15</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Gender*</nz-form-label>
-            <nz-select class="form-field" formControlName="gender">
-                <nz-option nzValue="male" nzLabel="male"></nz-option> 
-                <nz-option nzValue="female" nzLabel="female"></nz-option>
-            </nz-select>
+
+            <nz-form-item>
+                <nz-form-label nzRequired nzFor="gender">Gender</nz-form-label>
+                <nz-form-control nzErrorTip="Please select Gender">
+                    <nz-select class="form-field" formControlName="gender">
+                        <nz-option nzValue="male" nzLabel="male"></nz-option>
+                        <nz-option nzValue="female" nzLabel="female"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 2" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">second name*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="lastName">
+            <nz-form-item>
+                <nz-form-label nzFor="LastName" nzRequired>Last Name</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineLast">
+                    <input nz-input id="lastName" formControlName="lastName" />
+
+                    <ng-template #combineLast let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 15</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Bio*</nz-form-label>
-            <textarea class="form-field" 
-                     nz-input 
-                     placeholder="Write a description of yourself..." 
-                     nzAutosize
-                     formControlName="description"></textarea>
+            <nz-form-item>
+                <nz-form-label nzFor="description" nzRequired>Bio</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineBio">
+                    <textarea class="form-field" nz-input placeholder="Write a description of yourself..." nzAutosize formControlName="description"></textarea>
+                    <ng-template #combineBio let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 250</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
-    <div id="row 3" style="display: flex"> 
+    <div id="row 3" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">County*</nz-form-label>
-            <nz-select class="form-field" formControlName="county">
-                <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option> 
-            </nz-select>
+            <nz-form-item>
+                <nz-form-label nzFor="county" nzRequired>County</nz-form-label>
+                <nz-form-control nzErrorTip="Please select a County">
+                    <nz-select class="form-field" formControlName="county">
+                        <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Date of birth*</nz-form-label>
-            <nz-date-picker nzPlaceholder="Select a date"
-                            nzFormat="dd/MM/yyyy"
-                            [nzDisabledDate]="disabledDate"
-                            [nzShowToday] = false
-                            formControlName="age"            
-            ></nz-date-picker>
+            <nz-form-item>
+                <nz-form-label nzFor="age" nzRequired>Date of Birth</nz-form-label>
+                <i nz-icon nz-tooltip nzTitle="Must be older than 55 (1965)" nzType="question-circle" nzTheme="outline"></i>
+                <nz-form-control nzErrorTip="Please select Birth Date">
+                    <nz-date-picker nzPlaceholder="Select a date" nzFormat="dd/MM/yyyy" [nzDisabledDate]="disabledDate" [nzShowToday]=false formControlName="age"></nz-date-picker>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 4" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Occupation*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="occupation">
+            <nz-form-item>
+                <nz-form-label nzFor="occupation" nzRequired>Occupation</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineOccu">
+                    <input class="form-field" nz-input formControlName="occupation">
+
+                    <ng-template #combineOccu let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 26</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
+                </nz-form-control>
+            </nz-form-item>
         </div>
+
         <div id="empty space" nz-col nzSpan="3"></div>
+
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Marital status*</nz-form-label>
-            <nz-select class="form-field" formControlName="maritalStatus">
-                <nz-option nzValue="separated" nzLabel="separated"></nz-option> 
-                <nz-option nzValue="widowed" nzLabel="widowed"></nz-option>
-                <nz-option nzValue="divorced" nzLabel="divorced"></nz-option>
-                <nz-option nzValue="single" nzLabel="single"></nz-option>
-            </nz-select>
+            <nz-form-item>
+                <nz-form-label nzFor="maritalStatus" nzRequired>Marital Status</nz-form-label>
+                <nz-form-control nzErrorTip="Please add an Occupation">
+                    <nz-select class="form-field" formControlName="maritalStatus">
+                        <nz-option nzValue="separated" nzLabel="separated"></nz-option>
+                        <nz-option nzValue="widowed" nzLabel="widowed"></nz-option>
+                        <nz-option nzValue="divorced" nzLabel="divorced"></nz-option>
+                        <nz-option nzValue="single" nzLabel="single"></nz-option>
+                    </nz-select>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 5" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Smoker*</nz-form-label>
-            <nz-radio-group class="form-field" formControlName="smoker">
-                <label nz-radio nzValue=true>Yes</label>
-                <label nz-radio nzValue=false>No</label>
-            </nz-radio-group>
+
+            <nz-form-item>
+                <nz-form-label nzFor="smoker" nzRequired>Smoker</nz-form-label>
+                <nz-form-control nzErrorTip="Please select an option">
+                    <nz-radio-group class="form-field" formControlName="smoker">
+                        <label nz-radio nzValue=true>Yes</label>
+                        <label nz-radio nzValue=false>No</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Drinker*</nz-form-label>
-            <nz-radio-group class="form-field" formControlName="drinker">
-                <label nz-radio nzValue=true>Yes</label>
-                <label nz-radio nzValue=false>No</label>
-            </nz-radio-group>
+            <nz-form-item>
+                <nz-form-label nzFor="drinker" nzRequired>Drinker</nz-form-label>
+                <nz-form-control nzErrorTip="Please select an option">
+                    <nz-radio-group class="form-field" formControlName="drinker">
+                        <label nz-radio nzValue=true>Yes</label>
+                        <label nz-radio nzValue=false>No</label>
+                    </nz-radio-group>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
     <div id="row 6" style="display: flex">
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Favourite song*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="favoriteSong">
+            <nz-form-item>
+                <nz-form-label nzFor="favoriteSong" nzRequired>Favourite Song</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineSong">
+                    <input class="form-field" nz-input formControlName="favoriteSong">
+
+                    <ng-template #combineSong let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 40</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+
+                </nz-form-control>
+            </nz-form-item>
         </div>
         <div id="empty space" nz-col nzSpan="3"></div>
         <div>
-            <nz-form-label class="form-label"
-            [nzNoColon]="true">Favourite movie*</nz-form-label>
-            <input class="form-field" 
-                    nz-input
-                    formControlName="favoriteMovie">
+            <nz-form-item>
+                <nz-form-label nzFor="favoriteMovie" nzRequired>Favourite Movie</nz-form-label>
+                <nz-form-control [nzErrorTip]="combineMov">
+                    <input class="form-field" nz-input formControlName="favoriteMovie">
+
+                    <ng-template #combineMov let-control>
+                        <ng-container *ngIf="control.hasError('maxlength')">Max length is 40</ng-container>
+                        <ng-container *ngIf="control.hasError('whitespace')">Must not contain all whitespaces </ng-container>
+                        <ng-container *ngIf="control.hasError('required')">Input is required</ng-container>
+                    </ng-template>
+                </nz-form-control>
+            </nz-form-item>
         </div>
     </div>
 
-    <div id= "row 7" style="display:flex">
+    <div id="row 7" style="display:flex">
         <div>
-            <nz-form-label class = "form-label">
+            <nz-form-label class="form-label">
                 Profile Picture
             </nz-form-label>
-            <nz-upload 
-            class="avatar-uploader"
-            nzName="avatar"
-            nzListType="picture-card"
-            [nzShowUploadList]="false"
-            [nzBeforeUpload]="beforeUpload"
-            (nzChange)="handleChange($event)">
+            <nz-upload class="avatar-uploader" nzName="avatar" nzListType="picture-card" [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload" (nzChange)="handleChange($event)">
                 <ng-container *ngIf="!avatarUrl">
                     <i class="upload-icon" nz-icon [nzType]="loading ? 'loading' : 'plus' "></i>
                     <div class="ant-upload-text">Upload</div>
@@ -153,10 +216,6 @@
         </div>
     </div>
     <div *nzModalFooter class="btn">
-        <button nz-button 
-                (click)="submit()"
-                [disabled]="!form.valid"
-                class="sign-up-btn">Sign up</button>
+        <button nz-button (click)="submit()" class="sign-up-btn">Sign up</button>
     </div>
 </form>
-
