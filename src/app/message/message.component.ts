@@ -35,6 +35,7 @@ export class MessageComponent implements OnInit {
   constructor(private db: AngularFirestore) { }
 
   ngOnInit(): void {
+    this.messages = [];
     this.getConnections();
     console.log(this.users);
   }
@@ -248,7 +249,6 @@ export class MessageComponent implements OnInit {
   }
 
   getMessages(){
-    this.messages = [];
     const snapshot = this.db.collection('chats').doc(this.chatId).collection('messages').get();
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
