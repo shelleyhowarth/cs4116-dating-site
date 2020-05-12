@@ -100,14 +100,14 @@ export class SignUpComponent implements OnInit {
       drinker: ['', Validators.required],
       favoriteSong: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(40)]],
       favoriteMovie: ['', [Validators.required, this.noWhitespaceValidator, Validators.maxLength(40)]]
-    })
+    });
   }
 
   public noWhitespaceValidator(control: FormControl) {
     const isWhitespace = (control.value || '').trim().length === 0;
     const isValid = !isWhitespace;
     return isValid ? null : { 'whitespace': true };
-}
+  }
 
   submit() {
 
@@ -117,11 +117,11 @@ export class SignUpComponent implements OnInit {
       this.form.controls[i].updateValueAndValidity();
     }
 
-    if(this.fileObj == null){
+    if(this.fileObj == null) {
       console.log("Image Blank")
       window.alert("Please Add A Valid Profile Picture!");
     }
-    else{
+    else {
     const user = {
       email: this.form.value.email,
       password: this.form.value.password,
@@ -144,7 +144,7 @@ export class SignUpComponent implements OnInit {
     this.form.reset;
     this.modalService.closeAll();   
     this.createInterestsComponent(user);
-  }
+    }
   }
 
   createInterestsComponent(user) {
@@ -156,17 +156,13 @@ export class SignUpComponent implements OnInit {
           entry: user
         },
     });
-}
+  }
 
   public CalculateAge(birthdate: number) { }
 
   disabledDate = (current: Date): boolean => {
     return differenceInCalendarDays(current, this.today) > 0;
   }
-
- 
-
-
 
   beforeUpload = (file: File) => {
     return new Observable((observer: Observer<boolean>) => {
@@ -190,7 +186,6 @@ export class SignUpComponent implements OnInit {
           observer.complete();
           return;
         }
-
         observer.next(isJPG && isLt2M && dimensionRes);
         observer.complete();
       });
@@ -207,7 +202,7 @@ export class SignUpComponent implements OnInit {
         window.URL.revokeObjectURL(img.src!);
         resolve(width === height && width >= 300);
         this.msg.info("Image width: "+ width + "  height: "+height + " type: " + file.type);
-              };
+      };
     });
   }
 

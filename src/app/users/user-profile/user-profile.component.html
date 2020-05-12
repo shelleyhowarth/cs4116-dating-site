@@ -3,11 +3,6 @@
     <div nz-col nzSpan="15">
         <nz-card class="profile-card">
             <div id="first row" nz-row style="display: flex">
-                <div *ngIf="isAdmin">
-                    <button *ngIf=!user.disabled nz-button class="disableBtn" (click)="disableAccount()">Disable account</button>
-                    <button *ngIf=user.disabled nz-button class="disableBtn" (click)="reEnableAccount()">Re-Enable account</button>
-                    <button nz-button class="disableBtn" (click)="deleteAccount()">Delete account</button>
-                </div>
                 <div nz-col nzSpan="7">
                     <img src="{{ user.profilePic }}" class="profile-picture">
                 </div>
@@ -16,8 +11,16 @@
                     <p class="name">{{ user.firstName | titlecase }}</p>
                     <p class="age">{{ user.age }}, {{ user.county }}</p>
                 </div>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div *ngIf="isAdmin">
+                    <button *ngIf=!user.disabled nz-button class="disableBtn" (click)="disableAccount()">Disable account</button>
+                    <button *ngIf=user.disabled nz-button class="disableBtn" (click)="reEnableAccount()">Re-Enable account</button>
+                    <button nz-button class="disableBtn" (click)="deleteAccount()">Delete account</button>
+                </div>
             </div>
             <div id="second row" nz-row>
+                <button *ngIf="isAdmin" nz-button class="edit" nzType="default" nzShape="circle" (click)="editPictureComponent()"><i nz-icon
+                    nzType="edit"></i></button>
                 <div id="empty space" nz-col nzSpan="7"></div>
                 <div *ngIf="noConnection">
                     <button nz-button class="connect-btn" (click)="sendConnectRequest()">Connect</button>
@@ -30,19 +33,14 @@
                     <button nz-button class="connect-btn" (click)="deleteConnection()">Delete connection</button>
                 </div>
             </div>
-            <div *ngIf="isAdmin" id="second row" nz-row>
-                <div nz-col nzSpan="7"></div>
-                <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editPictureComponent()"><i nz-icon
-                        nzType="edit"></i></button>
-            </div>
             <div style="margin-top: 3%"></div>
-            <div *ngIf="isAdmin" id="third row" nz-row style="display: flex">
+            <div id="third row" nz-row style="display: flex">
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
                     <p class="age">Bio</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="2"></div>
-                <div>
+                <div *ngIf="isAdmin">
                     <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editBioComponent()"><i nz-icon
                             nzType="edit"></i></button>
                 </div>
@@ -51,7 +49,7 @@
                     <p class="age">Interests</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
-                <div>
+                <div *ngIf="isAdmin">
                     <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editInterestsComponent()"><i nz-icon
                             nzType="edit"></i></button>
                 </div>
@@ -60,52 +58,53 @@
                     <p class="age">General</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
-                <div>
+                <div *ngIf="isAdmin">
                     <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editGeneralComponent()"><i nz-icon
                             nzType="edit"></i></button>
                 </div>
             </div>
-            <div style="margin-top: 3%"></div>
             <div id="fourth row" nz-row>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div nz-col nzSpan="5">
                     <p class="bio">{{ user.description }}</p>
                 </div>
                 <div id="empty space" nz-col nzSpan="3"></div>
-                <div nz-col nzSpan="2">
+                <div style="min-height: 7rem;" nz-col nzSpan="6">
                     <ul>
                         <li *ngFor="let interest of user.interests" class="bio"> {{ interest }} </li>
                     </ul>
                 </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="general">Occupation:</p>
-                    &nbsp;
-                    <p class="general">{{ user.occupation }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="general">Smoker:</p>
-                    &nbsp;
-                    <p class="general">{{ isSmoker() }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="general">Drinker:</p>
-                    &nbsp;
-                    <p class="general">{{ isDrinker() }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="7"></div>
-                <div style="display: flex">
-                    <p class="general">Favourite Song:</p>
-                    &nbsp;
-                    <p class="general">{{ user.favoriteSong }}</p>
-                </div>
-                <div id="empty space" nz-col nzSpan="18"></div>
-                <div style="display: flex">
-                    <p class="general">Favourite Movie:</p>
-                    &nbsp;
-                    <p class="general">{{ user.favoriteMovie }}</p>
+                <div id="empty space" nz-col nzSpan="3"></div>
+                <div>
+                    <div style="display: flex">
+                        <p class="bio">Occupation:</p>
+                        &nbsp;
+                        <p class="bio">{{ user.occupation }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Smoker:</p>
+                        &nbsp;
+                        <p class="bio">{{ isSmoker() }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Drinker:</p>
+                        &nbsp;
+                        <p class="bio">{{ isDrinker() }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Favourite Song:</p>
+                        &nbsp;
+                        <p class="bio">{{ user.favoriteSong }}</p>
+                    </div>
+                    <div id="empty space" nz-col nzSpan="3"></div>
+                    <div style="display: flex">
+                        <p class="bio">Favourite Movie:</p>
+                        &nbsp;
+                        <p class="bio">{{ user.favoriteMovie }}</p>
+                    </div>
                 </div>
             </div>
         </nz-card>

@@ -57,8 +57,9 @@
                     
                 </div>
             </div>
-            <div>
-                <button *ngIf="admin" nz-button class="disabled" (click)="getDisabled()">Get Disabled</button>
+            <div id="empty space" nz-col nzSpan="12"></div>
+            <div id="hi" *ngIf="admin">
+                <button nz-button class="sign-up-btn" (click)="getDisabled()">Disabled Accounts</button>
             </div>
         </nz-card>
     </div>
