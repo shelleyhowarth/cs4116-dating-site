@@ -100,7 +100,7 @@ export class MessageComponent implements OnInit {
   }
 
   send(){
-    if(this.message.length === 0) {
+    if(this.message.length !== 0) {
       this.sendMessage(this.message);
     }
     console.log("message notification");
