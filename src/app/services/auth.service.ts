@@ -72,6 +72,8 @@ export class AuthService {
 
   /* Sign out */
   SignOut() {
+    this.signUp = false;
+    this.signUpFinished = false;
     this.afAuth.auth.signOut();
   }
 
