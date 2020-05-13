@@ -16,6 +16,7 @@
                     <button *ngIf=!user.disabled nz-button class="disableBtn" (click)="disableAccount()">Disable account</button>
                     <button *ngIf=user.disabled nz-button class="disableBtn" (click)="reEnableAccount()">Re-Enable account</button>
                     <button nz-button class="disableBtn" (click)="deleteAccount()">Delete account</button>
+                    <button *ngIf="!hideAdminBtn" nz-button class="disableBtn" (click)="makeAdmin(user.uid)">Make Admin</button>
                 </div>
             </div>
             <div id="second row" nz-row>

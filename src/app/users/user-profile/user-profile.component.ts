@@ -25,6 +25,7 @@ export class UserProfileComponent implements OnInit {
   connectionPending = false;
   connectionAccepted = false;
   isAdmin = false;
+  hideAdminBtn = false; 
 
   constructor(private router: Router, private db: AngularFirestore, public afAuth: AngularFireAuth, private modalService: NzModalService) { }
 
@@ -251,5 +252,13 @@ export class UserProfileComponent implements OnInit {
     else {
       return "No";
     }
+  }
+
+  makeAdmin(uid) {
+    this.db.collection("Users").doc(uid).update({
+      admin: true
+    });
+    window.alert(this.user.firstName + " has been made an admin.");
+    this.hideAdminBtn = true;
   }
 }
