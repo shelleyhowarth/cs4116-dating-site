@@ -29,6 +29,9 @@
                 <p class="notif-text">{{ messageNotification.notification }}</p>
                 <button nz-button (click)="discardedNotification(i)" class="sign-up-btn">Discard</button>
             </div>
+            <div *ngIf="notifications.length === 0 && messageNotifications.length === 0">
+                <p class="notif-text">No notifications to display.</p>
+            </div>
         </nz-card>
     </div>
 </div>
