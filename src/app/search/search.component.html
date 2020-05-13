@@ -46,7 +46,11 @@
                         <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
                     </nz-select>
                 </div>
-                <div id="empty space" nz-col nzSpan="1"></div>
+            </div>
+            <div id="empty space" nz-row nzSpan="5">
+                &nbsp;
+            </div>
+            <div nz-row id="forth row" style="display: flex">
                 <div>
                     <button nz-button class="search" (click)="search()">Search</button>
                 </div>
@@ -54,10 +58,10 @@
                 <div>
                     <button nz-button class="search" (click)="reset()">Reset</button>
                 </div>
-            </div>
-            <div id="empty space" nz-col nzSpan="12"></div>
-            <div id="hi" *ngIf="admin">
-                <button nz-button class="sign-up-btn" (click)="getDisabled()">Disabled Accounts</button>
+                &nbsp;
+                <div id="hi" *ngIf="admin">
+                    <button nz-button class="disableAcc-btn" (click)="getDisabled()">Disabled Accounts</button>
+                </div>
             </div>
         </nz-card>
     </div>

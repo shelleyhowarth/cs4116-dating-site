@@ -4,15 +4,15 @@
 .search {
     @extend .sign-in;
     margin-left: 0;
-    font-size: 150%;
-    width: 7rem;
+    font-size: 130%;
+    width: 6rem;
 }
 
-.disabled {
+.disableAcc-btn {
     @extend .sign-in;
     margin-left: 0;
-    font-size: 150%;
-    width: 10rem;
+    font-size: 130%;
+    width: 12rem;
 }
 
 .search-title {
