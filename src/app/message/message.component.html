@@ -12,9 +12,20 @@
                 &nbsp;
                 &nbsp;
             </div>
-            <div *ngIf=userSelected>
-                <img class="search-pic" src= "{{ receiver.profilePic }}">
-                <p class="details">{{ receiver.firstName }}</p>
+            <div *ngIf=userSelected style="display: flex;">
+                <div>
+                    <i nz-icon (click)="goBack()">
+                        <img src="https://firebasestorage.googleapis.com/v0/b/cs4116-group4-dating.appspot.com/o/icons%2Fvectorpaint.svg?alt=media&token=73b776df-8260-4254-9a19-e50aeebcf662"  class="icon" />
+                    </i>
+                    <p class="details">Go Back</p>
+                </div>
+                &nbsp;
+                &nbsp;
+                &nbsp;
+                <div>
+                    <img class="search-pic" src= "{{ receiver.profilePic }}">
+                    <p class="details">{{ receiver.firstName }}</p>
+                </div>
             </div>
         </div>
     </nz-card>
