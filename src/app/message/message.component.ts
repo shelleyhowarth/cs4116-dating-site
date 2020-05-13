@@ -99,6 +99,9 @@ export class MessageComponent implements OnInit {
 
   goBack() {
     this.users = [];
+    this.connections = [];
+    this.searchId = [];
+    this.messages =  [];
     this.getConnections();
     this.userSelected = false;
   }
