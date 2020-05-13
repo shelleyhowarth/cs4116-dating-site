@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
     if(this.authService.isAuthenticated()){
       console.log("LOGGED IN");
     }
-    
-    
   }
 
   createSignUpComponent() {

@@ -42,7 +42,7 @@
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="location" [(ngModel)]="filter.county" (ngModelChange)="log($event); selectedValue = undefined">
+                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="location" [(ngModel)]="filter.county">
                         <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
                     </nz-select>
                 </div>

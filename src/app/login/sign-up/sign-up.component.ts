@@ -112,13 +112,11 @@ export class SignUpComponent implements OnInit {
   submit() {
 
     for (const i in this.form.controls) {
-      console.log(this.form.controls[i]);
       this.form.controls[i].markAsDirty();
       this.form.controls[i].updateValueAndValidity();
     }
 
     if(this.fileObj == null) {
-      console.log("Image Blank")
       window.alert("Please Add A Valid Profile Picture!");
     }
     else {

@@ -148,15 +148,9 @@ export class SearchComponent implements OnInit {
     this.searchArray = [];
   }
 
-  log(arg: any) {
-    console.log(arg);
-    this.selectedValue = undefined;
-  }
-
   getDisabled() {
     this.searchArray = [];
     this.users.forEach(user => {
-      console.log(user);
       if (user.disabled === true) {
         this.searchArray.push(user);
       }

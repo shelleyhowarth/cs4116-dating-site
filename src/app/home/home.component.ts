@@ -116,7 +116,6 @@ export class HomeComponent implements OnInit {
           object.notification = data.notification;
           object.seen = data.seen;
           object.connectionId = doc.id;
-          console.log(object.connectionId);
           this.notifications.push(object);
         }
         else if(doc.data().isConnection == false  && (doc.id.includes(this.userId) && (doc.id == data.receiver) && (doc.id != data.sender) && (data.seen == false))){
@@ -127,7 +126,6 @@ export class HomeComponent implements OnInit {
           object.sender = data.sender;
           this.messageNotifications.push(object);
         }
-       console.log(this.messageNotifications);
       });
     });
   }
@@ -211,7 +209,6 @@ export class HomeComponent implements OnInit {
 
   updateUsers(search) {
     var ref = this.db.collection("Users");
-    console.log("search " + search);
     ref.doc(search).get().subscribe(doc => {
         let object = new User();
         object.firstName = doc.data().firstName;
@@ -253,6 +250,13 @@ export class HomeComponent implements OnInit {
       else
         search = id1
       this.updateUsers(search);
+      var count = 0;
+      this.suggestedUsers.forEach(user => {
+        if (user.uid === id1 || user.uid === id2) {
+          this.suggestedUsers.splice(count, 1);
+        }
+        count++;
+      })
     });  
     this.db.collection("notifications").doc(id).update({
       seen: true
@@ -267,38 +271,19 @@ export class HomeComponent implements OnInit {
   }
 
   reject(id, index) {
-    var docRef = this.db.collection("notifications").doc(id).update({
+    this.db.collection("notifications").doc(id).update({
       seen: true
     });
     this.notifications.splice(index, 1);
-    var docRef2 = this.db.collection("Connections").doc(id).delete();
+    this.db.collection("Connections").doc(id).delete();
     window.alert("You have rejected the request");
   }
 
   discardedNotification(index) {
-    var docRef = this.db.collection("notifications").doc(this.userId).update({
+    this.db.collection("notifications").doc(this.userId).update({
       seen: true
     })
     this.messageNotifications.splice(index, 1);
-  }
-
-  updateDb(acceptStatus: boolean) {
-    var ref = this.db.collection("Connections").doc(this.connectedId);
-    ref.update({
-      accepted: acceptStatus
-    });
-
-    var ref2 = this.db.collection("notifications").doc(this.userId);
-    ref2.update({
-      seen: true
-    });
-  }
-
-  updateDbNotif(discardStatus: boolean) {
-    var ref = this.db.collection("notifications").doc(this.userId);
-    ref.update({
-      seen: true
-    });
   }
 }
 

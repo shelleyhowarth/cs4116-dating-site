@@ -43,8 +43,7 @@ export class MyProfileComponent implements OnInit {
   getUserInfo(){
     this.getUserEmail();
     var docRef = this.firestore.collection("Users").doc(this.uid).valueChanges();
-    
-    console.log(docRef);
+
     docRef.subscribe(doc => {
           this.newUser = doc
           var object = new User();
