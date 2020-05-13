@@ -221,7 +221,6 @@ export class MessageComponent implements OnInit {
     snapshot.subscribe(snap => {
        snap.forEach(doc => {
          var data = doc.data();
-         console.log(doc.id);
          let object = new ChatMessage;
          object.senderUid = data.sender;
          object.receiverUid = data.receiver;
@@ -233,7 +232,6 @@ export class MessageComponent implements OnInit {
          else {
            object.sendSelf = false;
          }
-         console.log(object);
          this.messages.push(object);
        });
        this.sortByDate();

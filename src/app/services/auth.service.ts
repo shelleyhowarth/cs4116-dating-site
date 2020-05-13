@@ -51,10 +51,8 @@ export class AuthService {
             }
           }
           else if (doc.data().email === email) {
-            console.log(isUser);
             isUser = true;
             if (isUser) {
-              console.log("here");
               return this.afAuth.auth.signInWithEmailAndPassword(email, password)
                 .then((result) => {
                   this.router.navigate(['home']);

@@ -106,7 +106,6 @@ export class UserProfileComponent implements OnInit {
       
         this.isAdmin = this.currentUser.admin
       });
-      console.log(this.isAdmin);
   }
 
   sendConnectRequest() {
@@ -149,6 +148,24 @@ export class UserProfileComponent implements OnInit {
 
   deleteAccount() {
     this.db.collection('Users').doc(this.otherUserId).delete();
+
+    var docRef = this.db.collection("Connections").get();
+    docRef.subscribe(snap => {
+      snap.forEach(doc => {
+        if (doc.id.includes(this.otherUserId)) {
+          var ref = this.db.collection("Connections").doc(doc.id).delete();
+        }
+      });
+    });
+
+    var docRef2 = this.db.collection("chats").get();
+    docRef2.subscribe(snap => {
+      snap.forEach(doc => {
+        if (doc.id.includes(this.otherUserId)) {
+          var ref = this.db.collection("chats").doc(doc.id).delete();
+        }
+      });
+    });
     window.alert("Account successfully deleted");
   }
 

@@ -53,16 +53,12 @@ export class BaseComponent implements OnInit {
   constructor(public routing: Router, public authService: AuthService, private firestore: AngularFirestore) { }
 
   ngOnInit(): void {
-
     this.user = firebase.auth().currentUser;
     if (this.user != null) {
       this.uid = this.user.uid;
     }
-
     this.getUserInfo();
-
     this.isAdmin = this.newUser.admin;
-    console.log("admin " + this.isAdmin);
   }
 
   getUserInfo() {
@@ -88,10 +84,8 @@ export class BaseComponent implements OnInit {
       object.profilePic = doc.data().profilePic;
       object.admin = doc.data().admin;
       object.disabled = doc.data().disabled;
-      console.log(object.admin);
       this.newUser = object;
     });
-    console.log(this.newUser.admin);
   }
 
 }

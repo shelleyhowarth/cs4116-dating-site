@@ -50,13 +50,14 @@ export class SearchComponent implements OnInit {
     "Wicklow"
   ];
   form: FormGroup;
-  filter = { gender: '', ageRange: '', county: '', interests: '' };
+  filter = { gender: null, ageRange: null, county: null, interests: null };
   users: Array<User> = [];
   searchArray = [];
   noResults = true;
   userId = firebase.auth().currentUser.uid
   disabledUsers = [];
   admin;
+  selectedValue = null;
 
   constructor(private fb: FormBuilder, private firestore: AngularFirestore, private usersService: UsersService) { }
 
@@ -99,25 +100,33 @@ export class SearchComponent implements OnInit {
     this.noResults = true;
     this.searchArray = [];
       this.users.forEach(user => {
-        console.log(user);
-          if(user.gender === this.filter.gender || this.filter.gender === '')
+          if(user.gender === this.filter.gender  || this.filter.gender === null)
           {
-            if(user.county === this.filter.county || this.filter.county === '')
+            if(user.county === this.filter.county || this.filter.county === null)
             {
-              if(user.interests.find(interest => interest == this.filter.interests) || this.filter.interests === '') {
-                if(this.getAgeRange(user.age) || this.filter.ageRange === '') {
-                  
+              if (user.interests.find(interest => interest == this.filter.interests) || this.filter.interests === null)
+              {
+                if ( this.filter.ageRange == null) {
                   this.searchArray.push(user);
-                  if(this.searchArray.length > 0) {
+                  if (this.searchArray.length > 0) {
                     this.noResults = false;
                   }
-                  else if(this.searchArray.length == 0) {
+                  else if (this.searchArray.length == 0) {
                     this.noResults = true;
+                  }
+                }
+                else if(this.getAgeRange(user.age)) {
+                  this.searchArray.push(user);
+                  if (this.searchArray.length > 0) {
+                    this.noResults = false;
+                  }
+                  else if (this.searchArray.length == 0) {
+                    this.noResults = true;
+                  }
                 }
               }
             }
           }
-        }
       });
    }
 
@@ -135,14 +144,13 @@ export class SearchComponent implements OnInit {
   }
 
   reset() {
-    this.filter = { gender: '', ageRange: '', county: '', interests: '' };
-    this.search();
+    this.filter = { gender: null, ageRange: null, county: null, interests: null };
+    this.searchArray = [];
   }
 
   getDisabled() {
     this.searchArray = [];
     this.users.forEach(user => {
-      console.log(user);
       if (user.disabled === true) {
         this.searchArray.push(user);
       }

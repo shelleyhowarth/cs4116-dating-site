@@ -1,5 +1,5 @@
-<nz-layout style='background-color: whitesmoke;'>
-    <nz-sider style='position:fixed;' *ngIf="authService.isAuthenticated()">
+<nz-layout>
+    <nz-sider class="sider" style='position:fixed;' *ngIf="authService.isAuthenticated()">
         <ul nz-menu nzMode='inline' class="nav-container">
             <li
                 nz-menu-item
@@ -17,7 +17,7 @@
             </li>
         </ul>
     </nz-sider>
-    <nz-layout style='background-color: whitesmoke;'>
+    <nz-layout class="content">
         <nz-content style='margin-left:10%; background-color:whitesmoke; height:100%'>
             <div class="component-container">
                 <router-outlet> </router-outlet>

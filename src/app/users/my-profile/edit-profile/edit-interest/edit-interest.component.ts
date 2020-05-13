@@ -31,10 +31,6 @@ export class EditInterestComponent implements OnInit {
     let currInterests = this.modal.getInstance().nzComponentParams.current;
     this.currentInterests =  currInterests;
     this.defaultOption = [...this.currentInterests];
-
-    console.log("User "+ this.user);
-    console.log("Interests "+ this.currentInterests);
-    console.log("default "+ this.defaultOption);
   }
 
   update(){
