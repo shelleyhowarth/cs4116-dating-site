@@ -21,40 +21,38 @@
                 <div>
                     <p class="search-title">County</p>
                 </div>
-                <div nz-col nzSpan="4"></div>
-                <div>
-                    <button nz-button class="search" (click)="reset()">Reset</button>
-                
-                </div>
             </div>
             <div nz-row id="third row" style="display: flex">
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="gender" [(ngModel)]="filter.gender">
+                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="gender" [(ngModel)]="filter.gender">
                         <nz-option *ngFor="let gender of genders" [nzValue]="gender" [nzLabel]="gender"></nz-option>
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="age range" [(ngModel)]="filter.ageRange">
+                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="age range" [(ngModel)]="filter.ageRange">
                         <nz-option *ngFor="let range of ranges" [nzValue]="range" [nzLabel]="range"></nz-option>
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="interests" [(ngModel)]="filter.interests">
-                        <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest">
-                        </nz-option>
+                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="interests" [(ngModel)]="filter.interests">
+                        <nz-option *ngFor="let interest of interests" [nzValue]="interest" [nzLabel]="interest"></nz-option>
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
-                    <nz-select class="dropdown" nzPlaceHolder="location" [(ngModel)]="filter.county">
+                    <nz-select class="dropdown" nzAllowClear nzPlaceHolder="location" [(ngModel)]="filter.county" (ngModelChange)="log($event); selectedValue = undefined">
                         <nz-option *ngFor="let county of counties" [nzValue]="county" [nzLabel]="county"></nz-option>
                     </nz-select>
                 </div>
                 <div id="empty space" nz-col nzSpan="1"></div>
                 <div>
                     <button nz-button class="search" (click)="search()">Search</button>
+                </div>
+                &nbsp;
+                <div>
+                    <button nz-button class="search" (click)="reset()">Reset</button>
                 </div>
             </div>
             <div id="empty space" nz-col nzSpan="12"></div>
