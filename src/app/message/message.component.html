@@ -16,6 +16,9 @@
                 <img class="search-pic" src= "{{ receiver.profilePic }}">
                 <p class="details">{{ receiver.firstName }}</p>
             </div>
+            <div *ngIf="users.length == 0 && !userSelected">
+                <p class="notif-text">No connections to message.</p>
+            </div>
         </div>
     </nz-card>
     </div>
