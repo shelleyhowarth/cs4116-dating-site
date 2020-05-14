@@ -40,7 +40,7 @@
                 <div style="max-width: 20%;">
                 <p class="age">Bio</p>
                 <div id="empty space" nz-col nzSpan="2"></div>
-                <div>
+                <div *ngIf="isAdmin">
                     <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editBioComponent()"><i nz-icon
                             nzType="edit"></i></button>
                 </div>
@@ -50,7 +50,7 @@
                 <div>
                     <p class="age">Interests</p>
                     <div id="empty space" nz-col nzSpan="1"></div>
-                    <div>
+                    <div *ngIf="isAdmin">
                         <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editInterestsComponent()"><i nz-icon
                                 nzType="edit"></i></button>
                     </div>
@@ -64,7 +64,7 @@
                 <div>
                     <p class="age">General</p>
                     <div id="empty space" nz-col nzSpan="1"></div>
-                    <div>
+                    <div *ngIf="isAdmin">
                         <button nz-button class="edit" nzType="default" nzShape="circle" (click)="editGeneralComponent()"><i nz-icon
                                 nzType="edit"></i></button>
                     </div>
