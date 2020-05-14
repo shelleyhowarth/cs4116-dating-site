@@ -1,0 +1,15 @@
+@import "../../styles/variables";
+@import "../../styles/utilities";
+
+.title {
+    color: $red;
+    font-size: 140%;
+    text-align: center;
+}
+
+.join {
+    font-style: italic;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
