@@ -50,6 +50,7 @@
                         <p class="black-text">{{ message.timeSent | date:'short'}}</p>
                     </nz-card>
                 </div>
+                <p class="notif-text" *ngIf="messages.length === 0">No messages to display.</p>
             </div>
             <hr>
             <div id="third row">
