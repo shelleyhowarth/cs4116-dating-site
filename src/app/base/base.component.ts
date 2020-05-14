@@ -4,6 +4,9 @@ import { AuthService } from '../services/auth.service';
 import * as firebase from 'firebase';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from '../model/user.model';
+import { NzModalService } from 'ng-zorro-antd/modal';
+import { AboutComponent } from '../about/about.component'
+import { ContactComponent } from '../contact/contact.component'
 
 @Component({
   selector: 'app-base',
@@ -50,7 +53,7 @@ export class BaseComponent implements OnInit {
     }
   ]
 
-  constructor(public routing: Router, public authService: AuthService, private firestore: AngularFirestore) { }
+  constructor(public routing: Router, public authService: AuthService, private firestore: AngularFirestore, private modalService: NzModalService) { }
 
   ngOnInit(): void {
     this.user = firebase.auth().currentUser;
@@ -85,6 +88,18 @@ export class BaseComponent implements OnInit {
       object.admin = doc.data().admin;
       object.disabled = doc.data().disabled;
       this.newUser = object;
+    });
+  }
+
+  about() {
+    this.modalService.create({
+      nzContent: AboutComponent,
+    });
+  }
+
+  contact() {
+    this.modalService.create({
+      nzContent: ContactComponent,
     });
   }
 

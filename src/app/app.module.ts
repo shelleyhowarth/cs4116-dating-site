@@ -41,6 +41,8 @@ import { EditBioComponent } from './users/my-profile/edit-profile/edit-bio/edit-
 import { EditProfilePictureComponent } from './users/my-profile/edit-profile/edit-profile-picture/edit-profile-picture.component';
 import { EditGeneralComponent } from './users/my-profile/edit-profile/edit-general/edit-general.component';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
 
 registerLocaleData(en);
 
@@ -70,7 +72,9 @@ const appRoutes: Routes = [
     EditInterestComponent,
     EditBioComponent,
     EditProfilePictureComponent,
-    EditGeneralComponent
+    EditGeneralComponent,
+    AboutComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
