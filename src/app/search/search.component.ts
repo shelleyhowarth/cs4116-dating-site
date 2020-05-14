@@ -146,6 +146,7 @@ export class SearchComponent implements OnInit {
   reset() {
     this.filter = { gender: null, ageRange: null, county: null, interests: null };
     this.searchArray = [];
+    this.noResults = true;
   }
 
   getDisabled() {
