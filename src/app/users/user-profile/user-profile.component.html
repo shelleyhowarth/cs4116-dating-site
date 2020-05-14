@@ -11,7 +11,7 @@
                     <p class="name">{{ user.firstName | titlecase }}</p>
                     <p class="age">{{ user.age }}, {{ user.county }}</p>
                 </div>
-                <div id="empty space" nz-col nzSpan="3"></div>
+                <div id="empty space" nz-col nzSpan="2"></div>
                 <div *ngIf="isAdmin">
                     <button *ngIf=!user.disabled nz-button class="disableBtn" (click)="disableAccount()">Disable account</button>
                     <button *ngIf=user.disabled nz-button class="disableBtn" (click)="reEnableAccount()">Re-Enable account</button>
